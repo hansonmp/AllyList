@@ -1,4 +1,4 @@
-// --- Data Injection (V8: Synthetic data with Node/Link Integrity Check) ---
+// --- Data Injection (V9: Final Data Fix and Live Server Test) ---
 const graphData = {
     "nodes": [
         {"Record_ID":"43","Type":"NODE","ID":"P-014","Name":"Kin","City":"Boise","State":"ID","Lat":"43.6150","Lng":"-116.2023","Emoji":"🍽️","Cuisine":"Modern American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.5,"Reviews":230,"MapLink":"https://maps.app.goo.gl/Kin"},
@@ -432,3 +432,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Draw the initial graph
     drawGraph(graphData);
 });
+
