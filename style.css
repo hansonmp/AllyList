@@ -1,101 +1,135 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
-    background-color: #f4f7f6;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: center;
 }
 
-h1 {
-    color: #333;
+.header {
+    background-color: #fff;
+    padding: 20px 0;
+    border-bottom: 3px solid #f0ad4e;
     margin-bottom: 20px;
 }
 
+h1 {
+    margin: 0;
+    font-size: 2em;
+    color: #333;
+}
+
+.container {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+/* --- Graph Container Styling --- */
 #chart-container {
-    width: 1200px;
+    /* Define a clear size for the graph area */
+    width: 1200px; 
     height: 800px;
-    margin: 20px auto; /* Centers the container */
-    border: 1px solid #ddd; /* Optional: Helps you see the container boundary */
+    margin: 20px auto; 
+    background-color: #fff;
+    border: 1px solid #ddd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Ensure the SVG inside the container is also visible */
-#chart-container svg {
-    display: block;
-}
-
-/* SVG Elements */
+/* --- D3 Node and Link Styles --- */
 .link {
     stroke: #999;
     stroke-opacity: 0.6;
     stroke-width: 1.5px;
-    cursor: default;
+    transition: stroke-width 0.2s, stroke-opacity 0.2s;
 }
 
-.node circle {
+.node-circle {
     stroke: #fff;
     stroke-width: 2px;
-    cursor: pointer;
-    transition: r 0.1s;
+    /* Default color based on role/type */
+    fill: #1f77b4; 
 }
 
-/* Node Coloring based on Type */
-.person { fill: #c0392b; /* Deep Red */ }
-.place { fill: #27ae60; /* Emerald Green */ }
-.award { fill: #f39c12; /* Orange Gold */ }
+/* Specific colors for Node types */
+.person .node-circle {
+    fill: #2ca02c; /* Green for Person/Chef */
+}
 
-/* Highlighting styles */
+.place .node-circle {
+    fill: #ff7f0e; /* Orange for Place/Restaurant */
+}
+
+.award .node-circle {
+    fill: #9467bd; /* Purple for Award */
+}
+
+.node-label {
+    fill: #000;
+    font-size: 1.1em;
+    pointer-events: none; /* Allows mouse events to pass through to the circle */
+}
+
+/* --- Highlighting Styles --- */
+/* Inactive elements when a node is highlighted */
 .inactive {
     opacity: 0.1;
 }
-.highlighted {
+
+/* Highlighted links */
+.link.highlighted {
+    stroke: #d62728;
     stroke-width: 3px;
-    stroke: #333;
-    opacity: 1;
-}
-.highlighted-link {
-    stroke-opacity: 1.0;
-    stroke-width: 3px;
-    stroke: #3498db; /* Bright Blue */
+    stroke-opacity: 1;
 }
 
-/* Tooltip and Legend */
+/* Highlighted nodes (connected nodes) */
+.node-group.highlighted .node-circle {
+    stroke: #d62728;
+    stroke-width: 4px;
+}
+
+/* --- Tooltip Styles --- */
 .tooltip {
     position: absolute;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.75);
-    color: white;
-    border-radius: 5px;
+    text-align: left;
+    padding: 8px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
     pointer-events: none;
-    font-size: 14px;
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-#info-panel {
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    background-color: white;
-    width: 600px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+/* --- Legend and Instructions Styles --- */
+.legend-instructions-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+    padding-bottom: 50px;
+}
+
+.instructions-box, .legend-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
 }
 
 .legend-item {
-    display: inline-flex;
-    align-items: center;
-    margin-right: 20px;
-    font-size: 14px;
+    padding: 5px 0;
+    font-size: 1em;
 }
 
-.legend-circle {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 6px;
-    border: 1px solid #fff;
+.instructions-box ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
 
+.instructions-box li {
+    margin-bottom: 8px;
 }
