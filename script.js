@@ -190,7 +190,7 @@ const graphData = {
         {"Record_ID":"149","Type":"EDGE","ID":"E-157","Label":"CURRENT_OWNER_AT","City":"Chicago","Degree":"1","Start_ID":"P-064","End_ID":"N-082","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
         {"Record_ID":"150","Type":"EDGE","ID":"E-158","Label":"JBF_NOMINEE_AT","City":"Chicago","Degree":"2","Start_ID":"N-082","End_ID":"A-005","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
         {"Record_ID":"151","Type":"EDGE","ID":"E-161","Label":"JBF_NOMINEE_AT","City":"Chicago","Degree":"2","Start_ID":"N-083","End_ID":"A-005","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
-        {"Record_ID":"152","Type":"EDGE","ID":"E-163","Label":"MASTERCHEF_COMPETITOR","City":"Des Moines","Degree":"2","Start_ID":"N-052","End_ID":"A-080","Relationship_Type":"Award","Current":"True","Sources":"TV Show Site","Confidence":"NA"},
+        {"Record_ID":"152","Type":"EDGE","ID":"E-163","Label":"MASTERCHEF_COMPETITOR","City":"Des Moines","Degree":"2","Start_ID":"N-052","End_ID":"A-014","Relationship_Type":"Award","Current":"True","Sources":"TV Show Site","Confidence":"NA"},
         {"Record_ID":"153","Type":"EDGE","ID":"E-164","Label":"JBF_NOMINEE_AT","City":"Boise","Degree":"1","Start_ID":"N-084","End_ID":"A-003","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2023","Confidence":"NA"},
         {"Record_ID":"154","Type":"EDGE","ID":"E-165","Label":"CURRENT_OWNER_AT","City":"Boise","Degree":"1","Start_ID":"P-066","End_ID":"N-084","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
         {"Record_ID":"155","Type":"EDGE","ID":"E-167","Label":"JBF_NOMINEE_AT","City":"Seattle","Degree":"3","Start_ID":"N-085","End_ID":"A-003","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
@@ -204,14 +204,14 @@ const graphData = {
         {"Record_ID":"163","Type":"EDGE","ID":"E-181","Label":"TOP_CHEF_COMPETITOR","City":"NYC","Degree":"3","Start_ID":"N-034","End_ID":"A-006","Relationship_Type":"Award","Current":"True","Sources":"Bravo TV","Confidence":"NA"},
         {"Record_ID":"164","Type":"EDGE","ID":"E-182","Label":"TOP_CHEF_COMPETITOR","City":"SF/LA","Degree":"4","Start_ID":"N-031","End_ID":"A-006","Relationship_Type":"Award","Current":"True","Sources":"Bravo TV","Confidence":"NA"},
         {"Record_ID":"165","Type":"EDGE","ID":"E-183","Label":"TOP_CHEF_COMPETITOR","City":"NYC","Degree":"5","Start_ID":"N-029","End_ID":"A-006","Relationship_Type":"Award","Current":"True","Sources":"Bravo TV","Confidence":"NA"},
-        {"Record_ID":"166","Type":"EDGE","ID":"E-184","Label":"MASTERCHEF_COMPETITOR","City":"Dothan","Degree":"1","Start_ID":"N-032","End_ID":"A-080","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
-        {"Record_ID":"167","Type":"EDGE","ID":"E-185","Label":"MASTERCHEF_COMPETITOR","City":"KC","Degree":"2","Start_ID":"N-035","End_ID":"A-080","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
-        {"Record_ID":"168","Type":"EDGE","ID":"E-186","Label":"MASTERCHEF_COMPETITOR","City":"LA","Degree":"3","Start_ID":"N-042","End_ID":"A-080","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
-        {"Record_ID":"169","Type":"EDGE","ID":"E-187","Label":"MASTERCHEF_COMPETITOR","City":"Louisville","Degree":"4","Start_ID":"N-036","End_ID":"A-080","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
+        {"Record_ID":"166","Type":"EDGE","ID":"E-184","Label":"MASTERCHEF_COMPETITOR","City":"Dothan","Degree":"1","Start_ID":"N-032","End_ID":"A-014","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
+        {"Record_ID":"167","Type":"EDGE","ID":"E-185","Label":"MASTERCHEF_COMPETITOR","City":"KC","Degree":"2","Start_ID":"N-035","End_ID":"A-014","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
+        {"Record_ID":"168","Type":"EDGE","ID":"E-186","Label":"MASTERCHEF_COMPETITOR","City":"LA","Degree":"3","Start_ID":"N-042","End_ID":"A-014","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
+        {"Record_ID":"169","Type":"EDGE","ID":"E-187","Label":"MASTERCHEF_COMPETITOR","City":"Louisville","Degree":"4","Start_ID":"N-036","End_ID":"A-014","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
         {"Record_ID":"170","Type":"EDGE","ID":"E-188","Label":"NEXT_LEVEL_CHEF_COMPETITOR","City":"Multiple","Degree":"1","Start_ID":"N-044","End_ID":"A-013","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
         {"Record_ID":"171","Type":"EDGE","ID":"E-189","Label":"FOOD_WINE_BEST_NEW_CHEF","City":"Anchorage","Degree":"1","Start_ID":"N-027","End_ID":"A-020","Relationship_Type":"Award","Current":"True","Sources":"Magazine Site","Confidence":"NA"},
         {"Record_ID":"172","Type":"EDGE","ID":"E-190","Label":"FINAL_TABLE_FINALIST","City":"LA","Degree":"1","Start_ID":"N-041","End_ID":"A-021","Relationship_Type":"Award","Current":"True","Sources":"Netflix","Confidence":"NA"},
-        {"Record_ID":"173","Type":"EDGE","ID":"E-191","Label":"MASTERCHEF_COMPETITOR","City":"GA","Degree":"1","Start_ID":"N-037","End_ID":"A-080","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
+        {"Record_ID":"173","Type":"EDGE","ID":"E-191","Label":"MASTERCHEF_COMPETITOR","City":"GA","Degree":"1","Start_ID":"N-037","End_ID":"A-014","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
         {"Record_ID":"174","Type":"EDGE","ID":"E-192","Label":"TOP_CHEF_COMPETITOR","City":"Multiple","Degree":"1","Start_ID":"N-043","End_ID":"A-006","Relationship_Type":"Award","Current":"True","Sources":"Bravo TV","Confidence":"NA"}
     ]
 };
@@ -297,7 +297,7 @@ const node = g.append("g")
     .attr("class", d => `node-group ${d.type.toLowerCase().replace(/\s/g, '-')}`)
     .call(d3.drag()
         .on("start", dragstarted)
-        .on("on", dragged) // Changed 'drag' to 'on' for correct D3 syntax if previous versions were problematic
+        .on("drag", dragged) 
         .on("end", dragended));
 
 // --- Append Circles for visual grouping/size
