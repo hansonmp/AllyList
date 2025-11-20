@@ -1,4 +1,5 @@
 // --- Data Injection (V7: Synthetic data with Lat/Lng) ---
+// **THIS OBJECT MUST BE COMPLETELY CONTAINED IN THIS FILE**
 const graphData = {
     "nodes": [
         {"Record_ID":"43","Type":"NODE","ID":"P-014","Name":"Kin","City":"Boise","State":"ID","Lat":"43.6150","Lng":"-116.2023","Emoji":"🍽️","Cuisine":"Modern American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.5,"Reviews":230,"MapLink":"https://maps.app.goo.gl/Kin"},
@@ -35,16 +36,16 @@ const graphData = {
         {"Record_ID":"74","Type":"NODE","ID":"A-003","Name":"Best Chef: Northwest Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2022", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"75","Type":"NODE","ID":"A-004","Name":"Best Chef: Midwest Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2023", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"76","Type":"NODE","ID":"A-005","Name":"Outstanding Chef Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2019", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"77","Type":"NODE","ID":"A-006","Name":"Top Chef","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Competition","Year":"2024", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}, // Changed to Competition
+        {"Record_ID":"77","Type":"NODE","ID":"A-006","Name":"Top Chef","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Competition","Year":"2024", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}, 
         {"Record_ID":"78","Type":"NODE","ID":"A-008","Name":"Best New Restaurant Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2019", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"79","Type":"NODE","ID":"A-013","Name":"Next Level Chef","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Competition","Year":"2024", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}, // Changed to Competition
-        {"Record_ID":"80","Type":"NODE","ID":"A-014","Name":"MasterChef","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Competition","Year":"2024", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}, // Changed to Competition
+        {"Record_ID":"79","Type":"NODE","ID":"A-013","Name":"Next Level Chef","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Competition","Year":"2024", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}, 
+        {"Record_ID":"80","Type":"NODE","ID":"A-014","Name":"MasterChef","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Competition","Year":"2024", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}, 
         {"Record_ID":"81","Type":"NODE","ID":"A-016","Name":"Best Chef: South Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2023", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"82","Type":"NODE","ID":"A-017","Name":"Outstanding Chef Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2023", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"83","Type":"NODE","ID":"A-018","Name":"Best New Restaurant Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2023", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"84","Type":"NODE","ID":"A-019","Name":"Best Chef: Mountain Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2022", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"85","Type":"NODE","ID":"A-020","Name":"Food & Wine Best New Chef","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2022", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"86","Type":"NODE","ID":"A-021","Name":"The Final Table","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Competition","Year":"2018", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}, // Changed to Competition
+        {"Record_ID":"86","Type":"NODE","ID":"A-021","Name":"The Final Table","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Competition","Year":"2018", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}, 
         {"Record_ID":"87","Type":"NODE","ID":"A-026","Name":"One MICHELIN Star","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2024", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"88","Type":"NODE","ID":"P-029","Name":"The Grey","City":"Savannah","State":"GA","Lat":"32.0760","Lng":"-81.0880","Emoji":"🍽️","Cuisine":"Southern","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.5,"Reviews":620,"MapLink":"https://maps.app.goo.gl/TheGrey"},
         {"Record_ID":"89","Type":"NODE","ID":"P-030","Name":"Pēppē","City":"NYC","State":"NY","Lat":"40.7128","Lng":"-74.0060","Emoji":"🍽️","Cuisine":"Modern Fine Dining","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.6,"Reviews":150,"MapLink":"https://maps.app.goo.gl/Peppe"},
@@ -279,7 +280,7 @@ function drawGraph(filteredData) {
             g.selectAll(".node").classed("active", false);
             d3.select(event.currentTarget).classed("active", true);
             
-            link.classed("highlighted", l => l.Source.ID === d.ID || l.Target.ID === d.ID);
+            link.classed("highlighted", l => l.source.ID === d.ID || l.target.ID === d.ID);
 
             // Populate the detail panel
             d3.select("#detail-panel").html(generateDetailPanelContent(d));
@@ -347,7 +348,7 @@ function generateDetailPanelContent(d) {
     }
     
     // --- Award/Competition Content (Simplified and cleaned) ---
-    if (d['Role/Primary'] === 'Award' || d['Role/Primary'] === 'Competition') {
+    if (d['Role/Primary'] === 'Award' || d.Role/Primary === 'Competition') {
         content += `
             <p><strong>Type:</strong> ${d['Role/Primary']}</p>
             ${d.Year ? `<p><strong>Year:</strong> ${d.Year}</p>` : ''}
@@ -375,8 +376,6 @@ function generateDetailPanelContent(d) {
 
                 if (d['Role/Primary'] === 'Award' || d['Role/Primary'] === 'Competition') {
                     // Current node is an Award/Competition: Show WHO/WHAT received it.
-                    // Output: [Emoji] [Name] (e.g., 🍽️ Mixtli)
-                    // Skip if the connected node is an Award too (unlikely with clean data)
                     if (connectedNode['Role/Primary'] === 'Award' || connectedNode['Role/Primary'] === 'Competition') return;
                     
                     displayLabel = ''; 
