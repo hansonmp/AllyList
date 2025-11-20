@@ -3,34 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dining Knowledge Graph</title>
-    <base href="https://hansonmp.github.io/AllyList/">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Culinary Knowledge Graph</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
+    <div class="header">
+        <h1>🏆 Dining & Culinary Knowledge Graph</h1>
+    </div>
 
-    <h1>🏆 Dining & Culinary Knowledge Graph</h1>
-    <div id="tooltip" class="tooltip"></div>
-    <div id="chart-container">
+    <div class="container">
+        <div id="chart-container"></div>
+    </div>
+    
+    <div class="legend-instructions-container">
+        <div class="instructions-box">
+            <h2>Instructions</h2>
+            <ul>
+                <li>**Drag** the nodes to reorganize the graph.</li>
+                <li>**Hover** over a node to see its details (Name, Type, Location).</li>
+                <li>**Zoom** with the mouse wheel.</li>
+            </ul>
         </div>
-    <div id="info-panel">
-        <h2>Node Legend</h2>
-        <div class="legend-item"><span class="legend-circle person"></span> Chef/Person</div>
-        <div class="legend-item"><span class="legend-circle place"></span> Restaurant/Place</div>
-        <div class="legend-item"><span class="legend-circle award"></span> Award/Competition</div>
-
-        <br>
-        <h2>Instructions</h2>
-        <ul>
-            <li>**Drag** the nodes to reorganize the graph.</li>
-            <li>**Hover** over a node to see its details (Name, Type, Location).</li>
-            <li>**Double-click** a node to highlight its immediate connections. Double-click the background to clear highlights.</li>
-            <li>**Zoom** with the mouse wheel.</li>
-        </ul>
+        
+        <div class="legend-box">
+            <h2>Node Legend</h2>
+            <div class="legend-item person">👨🏻‍🍳 Chef/Person</div>
+            <div class="legend-item place">🍽️ Restaurant/Place</div>
+            <div class="legend-item award">🏆 Award/Competition</div>
+        </div>
     </div>
 
     <script src="script.js"></script>
 </body>
-
 </html>
