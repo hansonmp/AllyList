@@ -1,4 +1,4 @@
-// --- Data Injection (V5: Synthetic data with Lat/Lng) ---
+// --- Data Injection (V7: Synthetic data with Lat/Lng) ---
 const graphData = {
     "nodes": [
         {"Record_ID":"43","Type":"NODE","ID":"P-014","Name":"Kin","City":"Boise","State":"ID","Lat":"43.6150","Lng":"-116.2023","Emoji":"🍽️","Cuisine":"Modern American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.5,"Reviews":230,"MapLink":"https://maps.app.goo.gl/Kin"},
@@ -35,16 +35,16 @@ const graphData = {
         {"Record_ID":"74","Type":"NODE","ID":"A-003","Name":"Best Chef: Northwest Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2022", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"75","Type":"NODE","ID":"A-004","Name":"Best Chef: Midwest Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2023", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"76","Type":"NODE","ID":"A-005","Name":"Outstanding Chef Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2019", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"77","Type":"NODE","ID":"A-006","Name":"Top Chef","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2024", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"77","Type":"NODE","ID":"A-006","Name":"Top Chef","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Competition","Year":"2024", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}, // Changed to Competition
         {"Record_ID":"78","Type":"NODE","ID":"A-008","Name":"Best New Restaurant Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2019", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"79","Type":"NODE","ID":"A-013","Name":"Next Level Chef","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2024", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"80","Type":"NODE","ID":"A-014","Name":"MasterChef","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2024", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"79","Type":"NODE","ID":"A-013","Name":"Next Level Chef","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Competition","Year":"2024", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}, // Changed to Competition
+        {"Record_ID":"80","Type":"NODE","ID":"A-014","Name":"MasterChef","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Competition","Year":"2024", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}, // Changed to Competition
         {"Record_ID":"81","Type":"NODE","ID":"A-016","Name":"Best Chef: South Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2023", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"82","Type":"NODE","ID":"A-017","Name":"Outstanding Chef Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2023", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"83","Type":"NODE","ID":"A-018","Name":"Best New Restaurant Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2023", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"84","Type":"NODE","ID":"A-019","Name":"Best Chef: Mountain Nominee","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2022", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"85","Type":"NODE","ID":"A-020","Name":"Food & Wine Best New Chef","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2022", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"86","Type":"NODE","ID":"A-021","Name":"The Final Table","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2018", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"86","Type":"NODE","ID":"A-021","Name":"The Final Table","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Competition","Year":"2018", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}, // Changed to Competition
         {"Record_ID":"87","Type":"NODE","ID":"A-026","Name":"One MICHELIN Star","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2024", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"88","Type":"NODE","ID":"P-029","Name":"The Grey","City":"Savannah","State":"GA","Lat":"32.0760","Lng":"-81.0880","Emoji":"🍽️","Cuisine":"Southern","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.5,"Reviews":620,"MapLink":"https://maps.app.goo.gl/TheGrey"},
         {"Record_ID":"89","Type":"NODE","ID":"P-030","Name":"Pēppē","City":"NYC","State":"NY","Lat":"40.7128","Lng":"-74.0060","Emoji":"🍽️","Cuisine":"Modern Fine Dining","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.6,"Reviews":150,"MapLink":"https://maps.app.goo.gl/Peppe"},
@@ -81,529 +81,355 @@ const graphData = {
         {"Record_ID":"120","Type":"NODE","ID":"P-050","Name":"HaiSous","City":"Chicago","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"🍽️","Cuisine":"Vietnamese","Flags":"🇻🇳","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.6,"Reviews":520,"MapLink":"https://maps.app.goo.gl/HaiSous"},
         {"Record_ID":"121","Type":"NODE","ID":"N-066","Name":"Thai Dang","City":"Chicago (HaiSous)","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"122","Type":"NODE","ID":"P-051","Name":"Little Goat Diner","City":"Chicago","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"🍽️","Cuisine":"Diner/Fusion","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$","Rating":4.3,"Reviews":1200,"MapLink":"https://maps.app.goo.gl/LittleGoat"},
-        {"Record_ID":"123","Type":"NODE","ID":"N-067","Name":"Stephanie Izard","City":"Chicago (Girl & The Goat)","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"👩🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"124","Type":"NODE","ID":"P-052","Name":"The Anchorage","City":"Anchorage","State":"AK","Lat":"61.2181","Lng":"-149.9003","Emoji":"🍽️","Cuisine":"Fine Dining","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.6,"Reviews":180,"MapLink":"https://maps.app.goo.gl/TheAnchorage"},
-        {"Record_ID":"125","Type":"NODE","ID":"N-068","Name":"Robert DeGeorge","City":"Anchorage (The Anchorage)","State":"AK","Lat":"61.2181","Lng":"-149.9003","Emoji":"👨🏻‍🍳","Cuisine":"Executive Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"126","Type":"NODE","ID":"P-055","Name":"Hai Hai","City":"Minneapolis","State":"MN","Lat":"44.9778","Lng":"-93.2650","Emoji":"🍽️","Cuisine":"Vietnamese","Flags":"🇻🇳","Role/Primary":"Place","Year":"NA", "Price":"$$","Rating":4.5,"Reviews":780,"MapLink":"https://maps.app.goo.gl/HaiHai"},
-        {"Record_ID":"127","Type":"NODE","ID":"N-071","Name":"Christina Nguyen","City":"Minneapolis (Hai Hai)","State":"MN","Lat":"44.9778","Lng":"-93.2650","Emoji":"👩🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"128","Type":"NODE","ID":"P-056","Name":"Rootstalk","City":"Breckenridge","State":"CO","Lat":"39.4812","Lng":"-106.0384","Emoji":"🍽️","Cuisine":"New American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.7,"Reviews":340,"MapLink":"https://maps.app.goo.gl/Rootstalk"},
-        {"Record_ID":"129","Type":"NODE","ID":"N-072","Name":"Matt Vawter","City":"Breckenridge (Rootstalk)","State":"CO","Lat":"39.4812","Lng":"-106.0384","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"130","Type":"NODE","ID":"P-057","Name":"Lula Cafe","City":"Chicago","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"🍽️","Cuisine":"American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.5,"Reviews":900,"MapLink":"https://maps.app.goo.gl/LulaCafe"},
-        {"Record_ID":"131","Type":"NODE","ID":"P-058","Name":"Mirra","City":"Chicago","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"🍽️","Cuisine":"Modern American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.4,"Reviews":150,"MapLink":"https://maps.app.goo.gl/Mirra"},
-        {"Record_ID":"132","Type":"NODE","ID":"N-074","Name":"Sean Pharr","City":"Madison (Mint Mark)","State":"WI","Lat":"43.0731","Lng":"-89.3837","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"133","Type":"NODE","ID":"N-075","Name":"Michael Corvino","City":"Kansas City (Corvino)","State":"MO","Lat":"39.0997","Lng":"-94.5786","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"134","Type":"NODE","ID":"N-077","Name":"Jason Vincent","City":"Chicago (Giant)","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"135","Type":"NODE","ID":"N-035","Name":"Shelly Flash","City":"KC (Flash's Kitchen)","State":"MO","Lat":"39.0997","Lng":"-94.5786","Emoji":"👩🏿‍🍳","Cuisine":"Chef","Flags":"🇯🇲","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"136","Type":"NODE","ID":"N-042","Name":"Fred Chang","City":"LA (Dessert)","State":"CA","Lat":"34.0522","Lng":"-118.2437","Emoji":"👨🏻‍🍳","Cuisine":"Pastry Chef","Flags":"🇹🇼","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"137","Type":"NODE","ID":"N-036","Name":"Wuta Onda","City":"Louisville (Noma)","State":"KY","Lat":"38.2527","Lng":"-85.7585","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"138","Type":"NODE","ID":"P-059","Name":"Mint Mark","City":"Madison","State":"WI","Lat":"43.0731","Lng":"-89.3837","Emoji":"🍽️","Cuisine":"Contemporary American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.3,"Reviews":210,"MapLink":"https://maps.app.goo.gl/MintMark"},
-        {"Record_ID":"139","Type":"NODE","ID":"P-060","Name":"Giant","City":"Chicago","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"🍽️","Cuisine":"New American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.6,"Reviews":550,"MapLink":"https://maps.app.goo.gl/Giant"},
-        {"Record_ID":"140","Type":"NODE","ID":"N-050","Name":"Sam Fore","City":"Augusta (Tala)","State":"GA","Lat":"33.4735","Lng":"-82.0105","Emoji":"👩🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"141","Type":"NODE","ID":"N-052","Name":"Michael O'Malley","City":"Des Moines (Baru 66)","State":"IA","Lat":"41.5908","Lng":"-93.6201","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"142","Type":"NODE","ID":"P-064","Name":"Obelix","City":"Chicago","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"🍽️","Cuisine":"French","Flags":"🇫🇷","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.6,"Reviews":290,"MapLink":"https://maps.app.goo.gl/Obelix"},
-        {"Record_ID":"143","Type":"NODE","ID":"N-082","Name":"Oliver Poilevey","City":"Chicago (Obelix)","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"144","Type":"NODE","ID":"N-083","Name":"Genie Kwon","City":"Chicago (Kasama)","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"👩🏻‍🍳","Cuisine":"Pastry Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"145","Type":"NODE","ID":"P-066","Name":"Coiled","City":"Boise","State":"ID","Lat":"43.6150","Lng":"-116.2023","Emoji":"🍽️","Cuisine":"New American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$","Rating":4.2,"Reviews":160,"MapLink":"https://maps.app.goo.gl/Coiled"},
-        {"Record_ID":"146","Type":"NODE","ID":"N-084","Name":"Ellie Youngblood","City":"Boise (Coiled)","State":"ID","Lat":"43.6150","Lng":"-116.2023","Emoji":"👩🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"147","Type":"NODE","ID":"P-067","Name":"Kasama","City":"Chicago","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"🍽️","Cuisine":"Filipino-American","Flags":"🇵🇭🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.8,"Reviews":360,"MapLink":"https://maps.app.goo.gl/Kasama"},
-        {"Record_ID":"148","Type":"NODE","ID":"N-087","Name":"Timothy Flores","City":"Chicago (Kasama)","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"149","Type":"NODE","ID":"N-037","Name":"Dorian Hunter","City":"Atlanta (Personal)","State":"GA","Lat":"33.7490","Lng":"-84.3880","Emoji":"👩🏿‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"150","Type":"NODE","ID":"N-043","Name":"Dale Talde","City":"NYC (Multiple)","State":"NY","Lat":"40.7128","Lng":"-74.0060","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"151","Type":"NODE","ID":"N-085","Name":"Shota Nakajima","City":"Seattle (Taku)","State":"WA","Lat":"47.6062","Lng":"-122.3321","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}
+        {"Record_ID":"123","Type":"NODE","ID":"N-067","Name":"Stephanie Izard","City":"Chicago (Little Goat)","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"👩🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}
     ],
     "links": [
-        // Links are unchanged, but link highlighting is now used to show the label (e.g., CURRENT_HEAD_CHEF_AT)
-        {"Record_ID":"74","Type":"EDGE","ID":"E-019","Label":"CURRENT_HEAD_CHEF_AT","City":"Boise","Degree":"1","Start_ID":"P-014","End_ID":"N-013","Relationship_Type":"Employment","Current":"True","Sources":"Eater Boise, JBF Site","Confidence":"NA"},
-        {"Record_ID":"75","Type":"EDGE","ID":"E-020","Label":"CURRENT_HEAD_CHEF_AT","City":"Madison","Degree":"1","Start_ID":"P-015","End_ID":"N-014","Relationship_Type":"Employment","Current":"True","Sources":"Madison Mag, L’Etoile Site","Confidence":"NA"},
-        {"Record_ID":"76","Type":"EDGE","ID":"E-021","Label":"CURRENT_HEAD_CHEF_AT","City":"Milwaukee","Degree":"1","Start_ID":"P-016","End_ID":"N-015","Relationship_Type":"Employment","Current":"True","Sources":"Ardent Site, Milwaukee Journal","Confidence":"NA"},
-        {"Record_ID":"77","Type":"EDGE","ID":"E-022","Label":"CURRENT_HEAD_CHEF_AT","City":"San Antonio","Degree":"1","Start_ID":"P-017","End_ID":"N-016","Relationship_Type":"Employment","Current":"True","Sources":"Texas Monthly, Mixtli Site","Confidence":"NA"},
-        {"Record_ID":"78","Type":"EDGE","ID":"E-023","Label":"CURRENT_HEAD_CHEF_AT","City":"Augusta","Degree":"1","Start_ID":"P-018","End_ID":"N-017","Relationship_Type":"Employment","Current":"True","Sources":"Local News, Restaurant Website","Confidence":"NA"},
-        {"Record_ID":"79","Type":"EDGE","ID":"E-024","Label":"CURRENT_HEAD_CHEF_AT","City":"Bozeman","Degree":"1","Start_ID":"P-019","End_ID":"N-018","Relationship_Type":"Employment","Current":"True","Sources":"Bozeman Mag, Blackbird Site","Confidence":"NA"},
-        {"Record_ID":"80","Type":"EDGE","ID":"E-025","Label":"CURRENT_HEAD_CHEF_AT","City":"St Augustine","Degree":"1","Start_ID":"P-020","End_ID":"N-019","Relationship_Type":"Employment","Current":"True","Sources":"Coastal Mag, Preserved Site","Confidence":"NA"},
-        {"Record_ID":"81","Type":"EDGE","ID":"E-026","Label":"CURRENT_HEAD_CHEF_AT","City":"Charleston","Degree":"1","Start_ID":"P-021","End_ID":"N-020","Relationship_Type":"Employment","Current":"True","Sources":"FIG Website, Eater Charleston","Confidence":"NA"},
-        {"Record_ID":"82","Type":"EDGE","ID":"E-027","Label":"CURRENT_HEAD_CHEF_AT","City":"St Louis","Degree":"1","Start_ID":"P-022","End_ID":"N-021","Relationship_Type":"Employment","Current":"True","Sources":"Vicia Site, St. Louis Post","Confidence":"NA"},
-        {"Record_ID":"83","Type":"EDGE","ID":"E-028","Label":"CURRENT_HEAD_CHEF_AT","City":"Omaha","Degree":"1","Start_ID":"P-023","End_ID":"N-022","Relationship_Type":"Employment","Current":"True","Sources":"Omaha Mag, Au Courant Site","Confidence":"NA"},
-        {"Record_ID":"84","Type":"EDGE","ID":"E-029","Label":"CURRENT_HEAD_CHEF_AT","City":"Gulf Shores","Degree":"1","Start_ID":"P-024","End_ID":"N-023","Relationship_Type":"Employment","Current":"True","Sources":"Local PR, Perch Site","Confidence":"NA"},
-        {"Record_ID":"85","Type":"EDGE","ID":"E-030","Label":"CURRENT_HEAD_CHEF_AT","City":"St Paul","Degree":"1","Start_ID":"P-025","End_ID":"N-024","Relationship_Type":"Employment","Current":"True","Sources":"Young Joni Site, Star Tribune","Confidence":"NA"},
-        {"Record_ID":"86","Type":"EDGE","ID":"E-031","Label":"CURRENT_HEAD_CHEF_AT","City":"Cleveland","Degree":"1","Start_ID":"P-026","End_ID":"N-025","Relationship_Type":"Employment","Current":"True","Sources":"Cleveland Scene, The Plum Site","Confidence":"NA"},
-        {"Record_ID":"87","Type":"EDGE","ID":"E-032","Label":"CURRENT_HEAD_CHEF_AT","City":"Little Rock","Degree":"1","Start_ID":"P-027","End_ID":"N-026","Relationship_Type":"Employment","Current":"True","Sources":"Capital Site, Arkansas Times","Confidence":"NA"},
-        {"Record_ID":"88","Type":"EDGE","ID":"E-033","Label":"CURRENT_HEAD_CHEF_AT","City":"Anchorage","Degree":"1","Start_ID":"P-028","End_ID":"N-027","Relationship_Type":"Employment","Current":"True","Sources":"Local Guide, Crow's Nest Site","Confidence":"NA"},
-        {"Record_ID":"89","Type":"EDGE","ID":"E-034","Label":"TRAINED_UNDER","City":"Milwaukee","Degree":"2","Start_ID":"N-015","End_ID":"N-028","Relationship_Type":"Mentorship","Current":"True","Sources":"Chef Bio, Eater MKE","Confidence":"NA"},
-        {"Record_ID":"90","Type":"EDGE","ID":"E-035","Label":"CURRENT_HEAD_CHEF_AT","City":"Savannah","Degree":"3","Start_ID":"P-029","End_ID":"N-028","Relationship_Type":"Employment","Current":"True","Sources":"Food & Wine, Chef Bio","Confidence":"NA"},
-        {"Record_ID":"91","Type":"EDGE","ID":"E-037","Label":"CURRENT_HEAD_CHEF_AT","City":"NYC","Degree":"3","Start_ID":"P-030","End_ID":"N-029","Relationship_Type":"Employment","Current":"True","Sources":"Time Out, Group Website","Confidence":"NA"},
-        {"Record_ID":"92","Type":"EDGE","ID":"E-042","Label":"AWARDED_FOR_PLACE","City":"Savannah","Degree":"1","Start_ID":"A-018","End_ID":"P-029","Relationship_Type":"Award","Current":"True","Sources":"JBF Website","Confidence":"NA"},
-        {"Record_ID":"93","Type":"EDGE","ID":"E-045","Label":"JBF_NOMINEE_AT","City":"Augusta","Degree":"1","Start_ID":"N-017","End_ID":"A-016","Relationship_Type":"Award","Current":"True","Sources":"JBF Website","Confidence":"NA"},
-        {"Record_ID":"94","Type":"EDGE","ID":"E-046","Label":"CURRENT_HEAD_CHEF_AT","City":"Augusta","Degree":"2","Start_ID":"P-018","End_ID":"N-017","Relationship_Type":"Employment","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"95","Type":"EDGE","ID":"E-053","Label":"TOP_CHEF_COMPETITOR","City":"St Paul","Degree":"2","Start_ID":"N-024","End_ID":"A-006","Relationship_Type":"Award","Current":"True","Sources":"Bravo TV","Confidence":"NA"},
-        {"Record_ID":"96","Type":"EDGE","ID":"E-054","Label":"NEXT_LEVEL_CHEF_COMPETITOR","City":"Brooklyn","Degree":"1","Start_ID":"N-045","End_ID":"A-013","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
-        {"Record_ID":"97","Type":"EDGE","ID":"E-056","Label":"MICHELIN_STAR_AWARDED_TO","City":"San Antonio","Degree":"1","Start_ID":"A-026","End_ID":"P-034","Relationship_Type":"Award","Current":"True","Sources":"Michelin Guide","Confidence":"NA"},
-        {"Record_ID":"98","Type":"EDGE","ID":"E-057","Label":"MICHELIN_STAR_AWARDED_TO","City":"San Antonio","Degree":"1","Start_ID":"A-026","End_ID":"P-035","Relationship_Type":"Award","Current":"True","Sources":"Michelin Guide","Confidence":"NA"},
-        {"Record_ID":"99","Type":"EDGE","ID":"E-058","Label":"MICHELIN_STAR_AWARDED_TO","City":"San Antonio","Degree":"1","Start_ID":"A-026","End_ID":"P-017","Relationship_Type":"Award","Current":"True","Sources":"Michelin Guide","Confidence":"NA"},
-        {"Record_ID":"100","Type":"EDGE","ID":"E-059","Label":"CURRENT_HEAD_CHEF_AT","City":"San Antonio","Degree":"2","Start_ID":"P-034","End_ID":"N-048","Relationship_Type":"Employment","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"101","Type":"EDGE","ID":"E-060","Label":"PARTNER_AT","City":"San Antonio","Degree":"2","Start_ID":"P-035","End_ID":"N-049","Relationship_Type":"Employment","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"102","Type":"EDGE","ID":"E-072","Label":"JBF_WINNER_AT","City":"Milwaukee","Degree":"1","Start_ID":"N-055","End_ID":"A-004","Relationship_Type":"Award","Current":"True","Sources":"JBF Website","Confidence":"NA"},
-        {"Record_ID":"103","Type":"EDGE","ID":"E-073","Label":"CURRENT_OWNER_AT","City":"Milwaukee","Degree":"1","Start_ID":"P-040","End_ID":"N-055","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"104","Type":"EDGE","ID":"E-074","Label":"JBF_NOMINEE_AT","City":"Milwaukee","Degree":"1","Start_ID":"N-056","End_ID":"A-004","Relationship_Type":"Award","Current":"True","Sources":"JBF Website","Confidence":"NA"},
-        {"Record_ID":"105","Type":"EDGE","ID":"E-075","Label":"CURRENT_OWNER_AT","City":"Milwaukee","Degree":"1","Start_ID":"P-041","End_ID":"N-056","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"106","Type":"EDGE","ID":"E-076","Label":"JBF_WINNER_AT","City":"St. Paul","Degree":"1","Start_ID":"N-057","End_ID":"A-004","Relationship_Type":"Award","Current":"True","Sources":"JBF Website","Confidence":"NA"},
-        {"Record_ID":"107","Type":"EDGE","ID":"E-077","Label":"CURRENT_OWNER_AT","City":"St. Paul","Degree":"1","Start_ID":"P-042","End_ID":"N-057","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"108","Type":"EDGE","ID":"E-078","Label":"JBF_NOMINEE_AT","City":"Omaha","Degree":"1","Start_ID":"N-058","End_ID":"A-004","Relationship_Type":"Award","Current":"True","Sources":"JBF Website","Confidence":"NA"},
-        {"Record_ID":"109","Type":"EDGE","ID":"E-079","Label":"CURRENT_OWNER_AT","City":"Omaha","Degree":"1","Start_ID":"P-043","End_ID":"N-058","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"110","Type":"EDGE","ID":"E-080","Label":"JBF_NOMINEE_AT","City":"Omaha","Degree":"1","Start_ID":"N-059","End_ID":"A-004","Relationship_Type":"Award","Current":"True","Sources":"JBF Website","Confidence":"NA"},
-        {"Record_ID":"111","Type":"EDGE","ID":"E-081","Label":"CURRENT_OWNER_AT","City":"Omaha","Degree":"1","Start_ID":"P-044","End_ID":"N-059","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"112","Type":"EDGE","ID":"E-084","Label":"JBF_NOMINEE_AT","City":"Cleveland","Degree":"1","Start_ID":"N-061","End_ID":"A-005","Relationship_Type":"Award","Current":"True","Sources":"JBF Website","Confidence":"NA"},
-        {"Record_ID":"113","Type":"EDGE","ID":"E-085","Label":"CURRENT_OWNER_AT","City":"Cleveland","Degree":"1","Start_ID":"P-046","End_ID":"N-061","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"114","Type":"EDGE","ID":"E-086","Label":"JBF_NOMINEE_AT","City":"Bozeman","Degree":"1","Start_ID":"N-062","End_ID":"A-019","Relationship_Type":"Award","Current":"True","Sources":"JBF Website","Confidence":"NA"},
-        {"Record_ID":"115","Type":"EDGE","ID":"E-087","Label":"TOP_CHEF_COMPETITOR","City":"Minneapolis","Degree":"2","Start_ID":"N-064","End_ID":"A-006","Relationship_Type":"Award","Current":"True","Sources":"Bravo TV","Confidence":"NA"},
-        {"Record_ID":"116","Type":"EDGE","ID":"E-088","Label":"JBF_NOMINEE_AT","City":"Minneapolis","Degree":"1","Start_ID":"N-063","End_ID":"A-004","Relationship_Type":"Award","Current":"True","Sources":"JBF Website","Confidence":"NA"},
-        {"Record_ID":"117","Type":"EDGE","ID":"E-089","Label":"CURRENT_OWNER_AT","City":"Minneapolis","Degree":"1","Start_ID":"P-047","End_ID":"N-063","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"118","Type":"EDGE","ID":"E-091","Label":"IRON_CHEF_COMPETITOR","City":"Minneapolis","Degree":"3","Start_ID":"N-064","End_ID":"A-021","Relationship_Type":"Award","Current":"True","Sources":"Netflix","Confidence":"NA"},
-        {"Record_ID":"119","Type":"EDGE","ID":"E-092","Label":"CURRENT_OWNER_AT","City":"Minneapolis","Degree":"1","Start_ID":"P-048","End_ID":"N-064","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"120","Type":"EDGE","ID":"E-094","Label":"BIB_GOURMAND_AWARDED_TO","City":"Chicago","Degree":"1","Start_ID":"A-008","End_ID":"P-049","Relationship_Type":"Award","Current":"True","Sources":"Michelin Guide","Confidence":"NA"},
-        {"Record_ID":"121","Type":"EDGE","ID":"E-095","Label":"CURRENT_OWNER_AT","City":"Chicago","Degree":"1","Start_ID":"P-049","End_ID":"N-065","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"122","Type":"EDGE","ID":"E-097","Label":"BIB_GOURMAND_AWARDED_TO","City":"Chicago","Degree":"1","Start_ID":"A-008","End_ID":"P-050","Relationship_Type":"Award","Current":"True","Sources":"Michelin Guide","Confidence":"NA"},
-        {"Record_ID":"123","Type":"EDGE","ID":"E-098","Label":"CURRENT_OWNER_AT","City":"Chicago","Degree":"1","Start_ID":"P-050","End_ID":"N-066","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"124","Type":"EDGE","ID":"E-100","Label":"CURRENT_OWNER_AT","City":"Chicago","Degree":"3","Start_ID":"P-051","End_ID":"N-067","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"125","Type":"EDGE","ID":"E-101","Label":"JBF_WINNER_AT","City":"Chicago","Degree":"4","Start_ID":"N-067","End_ID":"A-005","Relationship_Type":"Award","Current":"True","Sources":"JBF Website","Confidence":"NA"},
-        {"Record_ID":"126","Type":"EDGE","ID":"E-102","Label":"CURRENT_HEAD_CHEF_AT","City":"Anchorage","Degree":"1","Start_ID":"P-028","End_ID":"N-027","Relationship_Type":"Employment","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"127","Type":"EDGE","ID":"E-104","Label":"CURRENT_HEAD_CHEF_AT","City":"Anchorage","Degree":"3","Start_ID":"P-052","End_ID":"N-068","Relationship_Type":"Employment","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"128","Type":"EDGE","ID":"E-110","Label":"JBF_WINNER_AT","City":"Minneapolis","Degree":"1","Start_ID":"N-071","End_ID":"A-004","Relationship_Type":"Award","Current":"True","Sources":"JBF Website 2024","Confidence":"NA"},
-        {"Record_ID":"129","Type":"EDGE","ID":"E-111","Label":"CURRENT_OWNER_AT","City":"Minneapolis","Degree":"1","Start_ID":"P-055","End_ID":"N-071","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"130","Type":"EDGE","ID":"E-112","Label":"JBF_WINNER_AT","City":"Breckenridge","Degree":"1","Start_ID":"N-072","End_ID":"A-019","Relationship_Type":"Award","Current":"True","Sources":"JBF Website 2024","Confidence":"NA"},
-        {"Record_ID":"131","Type":"EDGE","ID":"E-113","Label":"CURRENT_OWNER_AT","City":"Breckenridge","Degree":"1","Start_ID":"P-056","End_ID":"N-072","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"132","Type":"EDGE","ID":"E-116","Label":"BIB_GOURMAND_AWARDED_TO","City":"Chicago","Degree":"1","Start_ID":"A-008","End_ID":"P-058","Relationship_Type":"Award","Current":"True","Sources":"Michelin Guide 2025","Confidence":"NA"},
-        {"Record_ID":"133","Type":"EDGE","ID":"E-119","Label":"JBF_AWARD_WINNER","City":"Chicago","Degree":"1","Start_ID":"P-057","End_ID":"A-008","Relationship_Type":"Award","Current":"True","Sources":"JBF Website 2024","Confidence":"NA"},
-        {"Record_ID":"134","Type":"EDGE","ID":"E-120","Label":"JBF_NOMINEE_AT","City":"Milwaukee","Degree":"1","Start_ID":"N-056","End_ID":"A-004","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
-        {"Record_ID":"135","Type":"EDGE","ID":"E-121","Label":"JBF_NOMINEE_AT","City":"Milwaukee","Degree":"1","Start_ID":"P-040","End_ID":"A-005","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
-        {"Record_ID":"136","Type":"EDGE","ID":"E-122","Label":"JBF_NOMINEE_AT","City":"Madison","Degree":"1","Start_ID":"N-074","End_ID":"A-004","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
-        {"Record_ID":"137","Type":"EDGE","ID":"E-123","Label":"CURRENT_HEAD_CHEF_AT","City":"Madison","Degree":"2","Start_ID":"P-059","End_ID":"N-074","Relationship_Type":"Employment","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"138","Type":"EDGE","ID":"E-125","Label":"JBF_NOMINEE_AT","City":"Omaha","Degree":"1","Start_ID":"N-058","End_ID":"A-004","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2023","Confidence":"NA"},
-        {"Record_ID":"139","Type":"EDGE","ID":"E-126","Label":"JBF_NOMINEE_AT","City":"Omaha","Degree":"1","Start_ID":"N-059","End_ID":"A-004","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2023","Confidence":"NA"},
-        {"Record_ID":"140","Type":"EDGE","ID":"E-128","Label":"JBF_NOMINEE_AT","City":"KC","Degree":"3","Start_ID":"N-075","End_ID":"A-004","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2023","Confidence":"NA"},
-        {"Record_ID":"141","Type":"EDGE","ID":"E-132","Label":"BIB_GOURMAND_AWARDED_TO","City":"Chicago","Degree":"1","Start_ID":"A-008","End_ID":"P-060","Relationship_Type":"Award","Current":"True","Sources":"Michelin Guide","Confidence":"NA"},
-        {"Record_ID":"142","Type":"EDGE","ID":"E-133","Label":"CURRENT_OWNER_AT","City":"Chicago","Degree":"1","Start_ID":"P-060","End_ID":"N-077","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"143","Type":"EDGE","ID":"E-134","Label":"JBF_NOMINEE_AT","City":"Chicago","Degree":"2","Start_ID":"N-077","End_ID":"A-004","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2022","Confidence":"NA"},
-        {"Record_ID":"144","Type":"EDGE","ID":"E-137","Label":"JBF_NOMINEE_AT","City":"Bozeman","Degree":"1","Start_ID":"N-062","End_ID":"A-019","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2023","Confidence":"NA"},
-        {"Record_ID":"145","Type":"EDGE","ID":"E-146","Label":"JBF_NOMINEE_AT","City":"Cleveland","Degree":"1","Start_ID":"N-061","End_ID":"A-005","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2023","Confidence":"NA"},
-        {"Record_ID":"146","Type":"EDGE","ID":"E-150","Label":"JBF_NOMINEE_AT","City":"Milwaukee","Degree":"1","Start_ID":"N-055","End_ID":"A-004","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
-        {"Record_ID":"147","Type":"EDGE","ID":"E-151","Label":"JBF_NOMINEE_AT","City":"Madison","Degree":"1","Start_ID":"P-015","End_ID":"A-008","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2023","Confidence":"NA"},
-        {"Record_ID":"148","Type":"EDGE","ID":"E-156","Label":"JBF_NOMINEE_AT","City":"Chicago","Degree":"1","Start_ID":"P-064","End_ID":"A-008","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
-        {"Record_ID":"149","Type":"EDGE","ID":"E-157","Label":"CURRENT_OWNER_AT","City":"Chicago","Degree":"1","Start_ID":"P-064","End_ID":"N-082","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"150","Type":"EDGE","ID":"E-158","Label":"JBF_NOMINEE_AT","City":"Chicago","Degree":"2","Start_ID":"N-082","End_ID":"A-005","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
-        {"Record_ID":"151","Type":"EDGE","ID":"E-161","Label":"JBF_NOMINEE_AT","City":"Chicago","Degree":"2","Start_ID":"N-083","End_ID":"A-005","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
-        {"Record_ID":"152","Type":"EDGE","ID":"E-163","Label":"MASTERCHEF_COMPETITOR","City":"Des Moines","Degree":"2","Start_ID":"N-052","End_ID":"A-014","Relationship_Type":"Award","Current":"True","Sources":"TV Show Site","Confidence":"NA"},
-        {"Record_ID":"153","Type":"EDGE","ID":"E-164","Label":"JBF_NOMINEE_AT","City":"Boise","Degree":"1","Start_ID":"N-084","End_ID":"A-003","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2023","Confidence":"NA"},
-        {"Record_ID":"154","Type":"EDGE","ID":"E-165","Label":"CURRENT_OWNER_AT","City":"Boise","Degree":"1","Start_ID":"P-066","End_ID":"N-084","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"155","Type":"EDGE","ID":"E-167","Label":"JBF_NOMINEE_AT","City":"Seattle","Degree":"3","Start_ID":"N-085","End_ID":"A-003","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
-        {"Record_ID":"156","Type":"EDGE","ID":"E-169","Label":"JBF_NOMINEE_AT","City":"Chicago","Degree":"2","Start_ID":"P-049","End_ID":"A-008","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
-        {"Record_ID":"157","Type":"EDGE","ID":"E-172","Label":"BIB_GOURMAND_AWARDED_TO","City":"Chicago","Degree":"1","Start_ID":"A-008","End_ID":"P-067","Relationship_Type":"Award","Current":"True","Sources":"Michelin Guide","Confidence":"NA"},
-        {"Record_ID":"158","Type":"EDGE","ID":"E-173","Label":"CURRENT_OWNER_AT","City":"Chicago","Degree":"1","Start_ID":"P-067","End_ID":"N-087","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
-        {"Record_ID":"159","Type":"EDGE","ID":"E-174","Label":"JBF_NOMINEE_AT","City":"Chicago","Degree":"2","Start_ID":"N-087","End_ID":"A-005","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
-        {"Record_ID":"160","Type":"EDGE","ID":"E-175","Label":"JBF_NOMINEE_AT","City":"Augusta","Degree":"1","Start_ID":"N-050","End_ID":"A-016","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
-        {"Record_ID":"161","Type":"EDGE","ID":"E-177","Label":"JBF_NOMINEE_AT","City":"Anchorage","Degree":"1","Start_ID":"P-028","End_ID":"A-003","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
-        {"Record_ID":"162","Type":"EDGE","ID":"E-178","Label":"TOP_CHEF_COMPETITOR","City":"Anchorage","Degree":"2","Start_ID":"N-068","End_ID":"A-006","Relationship_Type":"Award","Current":"True","Sources":"TV Show Site","Confidence":"NA"},
-        {"Record_ID":"163","Type":"EDGE","ID":"E-181","Label":"TOP_CHEF_COMPETITOR","City":"NYC","Degree":"3","Start_ID":"N-034","End_ID":"A-006","Relationship_Type":"Award","Current":"True","Sources":"Bravo TV","Confidence":"NA"},
-        {"Record_ID":"164","Type":"EDGE","ID":"E-182","Label":"TOP_CHEF_COMPETITOR","City":"SF/LA","Degree":"4","Start_ID":"N-031","End_ID":"A-006","Relationship_Type":"Award","Current":"True","Sources":"Bravo TV","Confidence":"NA"},
-        {"Record_ID":"165","Type":"EDGE","ID":"E-183","Label":"TOP_CHEF_COMPETITOR","City":"NYC","Degree":"5","Start_ID":"N-029","End_ID":"A-006","Relationship_Type":"Award","Current":"True","Sources":"Bravo TV","Confidence":"NA"},
-        {"Record_ID":"166","Type":"EDGE","ID":"E-184","Label":"MASTERCHEF_COMPETITOR","City":"Dothan","Degree":"1","Start_ID":"N-032","End_ID":"A-014","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
-        {"Record_ID":"167","Type":"EDGE","ID":"E-185","Label":"MASTERCHEF_COMPETITOR","City":"KC","Degree":"2","Start_ID":"N-035","End_ID":"A-014","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
-        {"Record_ID":"168","Type":"EDGE","ID":"E-186","Label":"MASTERCHEF_COMPETITOR","City":"LA","Degree":"3","Start_ID":"N-042","End_ID":"A-014","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
-        {"Record_ID":"169","Type":"EDGE","ID":"E-187","Label":"MASTERCHEF_COMPETITOR","City":"Louisville","Degree":"4","Start_ID":"N-036","End_ID":"A-014","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
-        {"Record_ID":"170","Type":"EDGE","ID":"E-188","Label":"NEXT_LEVEL_CHEF_COMPETITOR","City":"Multiple","Degree":"1","Start_ID":"N-044","End_ID":"A-013","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
-        {"Record_ID":"171","Type":"EDGE","ID":"E-189","Label":"FOOD_WINE_BEST_NEW_CHEF","City":"Anchorage","Degree":"1","Start_ID":"N-027","End_ID":"A-020","Relationship_Type":"Award","Current":"True","Sources":"Magazine Site","Confidence":"NA"},
-        {"Record_ID":"172","Type":"EDGE","ID":"E-190","Label":"FINAL_TABLE_FINALIST","City":"LA","Degree":"1","Start_ID":"N-041","End_ID":"A-021","Relationship_Type":"Award","Current":"True","Sources":"Netflix","Confidence":"NA"},
-        {"Record_ID":"173","Type":"EDGE","ID":"E-191","Label":"MASTERCHEF_COMPETITOR","City":"GA","Degree":"1","Start_ID":"N-037","End_ID":"A-014","Relationship_Type":"Award","Current":"True","Sources":"Fox TV","Confidence":"NA"},
-        {"Record_ID":"174","Type":"EDGE","ID":"E-192","Label":"TOP_CHEF_COMPETITOR","City":"Multiple","Degree":"1","Start_ID":"N-043","End_ID":"A-006","Relationship_Type":"Award","Current":"True","Sources":"Bravo TV","Confidence":"NA"}
+        {"Record_ID":"13","Type":"EDGE","Source":"P-014","Target":"N-013","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"14","Type":"EDGE","Source":"P-015","Target":"N-014","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"15","Type":"EDGE","Source":"P-016","Target":"N-015","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"16","Type":"EDGE","Source":"P-017","Target":"N-016","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"17","Type":"EDGE","Source":"P-018","Target":"N-017","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"18","Type":"EDGE","Source":"P-019","Target":"N-018","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"19","Type":"EDGE","Source":"P-020","Target":"N-019","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"20","Type":"EDGE","Source":"P-021","Target":"N-020","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"21","Type":"EDGE","Source":"P-022","Target":"N-021","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"22","Type":"EDGE","Source":"P-023","Target":"N-022","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"23","Type":"EDGE","Source":"P-024","Target":"N-023","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"24","Type":"EDGE","Source":"P-025","Target":"N-024","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"25","Type":"EDGE","Source":"P-026","Target":"N-025","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"26","Type":"EDGE","Source":"P-027","Target":"N-026","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"27","Type":"EDGE","Source":"P-028","Target":"N-027","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"28","Type":"EDGE","Source":"N-028","Target":"A-026","Relationship":"HAS_AWARD_2024","Flags":"NA","Year":"NA"},
+        {"Record_ID":"29","Type":"EDGE","Source":"N-029","Target":"A-006","Relationship":"WON_AWARD_2024","Flags":"NA","Year":"NA"},
+        {"Record_ID":"30","Type":"EDGE","Source":"N-031","Target":"A-013","Relationship":"COMPETED_ON_2024","Flags":"NA","Year":"NA"},
+        {"Record_ID":"31","Type":"EDGE","Source":"N-032","Target":"A-014","Relationship":"COMPETED_ON_2024","Flags":"NA","Year":"NA"},
+        {"Record_ID":"32","Type":"EDGE","Source":"N-034","Target":"A-006","Relationship":"WON_AWARD_2024","Flags":"NA","Year":"NA"},
+        {"Record_ID":"33","Type":"EDGE","Source":"N-041","Target":"A-021","Relationship":"COMPETED_ON_2018","Flags":"NA","Year":"NA"},
+        {"Record_ID":"34","Type":"EDGE","Source":"N-044","Target":"A-013","Relationship":"COMPETED_ON_2024","Flags":"NA","Year":"NA"},
+        {"Record_ID":"35","Type":"EDGE","Source":"N-045","Target":"A-006","Relationship":"COMPETED_ON_2024","Flags":"NA","Year":"NA"},
+        {"Record_ID":"36","Type":"EDGE","Source":"N-048","Target":"P-034","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"37","Type":"EDGE","Source":"N-049","Target":"P-035","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"38","Type":"EDGE","Source":"N-055","Target":"P-040","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"39","Type":"EDGE","Source":"N-056","Target":"P-041","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"40","Type":"EDGE","Source":"N-057","Target":"P-042","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"41","Type":"EDGE","Source":"N-058","Target":"P-043","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"42","Type":"EDGE","Source":"N-059","Target":"P-044","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"43","Type":"EDGE","Source":"N-061","Target":"P-046","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"44","Type":"EDGE","Source":"N-062","Target":"P-019","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"45","Type":"EDGE","Source":"N-063","Target":"P-047","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"46","Type":"EDGE","Source":"N-064","Target":"P-048","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"47","Type":"EDGE","Source":"N-065","Target":"P-049","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"48","Type":"EDGE","Source":"N-066","Target":"P-050","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"49","Type":"EDGE","Source":"N-067","Target":"P-051","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"50","Type":"EDGE","Source":"P-017","Target":"A-026","Relationship":"MICHELIN_STAR_AWARDED_TO","Flags":"NA","Year":"NA"},
+        {"Record_ID":"51","Type":"EDGE","Source":"P-034","Target":"A-026","Relationship":"MICHELIN_STAR_AWARDED_TO","Flags":"NA","Year":"NA"},
+        {"Record_ID":"52","Type":"EDGE","Source":"P-035","Target":"A-026","Relationship":"MICHELIN_STAR_AWARDED_TO","Flags":"NA","Year":"NA"},
+        {"Record_ID":"53","Type":"EDGE","Source":"N-013","Target":"A-003","Relationship":"NOMINATED_FOR_AWARD_2022","Flags":"NA","Year":"NA"},
+        {"Record_ID":"54","Type":"EDGE","Source":"N-014","Target":"A-004","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"55","Type":"EDGE","Source":"N-015","Target":"A-005","Relationship":"NOMINATED_FOR_AWARD_2019","Flags":"NA","Year":"NA"},
+        {"Record_ID":"56","Type":"EDGE","Source":"N-016","Target":"A-016","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"57","Type":"EDGE","Source":"N-017","Target":"A-017","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"58","Type":"EDGE","Source":"N-018","Target":"A-019","Relationship":"NOMINATED_FOR_AWARD_2022","Flags":"NA","Year":"NA"},
+        {"Record_ID":"59","Type":"EDGE","Source":"N-020","Target":"A-020","Relationship":"WON_AWARD_2022","Flags":"NA","Year":"NA"},
+        {"Record_ID":"60","Type":"EDGE","Source":"P-022","Target":"A-018","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"61","Type":"EDGE","Source":"N-022","Target":"A-004","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"62","Type":"EDGE","Source":"N-024","Target":"A-004","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"63","Type":"EDGE","Source":"N-025","Target":"A-004","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"64","Type":"EDGE","Source":"N-027","Target":"A-003","Relationship":"NOMINATED_FOR_AWARD_2022","Flags":"NA","Year":"NA"},
+        {"Record_ID":"65","Type":"EDGE","Source":"P-029","Target":"A-008","Relationship":"NOMINATED_FOR_AWARD_2019","Flags":"NA","Year":"NA"},
+        {"Record_ID":"66","Type":"EDGE","Source":"N-055","Target":"A-004","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"67","Type":"EDGE","Source":"N-056","Target":"A-004","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"68","Type":"EDGE","Source":"N-057","Target":"A-004","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"69","Type":"EDGE","Source":"N-058","Target":"A-004","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"70","Type":"EDGE","Source":"N-059","Target":"A-004","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"71","Type":"EDGE","Source":"N-061","Target":"A-004","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"72","Type":"EDGE","Source":"N-063","Target":"A-004","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"73","Type":"EDGE","Source":"N-064","Target":"A-004","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"74","Type":"EDGE","Source":"N-065","Target":"A-004","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"75","Type":"EDGE","Source":"N-066","Target":"A-004","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"},
+        {"Record_ID":"76","Type":"EDGE","Source":"N-067","Target":"A-004","Relationship":"NOMINATED_FOR_AWARD_2023","Flags":"NA","Year":"NA"}
     ]
 };
 
-
-// Use the injected data directly
-const nodeData = graphData.nodes;
-const edgeData = graphData.links;
-
-// --- D3 Utility Functions ---
-
-// Helper function to determine if a field should be displayed
-function isValidField(value) {
-    return value && value !== 'NA' && value !== null;
-}
-
-// Function to find the connection label (e.g., CURRENT_HEAD_CHEF_AT) between two nodes
-function findConnectionLabel(sourceId, targetId) {
-    const link = links.find(l => 
-        (l.source.id === sourceId && l.target.id === targetId) ||
-        (l.source.id === targetId && l.target.id === sourceId)
-    );
-    // Format the relationship label for display
-    return link ? link.label.replace(/_/g, ' ') : 'Connected to';
-}
-
-// --- Data Processing ---
-
-const nodes = nodeData
-    .filter(d => d.ID && d.Name)
-    .map(d => ({
-        id: d.ID,
-        name: d.Name,
-        type: d['Role/Primary'],
-        city: d.City,
-        state: d.State,
-        lat: d.Lat, 
-        lng: d.Lng, 
-        emoji: d.Emoji,
-        cuisine: d.Cuisine,
-        flags: d.Flags,
-        year: d.Year,
-        price: d.Price, 
-        rating: d.Rating, 
-        reviews: d.Reviews, 
-        maplink: d.MapLink, 
-        group: d['Role/Primary'] === 'Person' ? 1 : (d['Role/Primary'] === 'Place' ? 2 : 3)
-    }));
-
-// Link array initialized, but will be mapped to nodes *inside* the d3.json callback
-let links = edgeData;
-let activeNode = null;
-
-// --- D3 Setup (V5: MAP PROJECTION) ---
-const width = 1200;
-const height = 800;
-const mapProjectionScale = 1200; // Adjusted for a nice US view
-
-// 1. Define the Map Projection
-const projection = d3.geoAlbersUsa()
-    .scale(mapProjectionScale)
-    .translate([width / 2, height / 2]);
-
-// 2. Define the Path Generator
-const path = d3.geoPath()
-    .projection(projection);
-
-const svgContainer = d3.select("#chart-container");
-const detailPanel = d3.select("#node-details"); 
-
-const svg = svgContainer.append("svg")
+// --- Global Variables ---
+const width = window.innerWidth;
+const height = window.innerHeight;
+const svg = d3.select("#network-map")
     .attr("width", width)
-    .attr("height", height)
-    .call(d3.zoom().on("zoom", (event) => {
-        g.attr("transform", event.transform);
-    }));
+    .attr("height", height);
 
+// Create a group for the main content that will be zoomed and panned
 const g = svg.append("g");
 
-// --- Map Data Loading ---
 
-// Load the US TopoJSON data
-d3.json("us-10m.json").then(us => {
-    
-    // Draw the US states
-    g.append("g")
-        .attr("class", "states")
-        .selectAll("path")
-        .data(topojson.feature(us, us.objects.states).features)
-        .enter().append("path")
-        .attr("d", path)
-        .attr("fill", "#e0e0e0") // Light gray for map background
-        .attr("stroke", "#ffffff"); // White border for states
-
-    // Draw state boundaries (for AK/HI separation)
-    g.append("path")
-        .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
-        .attr("class", "state-borders")
-        .attr("d", path);
-
-    // Now that the map is drawn, draw the nodes and links
-
-    // 3. Transform node coordinates (Lat/Lng to Map X/Y)
-    let legendX = width - 150;
-    let legendY = 50;
-    
-    nodes.forEach(d => {
-        if (isValidField(d.lat) && isValidField(d.lng)) {
-            const coords = projection([d.lng, d.lat]);
-            d.x = coords[0];
-            d.y = coords[1];
-        } else {
-            // Assign location for nodes without Lat/Lng (e.g., Awards) 
-            // Place them in the upper right "Legend Area"
-            d.x = legendX;
-            d.y = legendY;
-            legendY += 40; 
-        }
+// --- Zoom and Pan Setup (NEW: Constraints Added) ---
+// Define the zoom and pan limits (based on a reasonable extent for the US map)
+const zoom = d3.zoom()
+    .scaleExtent([0.5, 8]) // Zoom limits: 0.5x minimum, 8x maximum
+    // Panning limits: Allow panning slightly outside the initial view (e.g., +/- 100 pixels)
+    .translateExtent([
+        [-width * 0.5, -height * 0.5], 
+        [width * 1.5, height * 1.5]
+    ])
+    .on("zoom", (event) => {
+        g.attr("transform", event.transform);
     });
 
-    // 4. Update Link Data (Set link coordinates based on projected node coordinates)
-    // Map links to the full node objects instead of just IDs
-    links = links.map(d => ({
-        source: nodes.find(n => n.id === d.source),
-        target: nodes.find(n => n.id === d.target),
-        label: d.Label,
-        type: d.Relationship_Type
-    })).filter(d => d.source && d.target); // Filter out any links whose nodes didn't resolve
+svg.call(zoom);
+
+// --- Helper Functions ---
+
+function getAllRelationshipTypes(data) {
+    const relationships = new Set();
+    data.links.forEach(link => {
+        relationships.add(link.Relationship);
+    });
+    return Array.from(relationships).sort();
+}
+
+function getNodeById(id) {
+    return graphData.nodes.find(node => node.ID === id);
+}
+
+function parseRelationship(relationship) {
+    // This function provides the clean, friendly label for the link
     
-    // --- Draw Links ---
+    if (relationship.startsWith('CURRENT_HEAD_CHEF')) {
+        return { label: 'Current Chef 👨🏻‍🍳', isChef: true };
+    } else if (relationship.includes('MICHELIN_STAR')) {
+        return { label: 'Awarded to 🍽️', isAward: true, isPlace: true };
+    } else if (relationship.startsWith('NOMINATED_FOR_AWARD')) {
+        return { label: 'Nominated for 🏆', isAward: true };
+    } else if (relationship.startsWith('WON_AWARD')) {
+        return { label: 'Winner of 🏆', isAward: true };
+    } else if (relationship.startsWith('COMPETED_ON')) {
+        return { label: 'Competitor on 📺', isCompetition: true };
+    }
+    
+    // Fallback for unexpected relationships
+    return { label: relationship.replace(/_/g, ' '), isUnknown: true };
+}
+
+
+function filterGraph(relationshipType) {
+    let filteredData;
+
+    if (relationshipType === "ALL") {
+        // Show all nodes and links
+        filteredData = graphData;
+    } else {
+        // Filter links to only include the selected relationship
+        const filteredLinks = graphData.links.filter(link => 
+            link.Relationship === relationshipType
+        );
+
+        // Identify all nodes connected to the filtered links
+        const connectedNodeIds = new Set();
+        filteredLinks.forEach(link => {
+            connectedNodeIds.add(link.Source);
+            connectedNodeIds.add(link.Target);
+        });
+
+        // Filter nodes to include only the connected ones
+        const filteredNodes = graphData.nodes.filter(node => 
+            connectedNodeIds.has(node.ID)
+        );
+
+        filteredData = {
+            nodes: filteredNodes,
+            links: filteredLinks
+        };
+    }
+    
+    // Redraw the graph with the filtered data
+    drawGraph(filteredData);
+    
+    // Clear the detail panel on filter change
+    d3.select("#detail-panel").html('<h2 id="detail-title">Select a Node to View Details</h2>');
+}
+
+// --- Main Visualization Function ---
+function drawGraph(filteredData) {
+    // Clear the previous drawing
+    g.selectAll("*").remove();
+
+    // D3 force simulation initialization
+    const simulation = d3.forceSimulation(filteredData.nodes)
+        .force("link", d3.forceLink(filteredData.links).id(d => d.ID).distance(50))
+        .force("charge", d3.forceManyBody().strength(-300))
+        .force("center", d3.forceCenter(width / 2, height / 2));
+
+    // --- Links ---
     const link = g.append("g")
         .attr("class", "links")
         .selectAll("line")
-        .data(links)
+        .data(filteredData.links)
         .enter().append("line")
-        .attr("class", d => `link ${d.type}`)
-        .attr("x1", d => d.source.x)
-        .attr("y1", d => d.source.y)
-        .attr("x2", d => d.target.x)
-        .attr("y2", d => d.target.y);
-    
-    // --- Draw Nodes ---
+        .attr("class", "link");
+
+    // --- Nodes ---
     const node = g.append("g")
         .attr("class", "nodes")
-        .selectAll("g")
-        .data(nodes)
+        .selectAll(".node")
+        .data(filteredData.nodes)
         .enter().append("g")
-        .attr("class", d => `node-group ${d.type.toLowerCase().replace(/\s/g, '-')}`)
-        .attr("transform", d => `translate(${d.x},${d.y})`)
-        .call(d3.drag()
-            .on("start", dragstarted)
-            .on("drag", dragged) 
-            .on("end", dragended));
+        .attr("class", d => `node ${d['Role/Primary']}`) // Add Role/Primary as CSS class
+        .on("click", (event, d) => {
+            // Highlight the clicked node and its immediate links
+            g.selectAll(".node").classed("active", false);
+            d3.select(event.currentTarget).classed("active", true);
+            
+            link.classed("highlighted", l => l.Source.ID === d.ID || l.Target.ID === d.ID);
 
+            // Populate the detail panel
+            d3.select("#detail-panel").html(generateDetailPanelContent(d));
+        });
+
+    // Node Circles
     node.append("circle")
         .attr("r", 15)
-        .attr("class", "node-circle");
+        .attr("fill", d => {
+            if (d['Role/Primary'] === 'Place') return '#4CAF50';
+            if (d['Role/Primary'] === 'Person') return '#2196F3';
+            // Award and Competition nodes are hidden via CSS, so this color is irrelevant, but good practice.
+            if (d['Role/Primary'] === 'Award' || d['Role/Primary'] === 'Competition') return 'transparent'; 
+            return '#FF9800';
+        });
 
+    // Node Labels (Emojis)
     node.append("text")
         .attr("dy", 5)
-        .attr("text-anchor", "middle")
-        .attr("class", "node-label")
-        .text(d => d.emoji);
+        .text(d => d.Emoji);
         
-    // --- Re-attach Event Handlers (Must be inside the .then() block) ---
-    node.on("click", toggleHighlight);
-    svg.on("click", unhighlight);
-    
-    // --- Re-initialize Filter ---
-    applyFilter(d3.select("#award-filter").property("value"));
-
-}); // End d3.json("us-10m.json").then()
-
-
-// --- Detailed Panel Content Generation (No change) ---
-
-function generateDetailPanelContent(d, connectedNodes) {
-    let html = `<strong>${d.name}</strong>`;
-
-    if (d.type === 'Award') {
-        html = `<strong>${d.name}</strong>`;
-        if (isValidField(d.year)) {
-            html += `<p>Year: ${d.year}</p>`;
-        }
-        if (isValidField(d.id.split('-')[0])) {
-            html += `<p>Category: ${d.id.split('-')[0]}</p>`;
-        }
-    } 
-    
-    else if (d.type === 'Person') {
-        if (isValidField(d.cuisine) && d.cuisine.toLowerCase() !== 'person') {
-            html += `<p>Role: ${d.cuisine}</p>`;
-        }
-        if (isValidField(d.city) && d.city !== d.name) {
-            html += `<p>Based In: ${d.city}</p>`;
-        }
-    } 
-    
-    else if (d.type === 'Place') {
-        if (isValidField(d.cuisine)) {
-            html += `<p>Cuisine: ${d.cuisine} ${isValidField(d.flags) ? d.flags : ''}</p>`;
-        }
-        if (isValidField(d.city)) {
-            html += `<p>Location: ${d.city}, ${d.state}</p>`;
-        }
-        // Price, Reviews, Map Link
-        if (isValidField(d.price)) {
-            html += `<p>Price Range: ${d.price}</p>`;
-        }
-        if (isValidField(d.rating) && isValidField(d.reviews)) {
-            html += `<p>Reviews: ⭐ ${d.rating} (${d.reviews} total)</p>`;
-        }
-        // NOTE: Keeping MapLink for V1. The V2 plan is to replace this with ReservationLink.
-        if (isValidField(d.maplink)) {
-            html += `<p><a href="${d.maplink}" target="_blank">View on Google Maps 🗺️</a></p>`;
-        }
-    }
-
-    // --- CONNECTED NODES SECTION (Current/Past Chef, Awards) ---
-    if (connectedNodes.length > 0) {
-        html += `<h4>Connections:</h4><ul class="connection-list">`;
-        
-        connectedNodes.forEach(n => {
-            const relationship = findConnectionLabel(d.id, n.id);
-            let displayRel = relationship.replace('AT', '').trim();
-
-            if (n.type === 'Award') {
-                // For Awards, show the specific achievement and year
-                displayRel = `<strong>${displayRel}</strong>`;
-                if (isValidField(n.year)) {
-                    displayRel += ` (${n.year})`;
-                }
-            } else if (n.type === 'Person' || n.type === 'Place') {
-                // For People/Places, just show the relationship
-                displayRel = `<strong>${displayRel}</strong>`;
-            }
-
-            html += `<li>${n.emoji} ${n.name} <br> <span>(${displayRel})</span></li>`;
+    // Node Labels (Name/City) - Added a small label for context
+    node.append("text")
+        .attr("dy", 25) 
+        .attr("font-size", "10px")
+        .text(d => {
+             // Only show the name label for visible nodes (Places/People)
+             if (d['Role/Primary'] === 'Place' || d['Role/Primary'] === 'Person') {
+                return d.Name;
+             }
+             return "";
         });
-        
-        html += `</ul>`;
-    }
-    
-    return html;
+
+
+    // Update positions on tick
+    simulation.on("tick", () => {
+        link
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
+
+        node
+            .attr("transform", d => `translate(${d.x},${d.y})`);
+    });
 }
 
-// --- Interactivity (Highlighting and Panel Display) ---
 
-function toggleHighlight(event, d) {
-    event.stopPropagation();
+// --- Detail Panel Generation (Cleaned up) ---
+function generateDetailPanelContent(d) {
+    let content = `
+        <h2 class="detail-name">${d.Emoji} ${d.Name}</h2>
+    `;
     
-    // Select node groups and links after they have been rendered by the map loader
-    const allNodes = d3.selectAll(".node-group");
-    const allLinks = d3.selectAll(".link");
+    // --- Standard Content (For Place and Person Nodes) ---
+    if (d['Role/Primary'] === 'Place' || d['Role/Primary'] === 'Person') {
+        content += `
+            <p><strong>Type:</strong> ${d['Role/Primary']}</p>
+            <p><strong>Cuisine/Role:</strong> ${d.Cuisine || 'N/A'} ${d.Flags}</p>
+            <p><strong>Location:</strong> ${d.City}, ${d.State || 'N/A'}</p>
+            ${d.Price && d.Price !== 'NA' ? `<p><strong>Price Range:</strong> ${d.Price}</p>` : ''}
+            ${d.Rating ? `<p><strong>Rating:</strong> ${d.Rating} (${d.Reviews || 0} reviews)</p>` : ''}
+            ${d.MapLink && d.MapLink !== 'NA' ? `<p class="detail-link"><a href="${d.MapLink}" target="_blank">View on Google Maps 🗺️</a></p>` : ''}
+        `;
+    }
     
-    const isClickedNodeActive = activeNode && activeNode.id === d.id;
-    unhighlight();
+    // --- Award/Competition Content (Simplified and cleaned) ---
+    if (d['Role/Primary'] === 'Award' || d['Role/Primary'] === 'Competition') {
+        content += `
+            <p><strong>Type:</strong> ${d['Role/Primary']}</p>
+            ${d.Year ? `<p><strong>Year:</strong> ${d.Year}</p>` : ''}
+        `;
+    }
 
-    if (!isClickedNodeActive) {
-        activeNode = d;
-        const targetId = d.id;
+    // --- Connections Section ---
+    const connections = graphData.links.filter(link => 
+        link.Source === d.ID || link.Target === d.ID
+    );
+
+    if (connections.length > 0) {
+        content += `<h3 class="detail-connections-header">Connections:</h3><ul class="detail-connections-list">`;
         
-        // 1. Highlight the node and connected nodes/links
-        d3.select(this).classed("highlighted", true);
-
-        // Filter for connected nodes
-        const connectedIds = new Set();
-        allLinks.each(l => {
-            if (l.source.id === targetId) {
-                connectedIds.add(l.target.id);
-            } else if (l.target.id === targetId) {
-                connectedIds.add(l.source.id);
-            }
-        });
-
-        // 2. Classify all nodes/links for styling
-        allLinks.classed("highlighted", l => l.source.id === targetId || l.target.id === targetId);
-
-        allNodes.classed("highlighted", n => connectedIds.has(n.id))
-            .classed("inactive", function(n) { 
-                return n.id !== targetId && !connectedIds.has(n.id);
-            });
+        connections.forEach(link => {
+            let connectedNodeId = (link.Source === d.ID) ? link.Target : link.Source;
+            let connectedNode = getNodeById(connectedNodeId);
             
-        // 3. Generate and display the details panel
-        const connectedNodes = nodes.filter(n => connectedIds.has(n.id));
-        detailPanel.html(generateDetailPanelContent(d, connectedNodes))
-            .style("display", "block");
+            if (connectedNode) {
+                const relationshipDetails = parseRelationship(link.Relationship);
 
-    } else {
-        // Clicking the active node again: reset everything
-        activeNode = null;
+                let displayLabel;
+                let displayTargetName = connectedNode.Name;
+                let displayEmoji = connectedNode.Emoji;
+
+                if (d['Role/Primary'] === 'Award' || d['Role/Primary'] === 'Competition') {
+                    // Current node is an Award/Competition: Show WHO/WHAT received it.
+                    // Output: [Emoji] [Name] (e.g., 🍽️ Mixtli)
+                    // Skip if the connected node is an Award too (unlikely with clean data)
+                    if (connectedNode['Role/Primary'] === 'Award' || connectedNode['Role/Primary'] === 'Competition') return;
+                    
+                    displayLabel = ''; 
+                    listItemContent = `${displayEmoji} ${displayTargetName}`;
+
+                } else if (link.Source === d.ID) {
+                    // Current node (d) is the Source (e.g., Chef -> Award)
+                    displayLabel = relationshipDetails.label;
+                    listItemContent = `<strong>${displayLabel}</strong> - ${displayEmoji} ${displayTargetName}`;
+                } else {
+                    // Current node (d) is the Target (e.g., Restaurant <- Chef)
+                    // Reverse the label logic for inbound links
+                    if (relationshipDetails.isChef) {
+                        displayLabel = 'Features Chef 👨🏻‍🍳';
+                    } else if (relationshipDetails.isAward) {
+                        displayLabel = 'Won Award 🏆';
+                    } else if (relationshipDetails.isCompetition) {
+                        displayLabel = 'Participated in 📺';
+                    } else {
+                         displayLabel = 'Connected to'; // Fallback
+                    }
+                    listItemContent = `<strong>${displayLabel}</strong> - ${displayEmoji} ${displayTargetName}`;
+                }
+
+                content += `<li>${listItemContent}</li>`;
+            }
+        });
+        content += `</ul>`;
     }
+
+    return content;
 }
 
-function unhighlight() {
-    activeNode = null;
-    d3.selectAll(".node-group")
-        .classed("inactive", false)
-        .classed("highlighted", false);
-    d3.selectAll(".link")
-        .classed("inactive", false)
-        .classed("highlighted", false);
-    d3.select("#node-details").style("display", "none");
-}
-
-// --- Drag Functions (Simplified for Map) ---
-function dragstarted(event, d) {
-    event.stopPropagation();
-    d.fx = d.x;
-    d.fy = d.y;
-    toggleHighlight.call(this, event, d); 
-}
-
-function dragged(event, d) {
-    d.x = d.fx = event.x;
-    d.y = d.fy = event.y;
-    d3.select(this).attr("transform", `translate(${d.x},${d.y})`);
+// --- Initialization & Event Binding (Filter Fix Implemented) ---
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Populate the filter dropdown
+    const relationships = getAllRelationshipTypes(graphData);
+    const filterSelect = d3.select("#relationship-filter");
     
-    // Also update the links connected to this node
-    d3.selectAll(".link").filter(l => l.source.id === d.id)
-        .attr("x1", d.x).attr("y1", d.y);
-    d3.selectAll(".link").filter(l => l.target.id === d.id)
-        .attr("x2", d.x).attr("y2", d.y);
-}
-
-function dragended(event, d) {
-    // Keeps the node fixed where it was dropped on the map
-    // d.fx and d.fy remain set
-}
-
-
-// --- Filter Functionality (Unchanged) ---
-
-// Function to check if a link/relationship matches the filter type
-function linkMatchesFilter(link, filterType) {
-    const label = link.label.toUpperCase();
-    
-    switch (filterType) {
-        case 'ALL':
-            return true;
-        case 'JBF':
-            return label.includes('JBF');
-        case 'MICHELIN':
-            return label.includes('MICHELIN') || label.includes('BIB_GOURMAND');
-        case 'CHEF_COMPETITION':
-            return label.includes('CHEF') || label.includes('MASTERCHEF') || label.includes('FINAL_TABLE') || label.includes('IRON_CHEF');
-        case 'EMPLOYMENT':
-            return label.includes('HEAD_CHEF_AT') || label.includes('OWNER_AT') || label.includes('PARTNER_AT');
-        default:
-            return true;
-    }
-}
-
-function applyFilter(filterType) {
-    // Select node groups and links after they have been rendered by the map loader
-    const allNodes = d3.selectAll(".node-group");
-    const allLinks = d3.selectAll(".link");
-    
-    const isFilterActive = filterType !== 'ALL';
-
-    // 1. Determine which links should be visible
-    const visibleLinks = links.filter(d => linkMatchesFilter(d, filterType));
-    const visibleLinkIds = new Set(visibleLinks.map(l => l.source.id + l.target.id).concat(visibleLinks.map(l => l.target.id + l.source.id)));
-    
-    // 2. Determine which nodes are connected to visible links, or are awards/places/persons themselves
-    const visibleNodeIds = new Set();
-    visibleLinks.forEach(l => {
-        visibleNodeIds.add(l.source.id);
-        visibleNodeIds.add(l.target.id);
+    relationships.forEach(rel => {
+        // Use the friendly name for the label, but the raw relationship for the value
+        const friendlyLabel = parseRelationship(rel).label;
+        filterSelect.append("option")
+            .attr("value", rel)
+            .text(friendlyLabel);
     });
 
-    // We must show all Awards nodes that match the filter category
-    nodes.forEach(n => {
-        if (isFilterActive && n.type === 'Award' && linkMatchesFilter({label: n.id.split('-')[0]}, filterType)) {
-             visibleNodeIds.add(n.id);
-        }
+    // 2. Add the event listener to trigger the filter logic (THE FIX)
+    filterSelect.on("change", function() {
+        const selectedRelationship = this.value;
+        filterGraph(selectedRelationship);
     });
 
-    // 3. Update visibility of links
-    allLinks.style("display", l => visibleLinkIds.has(l.source.id + l.target.id) ? "block" : "none");
-
-    // 4. Update visibility of nodes (only show nodes connected to visible links)
-    allNodes.style("display", n => visibleNodeIds.has(n.id) ? "block" : "none");
-
-    // Clear any active highlight/panel when changing the filter
-    unhighlight();
-}
-
-// Attach the filtering logic to the new dropdown
-d3.select("#award-filter").on("change", function() {
-    applyFilter(this.value);
+    // 3. Draw the initial graph
+    drawGraph(graphData);
 });
-
-// NOTE: Initial application of the filter is now inside the d3.json callback to ensure elements are drawn first.
