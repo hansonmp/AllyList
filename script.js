@@ -234,6 +234,7 @@ const nodes = nodeData
         emoji: d.Emoji,
         cuisine: d.Cuisine,
         flags: d.Flags,
+        year: d.Year, // Include the year for awards
         group: d['Role/Primary'] === 'Person' ? 1 : (d['Role/Primary'] === 'Place' ? 2 : 3)
     }));
 
@@ -247,22 +248,22 @@ const links = edgeData
         type: d.Relationship_Type
     }));
 
+// Store the currently active (clicked) node for persistent highlight
+let activeNode = null;
+
 // 3. Initialize Force Simulation
 // --- Set up D3 force simulation parameters
 const width = 1200;
 const height = 800;
-const center_x = width / 2;
-const center_y = height / 2;
 
 const simulation = d3.forceSimulation(nodes)
     .force("link", d3.forceLink(links).id(d => d.id).distance(150)) // Set link distance
     .force("charge", d3.forceManyBody().strength(-300)) // Repulsion force
-    .force("center", d3.forceCenter(center_x, center_y)) // Center the graph
+    // Removed d3.forceCenter to allow for map placement preparation
     .force("collide", d3.forceCollide().radius(30).iterations(2)); // Prevent node overlap
 
 // 4. Create SVG Container
 // --- Select the container and append the SVG element
-// NOTE: We select the container but append the SVG. This is the key.
 const svgContainer = d3.select("#chart-container");
 
 const svg = svgContainer.append("svg")
@@ -318,36 +319,90 @@ const tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-// --- Highlighting function (used on hover)
-function highlight(d, highlight_type) {
-    // Determine the ID of the current node
-    const targetId = d.id;
-
-    // Dim all nodes and links
-    d3.selectAll(".node-group").classed("inactive", true);
-    d3.selectAll(".link").classed("inactive", true);
-
-    // Highlight the hovered node
-    d3.select(this).classed("inactive", false).classed("highlighted", true);
-
-    // Highlight linked nodes and edges
-    link.classed("highlighted", l => l.source.id === targetId || l.target.id === targetId)
-        .classed("inactive", l => !(l.source.id === targetId || l.target.id === targetId));
-
-    node.classed("highlighted", n => {
-        const connected = links.some(l => 
-            (l.source.id === targetId && l.target.id === n.id) || 
-            (l.target.id === targetId && l.source.id === n.id)
-        );
-        return connected;
-    })
-    .classed("inactive", function(n) { 
-        return !d3.select(this).classed("highlighted"); 
-    });
+// Helper function to determine if a field should be displayed
+function isValidField(value) {
+    return value && value !== 'NA' && value.toLowerCase() !== 'chef' && value.toLowerCase() !== 'person' && value.toLowerCase() !== 'place';
 }
 
-// --- Reset function (used on mouse out)
+// Function to generate tooltip content
+function generateTooltipContent(d) {
+    let content = `<strong>${d.name}</strong>`;
+
+    if (d.type === 'Award' && isValidField(d.year)) {
+        content = `<strong>${d.name} (${d.year})</strong>`;
+    }
+
+    if (d.type === 'Award' && isValidField(d.id.split('-')[0])) {
+        // Show the type of award/competition (e.g. JBF, Top Chef) if applicable
+        content += `<br>Type: ${d.id.split('-')[0]}`;
+    }
+
+    if (d.type === 'Person' && isValidField(d.cuisine)) {
+        content += `<br>${d.cuisine}`;
+    } else if (d.type === 'Place' && isValidField(d.cuisine)) {
+        content += `<br>Cuisine: ${d.cuisine}`;
+    }
+
+    if (isValidField(d.city) && d.city !== d.name) {
+        content += `<br>Location: ${d.city}`;
+    }
+
+    if (isValidField(d.flags)) {
+        content += `<br>Flags: ${d.flags}`;
+    }
+    
+    return content;
+}
+
+// --- Highlighting function (handles click to toggle persistence)
+function toggleHighlight(event, d) {
+    // Stop event propagation to prevent triggering the SVG background reset
+    event.stopPropagation();
+    
+    // Check if the clicked node is already active
+    const isClickedNodeActive = activeNode && activeNode.id === d.id;
+
+    // Reset all highlights (unhighlight all)
+    unhighlight();
+
+    if (!isClickedNodeActive) {
+        // New node is clicked: highlight it and its connections
+        activeNode = d;
+        const targetId = d.id;
+
+        // Highlight the clicked node
+        d3.select(this).classed("highlighted", true);
+
+        // Highlight linked nodes and edges
+        link.classed("highlighted", l => l.source.id === targetId || l.target.id === targetId);
+
+        node.classed("highlighted", n => {
+            const connected = links.some(l => 
+                (l.source.id === targetId && l.target.id === n.id) || 
+                (l.target.id === targetId && l.source.id === n.id)
+            );
+            return connected;
+        }).classed("inactive", function(n) { 
+            return !d3.select(this).classed("highlighted"); 
+        });
+
+        // Show Tooltip
+        tooltip.html(generateTooltipContent(d))
+            .style("left", (event.pageX + 10) + "px")
+            .style("top", (event.pageY - 28) + "px")
+            .transition()
+            .duration(200)
+            .style("opacity", .9);
+
+    } else {
+        // Clicking the active node again: reset everything
+        activeNode = null;
+    }
+}
+
+// --- Reset function (used on mouse out or background click)
 function unhighlight() {
+    activeNode = null;
     d3.selectAll(".node-group")
         .classed("inactive", false)
         .classed("highlighted", false);
@@ -357,24 +412,11 @@ function unhighlight() {
     tooltip.style("opacity", 0);
 }
 
-// --- Attach mouse event handlers
-node.on("mouseover", function(event, d) {
-    highlight.call(this, d, d.type);
+// --- Attach click event handlers
+node.on("click", toggleHighlight);
 
-    let content = `
-        <strong>${d.name} ${d.flags}</strong> (${d.type})<br>
-        Cuisine: ${d.cuisine}<br>
-        City: ${d.city}
-    `;
-
-    tooltip.html(content)
-        .style("left", (event.pageX + 10) + "px")
-        .style("top", (event.pageY - 28) + "px")
-        .transition()
-        .duration(200)
-        .style("opacity", .9);
-})
-.on("mouseout", unhighlight);
+// Reset highlight on clicking the SVG background
+svg.on("click", unhighlight);
 
 // 8. Define Tick Function
 // --- Updates positions on every tick of the simulation
@@ -396,6 +438,9 @@ function dragstarted(event, d) {
     if (!event.active) simulation.alphaTarget(0.3).restart();
     d.fx = d.x;
     d.fy = d.y;
+    // When dragging starts, stop propagation and activate node
+    event.stopPropagation();
+    toggleHighlight.call(this, event, d); 
 }
 
 function dragged(event, d) {
@@ -405,6 +450,7 @@ function dragged(event, d) {
 
 function dragended(event, d) {
     if (!event.active) simulation.alphaTarget(0);
-    d.fx = null;
-    d.fy = null;
+    // Keep node fixed in place after drag (optional, removed for now)
+    // d.fx = null; 
+    // d.fy = null; 
 }
