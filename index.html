@@ -3,37 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Culinary Knowledge Graph</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Culinary Network Map (V5: Map Projection)</title>
+    
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    
+    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
-    <div class="header">
-        <h1>🏆 Dining & Culinary Knowledge Graph</h1>
+
+    <header>
+        <h1>Chef & Restaurant Network Explorer 🍽️</h1>
+        <p>Visualizing connections (Employment, Awards, Mentorship) anchored to the US Map.</p>
+    </header>
+
+    <div id="filter-controls" style="margin-bottom: 20px;">
+        <label for="award-filter">Filter by Award/Relationship:</label>
+        <select id="award-filter">
+            <option value="ALL">Show All Connections</option>
+            <option value="JBF">JBF Awards (Winner/Nominee)</option>
+            <option value="MICHELIN">Michelin (Star/Bib Gourmand)</option>
+            <option value="CHEF_COMPETITION">TV Cooking Competitions (Top Chef, MasterChef, etc.)</option>
+            <option value="EMPLOYMENT">Employment/Ownership</option>
+        </select>
     </div>
 
-    <div class="container">
-        <div id="chart-container"></div>
-    </div>
+    <div id="chart-container"></div>
     
-    <div class="legend-instructions-container">
-        <div class="instructions-box">
-            <h2>Instructions</h2>
-            <ul>
-                <li>**Drag** the nodes to reorganize the graph.</li>
-                <li>**Hover** over a node to see its details (Name, Type, Location).</li>
-                <li>**Zoom** with the mouse wheel.</li>
-            </ul>
-        </div>
-        
-        <div class="legend-box">
-            <h2>Node Legend</h2>
-            <div class="legend-item person">👨🏻‍🍳 Chef/Person</div>
-            <div class="legend-item place">🍽️ Restaurant/Place</div>
-            <div class="legend-item award">🏆 Award/Competition</div>
-        </div>
-    </div>
+    <div id="node-details"></div>
 
     <script src="script.js"></script>
+
 </body>
 </html>
