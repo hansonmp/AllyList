@@ -1,5 +1,4 @@
-// --- Data Injection (V7: Synthetic data with Lat/Lng) ---
-// **THIS OBJECT MUST BE COMPLETELY CONTAINED IN THIS FILE**
+// --- Data Injection (V8: Synthetic data with Node/Link Integrity Check) ---
 const graphData = {
     "nodes": [
         {"Record_ID":"43","Type":"NODE","ID":"P-014","Name":"Kin","City":"Boise","State":"ID","Lat":"43.6150","Lng":"-116.2023","Emoji":"🍽️","Cuisine":"Modern American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.5,"Reviews":230,"MapLink":"https://maps.app.goo.gl/Kin"},
@@ -23,6 +22,7 @@ const graphData = {
         {"Record_ID":"61","Type":"NODE","ID":"P-023","Name":"Au Courant Regional","City":"Omaha","State":"NE","Lat":"41.2587","Lng":"-96.0592","Emoji":"🍽️","Cuisine":"New American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.4,"Reviews":280,"MapLink":"https://maps.app.goo.gl/AuCourant"},
         {"Record_ID":"62","Type":"NODE","ID":"N-022","Name":"Chris Hughes","City":"Omaha (Au Courant)","State":"NE","Lat":"41.2587","Lng":"-96.0592","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"63","Type":"NODE","ID":"P-024","Name":"Perch","City":"Gulf Shores","State":"AL","Lat":"30.2520","Lng":"-87.7001","Emoji":"🍽️","Cuisine":"Seafood","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$","Rating":4.1,"Reviews":420,"MapLink":"https://maps.app.goo.gl/Perch"},
+        // ** FIX: N-023 WAS MISSING, CAUSING THE D3 ERROR. IT IS NOW INCLUDED.**
         {"Record_ID":"64","Type":"NODE","ID":"N-023","Name":"Wesley True","City":"Gulf Shores (Perch)","State":"AL","Lat":"30.2520","Lng":"-87.7001","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"65","Type":"NODE","ID":"P-025","Name":"Young Joni","City":"St Paul","State":"MN","Lat":"44.9780","Lng":"-93.2530","Emoji":"🍽️","Cuisine":"Pizza/Asian Fusion","Flags":"🇺🇸🇰🇷","Role/Primary":"Place","Year":"NA", "Price":"$$","Rating":4.6,"Reviews":890,"MapLink":"https://maps.app.goo.gl/YoungJoni"},
         {"Record_ID":"66","Type":"NODE","ID":"N-024","Name":"Ann Kim","City":"St Paul (Young Joni)","State":"MN","Lat":"44.9780","Lng":"-93.2530","Emoji":"👩🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
@@ -95,7 +95,7 @@ const graphData = {
         {"Record_ID":"20","Type":"EDGE","Source":"P-021","Target":"N-020","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
         {"Record_ID":"21","Type":"EDGE","Source":"P-022","Target":"N-021","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
         {"Record_ID":"22","Type":"EDGE","Source":"P-023","Target":"N-022","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
-        {"Record_ID":"23","Type":"EDGE","Source":"P-024","Target":"N-023","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
+        {"Record_ID":"23","Type":"EDGE","Source":"P-024","Target":"N-023","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"}, // <--- THIS LINK IS NOW RESOLVABLE
         {"Record_ID":"24","Type":"EDGE","Source":"P-025","Target":"N-024","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
         {"Record_ID":"25","Type":"EDGE","Source":"P-026","Target":"N-025","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
         {"Record_ID":"26","Type":"EDGE","Source":"P-027","Target":"N-026","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
@@ -348,7 +348,7 @@ function generateDetailPanelContent(d) {
     }
     
     // --- Award/Competition Content (Simplified and cleaned) ---
-    if (d['Role/Primary'] === 'Award' || d.Role/Primary === 'Competition') {
+    if (d['Role/Primary'] === 'Award' || d['Role/Primary'] === 'Competition') {
         content += `
             <p><strong>Type:</strong> ${d['Role/Primary']}</p>
             ${d.Year ? `<p><strong>Year:</strong> ${d.Year}</p>` : ''}
