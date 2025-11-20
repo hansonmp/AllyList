@@ -1,149 +1,115 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f4f4f9;
-    color: #333;
+    margin: 0;
+    font-family: sans-serif;
+    overflow: hidden; /* Prevent body scroll, D3 handles map scroll */
 }
 
-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-h1 {
-    color: #5d5d81;
-}
-
-/* --- Map & SVG Container --- */
-#chart-container {
+#controls {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    padding: 10px;
+    background-color: #ffffff;
     border: 1px solid #ccc;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    margin-bottom: 20px;
-    position: relative; /* Needed for absolute positioning of details panel */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* Base style for US States */
-.states path {
-    fill: #e0e0e0;
-    stroke: #ffffff;
-}
-
-.state-borders {
-    fill: none;
-    stroke: #aaa;
-    stroke-linejoin: round;
-    stroke-linecap: round;
+#network-map {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background-color: #f0f0f0;
 }
 
 /* --- Node Styling --- */
-.node-circle {
-    stroke: #fff;
-    stroke-width: 2px;
+.node circle {
+    stroke: #333;
+    stroke-width: 1.5px;
     cursor: pointer;
-    transition: r 0.15s, stroke 0.15s, fill 0.15s;
 }
 
-.node-label {
+.node text {
     fill: #000;
-    font-size: 14px;
-    pointer-events: none; /* Allows click through to the circle */
+    text-anchor: middle;
+    font-size: 10px;
+    pointer-events: none; /* Allows click to pass through text to the circle */
 }
 
-/* Type-specific Colors */
-.node-group.person .node-circle {
-    fill: #4e79a7; /* Blue for Person */
-}
-
-.node-group.place .node-circle {
-    fill: #f28e2b; /* Orange for Place */
-}
-
-.node-group.award .node-circle {
-    fill: #e15759; /* Red for Award */
-}
-
-/* --- Link (Edge) Styling --- */
+/* --- Link Styling --- */
 .link {
     stroke: #999;
     stroke-opacity: 0.6;
     stroke-width: 1px;
-    transition: stroke-width 0.2s, stroke-opacity 0.2s;
-}
-
-/* --- Interactivity and Highlighting --- */
-.node-group.highlighted .node-circle {
-    stroke: #333;
-    stroke-width: 4px;
-    r: 20px;
 }
 
 .link.highlighted {
+    stroke: #FF0000;
+    stroke-width: 2px;
     stroke-opacity: 1;
-    stroke: #366c8d;
-    stroke-width: 3px;
-    z-index: 10;
 }
 
-/* Fading for non-related elements */
-.node-group.inactive,
-.link[style*="none"] {
-    opacity: 0.2;
-    pointer-events: none;
-}
-
-
-/* --- Node Details Panel --- */
-#node-details {
+/* --- Detail Panel Styling --- */
+#detail-panel {
     position: absolute;
-    top: 150px; /* Adjusted lower to avoid the filter control */
-    right: 20px;
-    width: 280px;
-    min-height: 100px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-left: 5px solid #5d5d81;
+    top: 50px;
+    right: 10px;
+    width: 250px;
     padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    z-index: 100; /* Ensure it stays above the map */
-    font-size: 14px;
-    display: none; /* Initially hidden */
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 999;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
-#node-details strong {
-    font-size: 1.3em;
-    display: block;
-    margin-bottom: 5px;
-    color: #5d5d81;
-}
-
-#node-details h4 {
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-size: 1.1em;
+#detail-panel h2 {
+    margin-top: 0;
+    font-size: 1.2em;
     color: #333;
     border-bottom: 1px solid #eee;
-    padding-bottom: 3px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
 }
 
-#node-details p {
+#detail-panel p {
+    font-size: 0.9em;
     margin: 5px 0;
 }
 
-#node-details a {
-    color: #366c8d;
-    text-decoration: none;
-    font-weight: bold;
+#detail-panel .detail-connections-header {
+    font-size: 1em;
+    color: #555;
+    margin-top: 15px;
+    border-top: 1px dashed #eee;
+    padding-top: 10px;
 }
 
-#node-details .connection-list {
-    margin-top: 5px;
+.detail-connections-list {
+    list-style-type: none;
     padding-left: 0;
-    list-style: none;
+    font-size: 0.85em;
 }
 
-#node-details .connection-list li {
-    margin-bottom: 8px;
-    padding-left: 10px;
-    border-left: 3px solid #f0f0f0;
+.detail-connections-list li {
+    margin-bottom: 3px;
+    color: #0056b3;
+}
+
+/* --- V7: Hide Award Nodes (Stylistic Fix) --- */
+/* This makes nodes classified as 'Award' transparent and unclickable, effectively removing them from the map view while keeping their data available for filters. */
+.node.Award, .node.Competition {
+    pointer-events: none;
+}
+
+.node.Award circle, .node.Competition circle {
+    fill: none; /* Hide the colored circle */
+    stroke: none; /* Hide the border */
+}
+
+.node.Award text, .node.Competition text {
+    fill: transparent; /* Hide the emoji/label */
 }
