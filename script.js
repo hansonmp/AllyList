@@ -1,3 +1,4 @@
+// --- Data Injection (Bypasses CSV Reading Issues) ---
 const graphData = {
     "nodes": [
         {"Record_ID":"43","Type":"NODE","ID":"P-014","Name":"Kin","City":"Boise","State":"ID","Lat":"43.6150","Lng":"-116.2023","Emoji":"🍽️","Cuisine":"Modern American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA","Source":"NA"},
@@ -214,3 +215,186 @@ const graphData = {
         {"Record_ID":"174","Type":"EDGE","ID":"E-192","Label":"TOP_CHEF_COMPETITOR","City":"Multiple","Degree":"1","Start_ID":"N-043","End_ID":"A-006","Relationship_Type":"Award","Current":"True","Sources":"Bravo TV","Confidence":"NA"}
     ]
 };
+
+
+// Use the injected data directly
+const nodeData = graphData.nodes;
+const edgeData = graphData.links;
+
+// 1. Process Node Data
+// --- Filter nodes and map data types
+const nodes = nodeData
+    .filter(d => d.ID && d.Name)
+    .map(d => ({
+        id: d.ID,
+        name: d.Name,
+        type: d.Role_Primary,
+        city: d.City,
+        state: d.State,
+        emoji: d.Emoji,
+        cuisine: d.Cuisine,
+        flags: d.Flags,
+        group: d.Role_Primary === 'Person' ? 1 : (d.Role_Primary === 'Place' ? 2 : 3)
+    }));
+
+// 2. Process Edge Data
+// --- Map edges, ensuring source and target IDs match the nodes
+const links = edgeData
+    .map(d => ({
+        source: d.Start_ID,
+        target: d.End_ID,
+        label: d.Label,
+        type: d.Relationship_Type
+    }));
+
+// 3. Initialize Force Simulation
+// --- Set up D3 force simulation parameters
+const width = 1200;
+const height = 800;
+const center_x = width / 2;
+const center_y = height / 2;
+
+const simulation = d3.forceSimulation(nodes)
+    .force("link", d3.forceLink(links).id(d => d.id).distance(150)) // Set link distance
+    .force("charge", d3.forceManyBody().strength(-300)) // Repulsion force
+    .force("center", d3.forceCenter(center_x, center_y)) // Center the graph
+    .force("collide", d3.forceCollide().radius(30).iterations(2)); // Prevent node overlap
+
+// 4. Create SVG Container
+// --- Select the container and append the SVG element
+const svg = d3.select("#chart-container").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .call(d3.zoom().on("zoom", (event) => {
+        svg.attr("transform", event.transform);
+    }))
+    .append("g");
+
+// 5. Draw Links (Edges)
+// --- Append lines for edges
+const link = svg.append("g")
+    .attr("class", "links")
+    .selectAll("line")
+    .data(links)
+    .enter().append("line")
+    .attr("class", d => `link ${d.type}`);
+
+// 6. Draw Nodes
+// --- Append circles and text/emojis for nodes
+const node = svg.append("g")
+    .attr("class", "nodes")
+    .selectAll("g")
+    .data(nodes)
+    .enter().append("g")
+    .attr("class", d => `node-group ${d.type.toLowerCase().replace(/\s/g, '-')}`)
+    .call(d3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended));
+
+// --- Append Circles for visual grouping/size
+node.append("circle")
+    .attr("r", 15)
+    .attr("class", "node-circle");
+
+// --- Append Emojis/Text Labels
+node.append("text")
+    .attr("dy", 5) // vertically center the emoji
+    .attr("text-anchor", "middle")
+    .attr("class", "node-label")
+    .text(d => d.emoji);
+
+// 7. Add Interactivity (Tooltips and Highlighting)
+// --- Add tooltip element (initially hidden)
+const tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+// --- Highlighting function (used on hover)
+function highlight(d, highlight_type) {
+    // Determine the ID of the current node
+    const targetId = d.id;
+
+    // Dim all nodes and links
+    d3.selectAll(".node-group").classed("inactive", true);
+    d3.selectAll(".link").classed("inactive", true);
+
+    // Highlight the hovered node
+    d3.select(this).classed("inactive", false).classed("highlighted", true);
+
+    // Highlight linked nodes and edges
+    link.classed("highlighted", l => l.source.id === targetId || l.target.id === targetId)
+        .classed("inactive", l => !(l.source.id === targetId || l.target.id === targetId));
+
+    node.classed("highlighted", n => {
+        const connected = links.some(l => 
+            (l.source.id === targetId && l.target.id === n.id) || 
+            (l.target.id === targetId && l.source.id === n.id)
+        );
+        return connected;
+    })
+    .classed("inactive", n => !d3.select(n).classed("highlighted")); // Ensure non-highlighted are inactive
+}
+
+// --- Reset function (used on mouse out)
+function unhighlight() {
+    d3.selectAll(".node-group")
+        .classed("inactive", false)
+        .classed("highlighted", false);
+    d3.selectAll(".link")
+        .classed("inactive", false)
+        .classed("highlighted", false);
+    tooltip.style("opacity", 0);
+}
+
+// --- Attach mouse event handlers
+node.on("mouseover", function(event, d) {
+    highlight.call(this, d, d.type);
+
+    let content = `
+        <strong>${d.name} ${d.flags}</strong> (${d.type})<br>
+        Cuisine: ${d.cuisine}<br>
+        City: ${d.city}
+    `;
+
+    tooltip.html(content)
+        .style("left", (event.pageX + 10) + "px")
+        .style("top", (event.pageY - 28) + "px")
+        .transition()
+        .duration(200)
+        .style("opacity", .9);
+})
+.on("mouseout", unhighlight);
+
+// 8. Define Tick Function
+// --- Updates positions on every tick of the simulation
+simulation.on("tick", () => {
+    // Update link positions
+    link
+        .attr("x1", d => d.source.x)
+        .attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x)
+        .attr("y2", d => d.target.y);
+
+    // Update node group positions
+    node
+        .attr("transform", d => `translate(${d.x},${d.y})`);
+});
+
+// 9. Drag Functions (Standard D3)
+function dragstarted(event, d) {
+    if (!event.active) simulation.alphaTarget(0.3).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+}
+
+function dragged(event, d) {
+    d.fx = event.x;
+    d.fy = event.y;
+}
+
+function dragended(event, d) {
+    if (!event.active) simulation.alphaTarget(0);
+    d.fx = null;
+    d.fy = null;
+}
