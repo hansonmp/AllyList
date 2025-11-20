@@ -1,7 +1,6 @@
-// --- Data Injection (V4: Synthetic data added for completeness) ---
+// --- Data Injection (V5: Synthetic data with Lat/Lng) ---
 const graphData = {
     "nodes": [
-        // SYNTHETIC DATA ADDED: Price, Rating, ReviewCount, MapLink
         {"Record_ID":"43","Type":"NODE","ID":"P-014","Name":"Kin","City":"Boise","State":"ID","Lat":"43.6150","Lng":"-116.2023","Emoji":"🍽️","Cuisine":"Modern American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.5,"Reviews":230,"MapLink":"https://maps.app.goo.gl/Kin"},
         {"Record_ID":"44","Type":"NODE","ID":"N-013","Name":"Kris Komori","City":"Boise (Kin)","State":"ID","Lat":"43.6150","Lng":"-116.2023","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"45","Type":"NODE","ID":"P-015","Name":"L'Etoile","City":"Madison","State":"WI","Lat":"43.0731","Lng":"-89.3837","Emoji":"🍽️","Cuisine":"French","Flags":"🇫🇷","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.7,"Reviews":450,"MapLink":"https://maps.app.goo.gl/LEtoile"},
@@ -16,8 +15,8 @@ const graphData = {
         {"Record_ID":"54","Type":"NODE","ID":"N-018","Name":"Robert Wallace","City":"Bozeman (Blackbird)","State":"MT","Lat":"45.6811","Lng":"-111.0494","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"55","Type":"NODE","ID":"P-020","Name":"Preserved Restaurant","City":"St Augustine","State":"FL","Lat":"29.8940","Lng":"-81.3110","Emoji":"🍽️","Cuisine":"Coastal Southern","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.3,"Reviews":510,"MapLink":"https://maps.app.goo.gl/Preserved"},
         {"Record_ID":"56","Type":"NODE","ID":"N-019","Name":"Jeffrey Harding","City":"St Augustine (Preserved)","State":"FL","Lat":"29.8940","Lng":"-81.3110","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"57","Type":"NODE","ID":"P-021","Name":"FIG","City":"Charleston","State":"NC","Lat":"32.7885","Lng":"-79.9328","Emoji":"🍽️","Cuisine":"Seasonal American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.7,"Reviews":750,"MapLink":"https://maps.app.goo.gl/FIG"},
-        {"Record_ID":"58","Type":"NODE","ID":"N-020","Name":"Jason Stanhope","City":"Charleston (FIG)","State":"NC","Lat":"32.7885","Lng":"-79.9328","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"57","Type":"NODE","ID":"P-021","Name":"FIG","City":"Charleston","State":"SC","Lat":"32.7885","Lng":"-79.9328","Emoji":"🍽️","Cuisine":"Seasonal American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.7,"Reviews":750,"MapLink":"https://maps.app.goo.gl/FIG"},
+        {"Record_ID":"58","Type":"NODE","ID":"N-020","Name":"Jason Stanhope","City":"Charleston (FIG)","State":"SC","Lat":"32.7885","Lng":"-79.9328","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"59","Type":"NODE","ID":"P-022","Name":"Vicia","City":"St Louis","State":"MO","Lat":"38.6391","Lng":"-90.2312","Emoji":"🍽️","Cuisine":"Vegetable-Forward","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.5,"Reviews":350,"MapLink":"https://maps.app.goo.gl/Vicia"},
         {"Record_ID":"60","Type":"NODE","ID":"N-021","Name":"Michael Gallina","City":"St Louis (Vicia)","State":"MO","Lat":"38.6391","Lng":"-90.2312","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"61","Type":"NODE","ID":"P-023","Name":"Au Courant Regional","City":"Omaha","State":"NE","Lat":"41.2587","Lng":"-96.0592","Emoji":"🍽️","Cuisine":"New American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.4,"Reviews":280,"MapLink":"https://maps.app.goo.gl/AuCourant"},
@@ -47,70 +46,70 @@ const graphData = {
         {"Record_ID":"85","Type":"NODE","ID":"A-020","Name":"Food & Wine Best New Chef","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2022", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"86","Type":"NODE","ID":"A-021","Name":"The Final Table","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2018", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"87","Type":"NODE","ID":"A-026","Name":"One MICHELIN Star","City":"NA","State":"NA","Lat":"NA","Lng":"NA","Emoji":"🏆","Cuisine":"NA","Flags":"NA","Role/Primary":"Award","Year":"2024", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"88","Type":"NODE","ID":"P-029","Name":"The Grey","City":"Savannah","State":"GA","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"Southern","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.5,"Reviews":620,"MapLink":"https://maps.app.goo.gl/TheGrey"},
-        {"Record_ID":"89","Type":"NODE","ID":"P-030","Name":"Pēppē","City":"NYC","State":"NY","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"Modern Fine Dining","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.6,"Reviews":150,"MapLink":"https://maps.app.goo.gl/Peppe"},
-        {"Record_ID":"90","Type":"NODE","ID":"N-029","Name":"Nini Nguyen","City":"NYC (Pēppē)","State":"NY","Lat":"NA","Lng":"NA","Emoji":"👩🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"91","Type":"NODE","ID":"N-031","Name":"Joe Sasto","City":"SF/LA (Nomad/La Tavola)","State":"CA","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"92","Type":"NODE","ID":"N-032","Name":"Kelsey Clark","City":"Dothan (The Dothan Nurseries)","State":"AL","Lat":"NA","Lng":"NA","Emoji":"👩🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"93","Type":"NODE","ID":"N-034","Name":"Buddha Lo","City":"NYC (Pēppē)","State":"NY","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇦🇺","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"94","Type":"NODE","ID":"N-041","Name":"Timothy Hollingsworth","City":"LA (Otium)","State":"CA","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"95","Type":"NODE","ID":"N-044","Name":"Michael Leonard","City":"Multiple (Crow's Nest)","State":"AK","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"96","Type":"NODE","ID":"N-045","Name":"Gabi Chappel","City":"Brooklyn (Social Media)","State":"NY","Lat":"NA","Lng":"NA","Emoji":"👩🏻‍🍳","Cuisine":"Social Media Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"88","Type":"NODE","ID":"P-029","Name":"The Grey","City":"Savannah","State":"GA","Lat":"32.0760","Lng":"-81.0880","Emoji":"🍽️","Cuisine":"Southern","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.5,"Reviews":620,"MapLink":"https://maps.app.goo.gl/TheGrey"},
+        {"Record_ID":"89","Type":"NODE","ID":"P-030","Name":"Pēppē","City":"NYC","State":"NY","Lat":"40.7128","Lng":"-74.0060","Emoji":"🍽️","Cuisine":"Modern Fine Dining","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.6,"Reviews":150,"MapLink":"https://maps.app.goo.gl/Peppe"},
+        {"Record_ID":"90","Type":"NODE","ID":"N-029","Name":"Nini Nguyen","City":"NYC (Pēppē)","State":"NY","Lat":"40.7128","Lng":"-74.0060","Emoji":"👩🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"91","Type":"NODE","ID":"N-031","Name":"Joe Sasto","City":"SF/LA (Nomad/La Tavola)","State":"CA","Lat":"34.0522","Lng":"-118.2437","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"92","Type":"NODE","ID":"N-032","Name":"Kelsey Clark","City":"Dothan (The Dothan Nurseries)","State":"AL","Lat":"31.2234","Lng":"-85.3900","Emoji":"👩🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"93","Type":"NODE","ID":"N-034","Name":"Buddha Lo","City":"NYC (Pēppē)","State":"NY","Lat":"40.7128","Lng":"-74.0060","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇦🇺","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"94","Type":"NODE","ID":"N-041","Name":"Timothy Hollingsworth","City":"LA (Otium)","State":"CA","Lat":"34.0522","Lng":"-118.2437","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"95","Type":"NODE","ID":"N-044","Name":"Michael Leonard","City":"Multiple (Crow's Nest)","State":"AK","Lat":"61.2181","Lng":"-149.9003","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"96","Type":"NODE","ID":"N-045","Name":"Gabi Chappel","City":"Brooklyn (Social Media)","State":"NY","Lat":"40.7128","Lng":"-74.0060","Emoji":"👩🏻‍🍳","Cuisine":"Social Media Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"97","Type":"NODE","ID":"P-034","Name":"Isidore","City":"San Antonio","State":"TX","Lat":"29.5310","Lng":"-98.4870","Emoji":"🍽️","Cuisine":"Texas Steakhouse","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.5,"Reviews":220,"MapLink":"https://maps.app.goo.gl/Isidore"},
-        {"Record_ID":"98","Type":"NODE","ID":"N-048","Name":"Danny Parada","City":"San Antonio (Isidore)","State":"TX","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"98","Type":"NODE","ID":"N-048","Name":"Danny Parada","City":"San Antonio (Isidore)","State":"TX","Lat":"29.5310","Lng":"-98.4870","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"99","Type":"NODE","ID":"P-035","Name":"Nicosi (Dessert Bar)","City":"San Antonio","State":"TX","Lat":"29.5310","Lng":"-98.4870","Emoji":"🍰","Cuisine":"Dessert Bar","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$","Rating":4.6,"Reviews":190,"MapLink":"https://maps.app.goo.gl/Nicosi"},
-        {"Record_ID":"100","Type":"NODE","ID":"N-049","Name":"Tavel Bristol-Joseph","City":"San Antonio (Nicosi)","State":"TX","Lat":"NA","Lng":"NA","Emoji":"👨🏿‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"101","Type":"NODE","ID":"P-040","Name":"The Diplomat","City":"Milwaukee","State":"WI","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.4,"Reviews":350,"MapLink":"https://maps.app.goo.gl/Diplomat"},
-        {"Record_ID":"102","Type":"NODE","ID":"N-055","Name":"Dane Baldwin","City":"Milwaukee (The Diplomat)","State":"WI","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"103","Type":"NODE","ID":"P-041","Name":"EsterEv","City":"Milwaukee","State":"WI","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"Modern American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.5,"Reviews":120,"MapLink":"https://maps.app.goo.gl/EsterEv"},
-        {"Record_ID":"104","Type":"NODE","ID":"N-056","Name":"Dan Jacobs","City":"Milwaukee (EsterEv)","State":"WI","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"105","Type":"NODE","ID":"P-042","Name":"Myriel","City":"St. Paul","State":"MN","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"Scandinavian","Flags":"🇸🇪","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.6,"Reviews":180,"MapLink":"https://maps.app.goo.gl/Myriel"},
-        {"Record_ID":"106","Type":"NODE","ID":"N-057","Name":"Karyn Tomlinson","City":"St. Paul (Myriel)","State":"MN","Lat":"NA","Lng":"NA","Emoji":"👩🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"107","Type":"NODE","ID":"P-043","Name":"Block 16","City":"Omaha","State":"NE","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"Farm-to-Table","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.7,"Reviews":410,"MapLink":"https://maps.app.goo.gl/Block16"},
-        {"Record_ID":"108","Type":"NODE","ID":"N-058","Name":"Paul Urban","City":"Omaha (Block 16)","State":"NE","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"109","Type":"NODE","ID":"P-044","Name":"Yoshitomo","City":"Omaha","State":"NE","Lat":"NA","Lng":"NA","Emoji":"🍣","Cuisine":"Sushi/Omakase","Flags":"🇯🇵","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.8,"Reviews":250,"MapLink":"https://maps.app.goo.gl/Yoshitomo"},
-        {"Record_ID":"110","Type":"NODE","ID":"N-059","Name":"David Utterback","City":"Omaha (Yoshitomo)","State":"NE","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"100","Type":"NODE","ID":"N-049","Name":"Tavel Bristol-Joseph","City":"San Antonio (Nicosi)","State":"TX","Lat":"29.5310","Lng":"-98.4870","Emoji":"👨🏿‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"101","Type":"NODE","ID":"P-040","Name":"The Diplomat","City":"Milwaukee","State":"WI","Lat":"43.0640","Lng":"-87.9170","Emoji":"🍽️","Cuisine":"American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.4,"Reviews":350,"MapLink":"https://maps.app.goo.gl/Diplomat"},
+        {"Record_ID":"102","Type":"NODE","ID":"N-055","Name":"Dane Baldwin","City":"Milwaukee (The Diplomat)","State":"WI","Lat":"43.0640","Lng":"-87.9170","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"103","Type":"NODE","ID":"P-041","Name":"EsterEv","City":"Milwaukee","State":"WI","Lat":"43.0640","Lng":"-87.9170","Emoji":"🍽️","Cuisine":"Modern American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.5,"Reviews":120,"MapLink":"https://maps.app.goo.gl/EsterEv"},
+        {"Record_ID":"104","Type":"NODE","ID":"N-056","Name":"Dan Jacobs","City":"Milwaukee (EsterEv)","State":"WI","Lat":"43.0640","Lng":"-87.9170","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"105","Type":"NODE","ID":"P-042","Name":"Myriel","City":"St. Paul","State":"MN","Lat":"44.9780","Lng":"-93.2530","Emoji":"🍽️","Cuisine":"Scandinavian","Flags":"🇸🇪","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.6,"Reviews":180,"MapLink":"https://maps.app.goo.gl/Myriel"},
+        {"Record_ID":"106","Type":"NODE","ID":"N-057","Name":"Karyn Tomlinson","City":"St. Paul (Myriel)","State":"MN","Lat":"44.9780","Lng":"-93.2530","Emoji":"👩🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"107","Type":"NODE","ID":"P-043","Name":"Block 16","City":"Omaha","State":"NE","Lat":"41.2587","Lng":"-96.0592","Emoji":"🍽️","Cuisine":"Farm-to-Table","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.7,"Reviews":410,"MapLink":"https://maps.app.goo.gl/Block16"},
+        {"Record_ID":"108","Type":"NODE","ID":"N-058","Name":"Paul Urban","City":"Omaha (Block 16)","State":"NE","Lat":"41.2587","Lng":"-96.0592","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"109","Type":"NODE","ID":"P-044","Name":"Yoshitomo","City":"Omaha","State":"NE","Lat":"41.2587","Lng":"-96.0592","Emoji":"🍣","Cuisine":"Sushi/Omakase","Flags":"🇯🇵","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.8,"Reviews":250,"MapLink":"https://maps.app.goo.gl/Yoshitomo"},
+        {"Record_ID":"110","Type":"NODE","ID":"N-059","Name":"David Utterback","City":"Omaha (Yoshitomo)","State":"NE","Lat":"41.2587","Lng":"-96.0592","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"111","Type":"NODE","ID":"P-046","Name":"Larder Delicatessen","City":"Cleveland","State":"OH","Lat":"41.5034","Lng":"-81.6944","Emoji":"🍽️","Cuisine":"Deli/American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$","Rating":4.4,"Reviews":380,"MapLink":"https://maps.app.goo.gl/Larder"},
-        {"Record_ID":"112","Type":"NODE","ID":"N-061","Name":"Allie La Valle-Umansky","City":"Cleveland (Larder)","State":"OH","Lat":"NA","Lng":"NA","Emoji":"👩🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"113","Type":"NODE","ID":"N-062","Name":"Chris Lockhart","City":"Bozeman (Blackbird)","State":"MT","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"114","Type":"NODE","ID":"P-047","Name":"Khâluna","City":"Minneapolis","State":"MN","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"Laotian","Flags":"🇱🇦","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.5,"Reviews":300,"MapLink":"https://maps.app.goo.gl/Khaluna"},
-        {"Record_ID":"115","Type":"NODE","ID":"N-063","Name":"Ann Ahmed","City":"Minneapolis (Khâluna)","State":"MN","Lat":"NA","Lng":"NA","Emoji":"👩🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"116","Type":"NODE","ID":"P-048","Name":"Union Hmong Kitchen","City":"Minneapolis","State":"MN","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"Hmong","Flags":"🇱🇦","Role/Primary":"Place","Year":"NA", "Price":"$$","Rating":4.4,"Reviews":270,"MapLink":"https://maps.app.goo.gl/UnionHmong"},
-        {"Record_ID":"117","Type":"NODE","ID":"N-064","Name":"Yia Vang","City":"Minneapolis (Union Hmong)","State":"MN","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"118","Type":"NODE","ID":"P-049","Name":"Parachute","City":"Chicago","State":"IL","Lat":"41.9360","Lng":"-87.7020","Emoji":"🍽️","Cuisine":"Korean-American","Flags":"🇺🇸🇰🇷","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.7,"Reviews":490,"MapLink":"https://maps.app.goo.gl/Parachute"},
-        {"Record_ID":"119","Type":"NODE","ID":"N-065","Name":"Beverly Kim","City":"Chicago (Parachute)","State":"IL","Lat":"NA","Lng":"NA","Emoji":"👩🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"120","Type":"NODE","ID":"P-050","Name":"HaiSous","City":"Chicago","State":"IL","Lat":"41.8540","Lng":"-87.6680","Emoji":"🍽️","Cuisine":"Vietnamese","Flags":"🇻🇳","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.6,"Reviews":520,"MapLink":"https://maps.app.goo.gl/HaiSous"},
-        {"Record_ID":"121","Type":"NODE","ID":"N-066","Name":"Thai Dang","City":"Chicago (HaiSous)","State":"IL","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"122","Type":"NODE","ID":"P-051","Name":"Little Goat Diner","City":"Chicago","State":"IL","Lat":"41.8845","Lng":"-87.6430","Emoji":"🍽️","Cuisine":"Diner/Fusion","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$","Rating":4.3,"Reviews":1200,"MapLink":"https://maps.app.goo.gl/LittleGoat"},
-        {"Record_ID":"123","Type":"NODE","ID":"N-067","Name":"Stephanie Izard","City":"Chicago (Girl & The Goat)","State":"IL","Lat":"NA","Lng":"NA","Emoji":"👩🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"112","Type":"NODE","ID":"N-061","Name":"Allie La Valle-Umansky","City":"Cleveland (Larder)","State":"OH","Lat":"41.5034","Lng":"-81.6944","Emoji":"👩🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"113","Type":"NODE","ID":"N-062","Name":"Chris Lockhart","City":"Bozeman (Blackbird)","State":"MT","Lat":"45.6811","Lng":"-111.0494","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"114","Type":"NODE","ID":"P-047","Name":"Khâluna","City":"Minneapolis","State":"MN","Lat":"44.9778","Lng":"-93.2650","Emoji":"🍽️","Cuisine":"Laotian","Flags":"🇱🇦","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.5,"Reviews":300,"MapLink":"https://maps.app.goo.gl/Khaluna"},
+        {"Record_ID":"115","Type":"NODE","ID":"N-063","Name":"Ann Ahmed","City":"Minneapolis (Khâluna)","State":"MN","Lat":"44.9778","Lng":"-93.2650","Emoji":"👩🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"116","Type":"NODE","ID":"P-048","Name":"Union Hmong Kitchen","City":"Minneapolis","State":"MN","Lat":"44.9778","Lng":"-93.2650","Emoji":"🍽️","Cuisine":"Hmong","Flags":"🇱🇦","Role/Primary":"Place","Year":"NA", "Price":"$$","Rating":4.4,"Reviews":270,"MapLink":"https://maps.app.goo.gl/UnionHmong"},
+        {"Record_ID":"117","Type":"NODE","ID":"N-064","Name":"Yia Vang","City":"Minneapolis (Union Hmong)","State":"MN","Lat":"44.9778","Lng":"-93.2650","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"118","Type":"NODE","ID":"P-049","Name":"Parachute","City":"Chicago","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"🍽️","Cuisine":"Korean-American","Flags":"🇺🇸🇰🇷","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.7,"Reviews":490,"MapLink":"https://maps.app.goo.gl/Parachute"},
+        {"Record_ID":"119","Type":"NODE","ID":"N-065","Name":"Beverly Kim","City":"Chicago (Parachute)","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"👩🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"120","Type":"NODE","ID":"P-050","Name":"HaiSous","City":"Chicago","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"🍽️","Cuisine":"Vietnamese","Flags":"🇻🇳","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.6,"Reviews":520,"MapLink":"https://maps.app.goo.gl/HaiSous"},
+        {"Record_ID":"121","Type":"NODE","ID":"N-066","Name":"Thai Dang","City":"Chicago (HaiSous)","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"122","Type":"NODE","ID":"P-051","Name":"Little Goat Diner","City":"Chicago","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"🍽️","Cuisine":"Diner/Fusion","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$","Rating":4.3,"Reviews":1200,"MapLink":"https://maps.app.goo.gl/LittleGoat"},
+        {"Record_ID":"123","Type":"NODE","ID":"N-067","Name":"Stephanie Izard","City":"Chicago (Girl & The Goat)","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"👩🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
         {"Record_ID":"124","Type":"NODE","ID":"P-052","Name":"The Anchorage","City":"Anchorage","State":"AK","Lat":"61.2181","Lng":"-149.9003","Emoji":"🍽️","Cuisine":"Fine Dining","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$$","Rating":4.6,"Reviews":180,"MapLink":"https://maps.app.goo.gl/TheAnchorage"},
-        {"Record_ID":"125","Type":"NODE","ID":"N-068","Name":"Robert DeGeorge","City":"Anchorage (The Anchorage)","State":"AK","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Executive Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"126","Type":"NODE","ID":"P-055","Name":"Hai Hai","City":"Minneapolis","State":"MN","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"Vietnamese","Flags":"🇻🇳","Role/Primary":"Place","Year":"NA", "Price":"$$","Rating":4.5,"Reviews":780,"MapLink":"https://maps.app.goo.gl/HaiHai"},
-        {"Record_ID":"127","Type":"NODE","ID":"N-071","Name":"Christina Nguyen","City":"Minneapolis (Hai Hai)","State":"MN","Lat":"NA","Lng":"NA","Emoji":"👩🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"128","Type":"NODE","ID":"P-056","Name":"Rootstalk","City":"Breckenridge","State":"CO","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"New American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.7,"Reviews":340,"MapLink":"https://maps.app.goo.gl/Rootstalk"},
-        {"Record_ID":"129","Type":"NODE","ID":"N-072","Name":"Matt Vawter","City":"Breckenridge (Rootstalk)","State":"CO","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"130","Type":"NODE","ID":"P-057","Name":"Lula Cafe","City":"Chicago","State":"IL","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.5,"Reviews":900,"MapLink":"https://maps.app.goo.gl/LulaCafe"},
-        {"Record_ID":"131","Type":"NODE","ID":"P-058","Name":"Mirra","City":"Chicago","State":"IL","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"Modern American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.4,"Reviews":150,"MapLink":"https://maps.app.goo.gl/Mirra"},
-        {"Record_ID":"132","Type":"NODE","ID":"N-074","Name":"Sean Pharr","City":"Madison (Mint Mark)","State":"WI","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"133","Type":"NODE","ID":"N-075","Name":"Michael Corvino","City":"Kansas City (Corvino)","State":"MO","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"134","Type":"NODE","ID":"N-077","Name":"Jason Vincent","City":"Chicago (Giant)","State":"IL","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"135","Type":"NODE","ID":"N-035","Name":"Shelly Flash","City":"KC (Flash's Kitchen)","State":"MO","Lat":"NA","Lng":"NA","Emoji":"👩🏿‍🍳","Cuisine":"Chef","Flags":"🇯🇲","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"136","Type":"NODE","ID":"N-042","Name":"Fred Chang","City":"LA (Dessert)","State":"CA","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Pastry Chef","Flags":"🇹🇼","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"137","Type":"NODE","ID":"N-036","Name":"Wuta Onda","City":"Louisville (Noma)","State":"KY","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"138","Type":"NODE","ID":"P-059","Name":"Mint Mark","City":"Madison","State":"WI","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"Contemporary American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.3,"Reviews":210,"MapLink":"https://maps.app.goo.gl/MintMark"},
-        {"Record_ID":"139","Type":"NODE","ID":"P-060","Name":"Giant","City":"Chicago","State":"IL","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"New American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.6,"Reviews":550,"MapLink":"https://maps.app.goo.gl/Giant"},
-        {"Record_ID":"140","Type":"NODE","ID":"N-050","Name":"Sam Fore","City":"Augusta (Tala)","State":"GA","Lat":"NA","Lng":"NA","Emoji":"👩🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"141","Type":"NODE","ID":"N-052","Name":"Michael O'Malley","City":"Des Moines (Baru 66)","State":"IA","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"142","Type":"NODE","ID":"P-064","Name":"Obelix","City":"Chicago","State":"IL","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"French","Flags":"🇫🇷","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.6,"Reviews":290,"MapLink":"https://maps.app.goo.gl/Obelix"},
-        {"Record_ID":"143","Type":"NODE","ID":"N-082","Name":"Oliver Poilevey","City":"Chicago (Obelix)","State":"IL","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"144","Type":"NODE","ID":"N-083","Name":"Genie Kwon","City":"Chicago (Kasama)","State":"IL","Lat":"NA","Lng":"NA","Emoji":"👩🏻‍🍳","Cuisine":"Pastry Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"145","Type":"NODE","ID":"P-066","Name":"Coiled","City":"Boise","State":"ID","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"New American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$","Rating":4.2,"Reviews":160,"MapLink":"https://maps.app.goo.gl/Coiled"},
-        {"Record_ID":"146","Type":"NODE","ID":"N-084","Name":"Ellie Youngblood","City":"Boise (Coiled)","State":"ID","Lat":"NA","Lng":"NA","Emoji":"👩🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"147","Type":"NODE","ID":"P-067","Name":"Kasama","City":"Chicago","State":"IL","Lat":"NA","Lng":"NA","Emoji":"🍽️","Cuisine":"Filipino-American","Flags":"🇵🇭🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.8,"Reviews":360,"MapLink":"https://maps.app.goo.gl/Kasama"},
-        {"Record_ID":"148","Type":"NODE","ID":"N-087","Name":"Timothy Flores","City":"Chicago (Kasama)","State":"IL","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"149","Type":"NODE","ID":"N-037","Name":"Dorian Hunter","City":"Atlanta (Personal)","State":"GA","Lat":"NA","Lng":"NA","Emoji":"👩🏿‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"150","Type":"NODE","ID":"N-043","Name":"Dale Talde","City":"NYC (Multiple)","State":"NY","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
-        {"Record_ID":"151","Type":"NODE","ID":"N-085","Name":"Shota Nakajima","City":"Seattle (Taku)","State":"WA","Lat":"NA","Lng":"NA","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}
+        {"Record_ID":"125","Type":"NODE","ID":"N-068","Name":"Robert DeGeorge","City":"Anchorage (The Anchorage)","State":"AK","Lat":"61.2181","Lng":"-149.9003","Emoji":"👨🏻‍🍳","Cuisine":"Executive Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"126","Type":"NODE","ID":"P-055","Name":"Hai Hai","City":"Minneapolis","State":"MN","Lat":"44.9778","Lng":"-93.2650","Emoji":"🍽️","Cuisine":"Vietnamese","Flags":"🇻🇳","Role/Primary":"Place","Year":"NA", "Price":"$$","Rating":4.5,"Reviews":780,"MapLink":"https://maps.app.goo.gl/HaiHai"},
+        {"Record_ID":"127","Type":"NODE","ID":"N-071","Name":"Christina Nguyen","City":"Minneapolis (Hai Hai)","State":"MN","Lat":"44.9778","Lng":"-93.2650","Emoji":"👩🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"128","Type":"NODE","ID":"P-056","Name":"Rootstalk","City":"Breckenridge","State":"CO","Lat":"39.4812","Lng":"-106.0384","Emoji":"🍽️","Cuisine":"New American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.7,"Reviews":340,"MapLink":"https://maps.app.goo.gl/Rootstalk"},
+        {"Record_ID":"129","Type":"NODE","ID":"N-072","Name":"Matt Vawter","City":"Breckenridge (Rootstalk)","State":"CO","Lat":"39.4812","Lng":"-106.0384","Emoji":"👨🏻‍🍳","Cuisine":"Chef/Owner","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"130","Type":"NODE","ID":"P-057","Name":"Lula Cafe","City":"Chicago","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"🍽️","Cuisine":"American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.5,"Reviews":900,"MapLink":"https://maps.app.goo.gl/LulaCafe"},
+        {"Record_ID":"131","Type":"NODE","ID":"P-058","Name":"Mirra","City":"Chicago","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"🍽️","Cuisine":"Modern American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.4,"Reviews":150,"MapLink":"https://maps.app.goo.gl/Mirra"},
+        {"Record_ID":"132","Type":"NODE","ID":"N-074","Name":"Sean Pharr","City":"Madison (Mint Mark)","State":"WI","Lat":"43.0731","Lng":"-89.3837","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"133","Type":"NODE","ID":"N-075","Name":"Michael Corvino","City":"Kansas City (Corvino)","State":"MO","Lat":"39.0997","Lng":"-94.5786","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"134","Type":"NODE","ID":"N-077","Name":"Jason Vincent","City":"Chicago (Giant)","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"135","Type":"NODE","ID":"N-035","Name":"Shelly Flash","City":"KC (Flash's Kitchen)","State":"MO","Lat":"39.0997","Lng":"-94.5786","Emoji":"👩🏿‍🍳","Cuisine":"Chef","Flags":"🇯🇲","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"136","Type":"NODE","ID":"N-042","Name":"Fred Chang","City":"LA (Dessert)","State":"CA","Lat":"34.0522","Lng":"-118.2437","Emoji":"👨🏻‍🍳","Cuisine":"Pastry Chef","Flags":"🇹🇼","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"137","Type":"NODE","ID":"N-036","Name":"Wuta Onda","City":"Louisville (Noma)","State":"KY","Lat":"38.2527","Lng":"-85.7585","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"138","Type":"NODE","ID":"P-059","Name":"Mint Mark","City":"Madison","State":"WI","Lat":"43.0731","Lng":"-89.3837","Emoji":"🍽️","Cuisine":"Contemporary American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.3,"Reviews":210,"MapLink":"https://maps.app.goo.gl/MintMark"},
+        {"Record_ID":"139","Type":"NODE","ID":"P-060","Name":"Giant","City":"Chicago","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"🍽️","Cuisine":"New American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.6,"Reviews":550,"MapLink":"https://maps.app.goo.gl/Giant"},
+        {"Record_ID":"140","Type":"NODE","ID":"N-050","Name":"Sam Fore","City":"Augusta (Tala)","State":"GA","Lat":"33.4735","Lng":"-82.0105","Emoji":"👩🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"141","Type":"NODE","ID":"N-052","Name":"Michael O'Malley","City":"Des Moines (Baru 66)","State":"IA","Lat":"41.5908","Lng":"-93.6201","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"142","Type":"NODE","ID":"P-064","Name":"Obelix","City":"Chicago","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"🍽️","Cuisine":"French","Flags":"🇫🇷","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.6,"Reviews":290,"MapLink":"https://maps.app.goo.gl/Obelix"},
+        {"Record_ID":"143","Type":"NODE","ID":"N-082","Name":"Oliver Poilevey","City":"Chicago (Obelix)","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"144","Type":"NODE","ID":"N-083","Name":"Genie Kwon","City":"Chicago (Kasama)","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"👩🏻‍🍳","Cuisine":"Pastry Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"145","Type":"NODE","ID":"P-066","Name":"Coiled","City":"Boise","State":"ID","Lat":"43.6150","Lng":"-116.2023","Emoji":"🍽️","Cuisine":"New American","Flags":"🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$","Rating":4.2,"Reviews":160,"MapLink":"https://maps.app.goo.gl/Coiled"},
+        {"Record_ID":"146","Type":"NODE","ID":"N-084","Name":"Ellie Youngblood","City":"Boise (Coiled)","State":"ID","Lat":"43.6150","Lng":"-116.2023","Emoji":"👩🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"147","Type":"NODE","ID":"P-067","Name":"Kasama","City":"Chicago","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"🍽️","Cuisine":"Filipino-American","Flags":"🇵🇭🇺🇸","Role/Primary":"Place","Year":"NA", "Price":"$$$","Rating":4.8,"Reviews":360,"MapLink":"https://maps.app.goo.gl/Kasama"},
+        {"Record_ID":"148","Type":"NODE","ID":"N-087","Name":"Timothy Flores","City":"Chicago (Kasama)","State":"IL","Lat":"41.8781","Lng":"-87.6298","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"149","Type":"NODE","ID":"N-037","Name":"Dorian Hunter","City":"Atlanta (Personal)","State":"GA","Lat":"33.7490","Lng":"-84.3880","Emoji":"👩🏿‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"150","Type":"NODE","ID":"N-043","Name":"Dale Talde","City":"NYC (Multiple)","State":"NY","Lat":"40.7128","Lng":"-74.0060","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"},
+        {"Record_ID":"151","Type":"NODE","ID":"N-085","Name":"Shota Nakajima","City":"Seattle (Taku)","State":"WA","Lat":"47.6062","Lng":"-122.3321","Emoji":"👨🏻‍🍳","Cuisine":"Chef","Flags":"🇺🇸","Role/Primary":"Person","Year":"NA", "Price":"NA","Rating":null,"Reviews":null,"MapLink":"NA"}
     ],
     "links": [
         // Links are unchanged, but link highlighting is now used to show the label (e.g., CURRENT_HEAD_CHEF_AT)
@@ -155,7 +154,7 @@ const graphData = {
         {"Record_ID":"112","Type":"EDGE","ID":"E-084","Label":"JBF_NOMINEE_AT","City":"Cleveland","Degree":"1","Start_ID":"N-061","End_ID":"A-005","Relationship_Type":"Award","Current":"True","Sources":"JBF Website","Confidence":"NA"},
         {"Record_ID":"113","Type":"EDGE","ID":"E-085","Label":"CURRENT_OWNER_AT","City":"Cleveland","Degree":"1","Start_ID":"P-046","End_ID":"N-061","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
         {"Record_ID":"114","Type":"EDGE","ID":"E-086","Label":"JBF_NOMINEE_AT","City":"Bozeman","Degree":"1","Start_ID":"N-062","End_ID":"A-019","Relationship_Type":"Award","Current":"True","Sources":"JBF Website","Confidence":"NA"},
-        {"Record_ID":"115","Type":"EDGE","ID":"E-087","Label":"TOP_CHEF_COMPETITOR","City":"Minneapolis","Degree":"2","Start_ID":"N-064","End_ID":"A-006","Relationship_Type":"Award","Current":"True","Sources":"TV Show Site","Confidence":"NA"},
+        {"Record_ID":"115","Type":"EDGE","ID":"E-087","Label":"TOP_CHEF_COMPETITOR","City":"Minneapolis","Degree":"2","Start_ID":"N-064","End_ID":"A-006","Relationship_Type":"Award","Current":"True","Sources":"Bravo TV","Confidence":"NA"},
         {"Record_ID":"116","Type":"EDGE","ID":"E-088","Label":"JBF_NOMINEE_AT","City":"Minneapolis","Degree":"1","Start_ID":"N-063","End_ID":"A-004","Relationship_Type":"Award","Current":"True","Sources":"JBF Website","Confidence":"NA"},
         {"Record_ID":"117","Type":"EDGE","ID":"E-089","Label":"CURRENT_OWNER_AT","City":"Minneapolis","Degree":"1","Start_ID":"P-047","End_ID":"N-063","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
         {"Record_ID":"118","Type":"EDGE","ID":"E-091","Label":"IRON_CHEF_COMPETITOR","City":"Minneapolis","Degree":"3","Start_ID":"N-064","End_ID":"A-021","Relationship_Type":"Award","Current":"True","Sources":"Netflix","Confidence":"NA"},
@@ -250,40 +249,39 @@ const nodes = nodeData
         type: d['Role/Primary'],
         city: d.City,
         state: d.State,
-        lat: d.Lat, // Added Lat for Map V5
-        lng: d.Lng, // Added Lng for Map V5
+        lat: d.Lat, 
+        lng: d.Lng, 
         emoji: d.Emoji,
         cuisine: d.Cuisine,
         flags: d.Flags,
         year: d.Year,
-        price: d.Price, // NEW FIELD
-        rating: d.Rating, // NEW FIELD
-        reviews: d.Reviews, // NEW FIELD
-        maplink: d.MapLink, // NEW FIELD
+        price: d.Price, 
+        rating: d.Rating, 
+        reviews: d.Reviews, 
+        maplink: d.MapLink, 
         group: d['Role/Primary'] === 'Person' ? 1 : (d['Role/Primary'] === 'Place' ? 2 : 3)
     }));
 
-const links = edgeData
-    .map(d => ({
-        source: d.Start_ID,
-        target: d.End_ID,
-        label: d.Label,
-        type: d.Relationship_Type
-    }));
-
+// Link array initialized, but will be mapped to nodes *inside* the d3.json callback
+let links = edgeData;
 let activeNode = null;
 
-// --- D3 Setup ---
+// --- D3 Setup (V5: MAP PROJECTION) ---
 const width = 1200;
 const height = 800;
+const mapProjectionScale = 1200; // Adjusted for a nice US view
 
-const simulation = d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(links).id(d => d.id).distance(150))
-    .force("charge", d3.forceManyBody().strength(-300))
-    .force("collide", d3.forceCollide().radius(30).iterations(2));
+// 1. Define the Map Projection
+const projection = d3.geoAlbersUsa()
+    .scale(mapProjectionScale)
+    .translate([width / 2, height / 2]);
+
+// 2. Define the Path Generator
+const path = d3.geoPath()
+    .projection(projection);
 
 const svgContainer = d3.select("#chart-container");
-const detailPanel = d3.select("#node-details"); // Select the new detail panel
+const detailPanel = d3.select("#node-details"); 
 
 const svg = svgContainer.append("svg")
     .attr("width", width)
@@ -294,36 +292,102 @@ const svg = svgContainer.append("svg")
 
 const g = svg.append("g");
 
-const link = g.append("g")
-    .attr("class", "links")
-    .selectAll("line")
-    .data(links)
-    .enter().append("line")
-    .attr("class", d => `link ${d.type}`);
+// --- Map Data Loading ---
 
-const node = g.append("g")
-    .attr("class", "nodes")
-    .selectAll("g")
-    .data(nodes)
-    .enter().append("g")
-    .attr("class", d => `node-group ${d.type.toLowerCase().replace(/\s/g, '-')}`)
-    .call(d3.drag()
-        .on("start", dragstarted)
-        .on("drag", dragged) 
-        .on("end", dragended));
+// Load the US TopoJSON data
+d3.json("us-10m.json").then(us => {
+    
+    // Draw the US states
+    g.append("g")
+        .attr("class", "states")
+        .selectAll("path")
+        .data(topojson.feature(us, us.objects.states).features)
+        .enter().append("path")
+        .attr("d", path)
+        .attr("fill", "#e0e0e0") // Light gray for map background
+        .attr("stroke", "#ffffff"); // White border for states
 
-node.append("circle")
-    .attr("r", 15)
-    .attr("class", "node-circle");
+    // Draw state boundaries (for AK/HI separation)
+    g.append("path")
+        .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
+        .attr("class", "state-borders")
+        .attr("d", path);
 
-node.append("text")
-    .attr("dy", 5)
-    .attr("text-anchor", "middle")
-    .attr("class", "node-label")
-    .text(d => d.emoji);
+    // Now that the map is drawn, draw the nodes and links
+
+    // 3. Transform node coordinates (Lat/Lng to Map X/Y)
+    let legendX = width - 150;
+    let legendY = 50;
+    
+    nodes.forEach(d => {
+        if (isValidField(d.lat) && isValidField(d.lng)) {
+            const coords = projection([d.lng, d.lat]);
+            d.x = coords[0];
+            d.y = coords[1];
+        } else {
+            // Assign location for nodes without Lat/Lng (e.g., Awards) 
+            // Place them in the upper right "Legend Area"
+            d.x = legendX;
+            d.y = legendY;
+            legendY += 40; 
+        }
+    });
+
+    // 4. Update Link Data (Set link coordinates based on projected node coordinates)
+    // Map links to the full node objects instead of just IDs
+    links = links.map(d => ({
+        source: nodes.find(n => n.id === d.source),
+        target: nodes.find(n => n.id === d.target),
+        label: d.Label,
+        type: d.Relationship_Type
+    })).filter(d => d.source && d.target); // Filter out any links whose nodes didn't resolve
+    
+    // --- Draw Links ---
+    const link = g.append("g")
+        .attr("class", "links")
+        .selectAll("line")
+        .data(links)
+        .enter().append("line")
+        .attr("class", d => `link ${d.type}`)
+        .attr("x1", d => d.source.x)
+        .attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x)
+        .attr("y2", d => d.target.y);
+    
+    // --- Draw Nodes ---
+    const node = g.append("g")
+        .attr("class", "nodes")
+        .selectAll("g")
+        .data(nodes)
+        .enter().append("g")
+        .attr("class", d => `node-group ${d.type.toLowerCase().replace(/\s/g, '-')}`)
+        .attr("transform", d => `translate(${d.x},${d.y})`)
+        .call(d3.drag()
+            .on("start", dragstarted)
+            .on("drag", dragged) 
+            .on("end", dragended));
+
+    node.append("circle")
+        .attr("r", 15)
+        .attr("class", "node-circle");
+
+    node.append("text")
+        .attr("dy", 5)
+        .attr("text-anchor", "middle")
+        .attr("class", "node-label")
+        .text(d => d.emoji);
+        
+    // --- Re-attach Event Handlers (Must be inside the .then() block) ---
+    node.on("click", toggleHighlight);
+    svg.on("click", unhighlight);
+    
+    // --- Re-initialize Filter ---
+    applyFilter(d3.select("#award-filter").property("value"));
+
+}); // End d3.json("us-10m.json").then()
 
 
-// --- Detailed Panel Content Generation ---
+// --- Detailed Panel Content Generation (No change) ---
 
 function generateDetailPanelContent(d, connectedNodes) {
     let html = `<strong>${d.name}</strong>`;
@@ -354,13 +418,14 @@ function generateDetailPanelContent(d, connectedNodes) {
         if (isValidField(d.city)) {
             html += `<p>Location: ${d.city}, ${d.state}</p>`;
         }
-        // NEW: Price, Reviews, Map Link
+        // Price, Reviews, Map Link
         if (isValidField(d.price)) {
             html += `<p>Price Range: ${d.price}</p>`;
         }
         if (isValidField(d.rating) && isValidField(d.reviews)) {
             html += `<p>Reviews: ⭐ ${d.rating} (${d.reviews} total)</p>`;
         }
+        // NOTE: Keeping MapLink for V1. The V2 plan is to replace this with ReservationLink.
         if (isValidField(d.maplink)) {
             html += `<p><a href="${d.maplink}" target="_blank">View on Google Maps 🗺️</a></p>`;
         }
@@ -399,6 +464,10 @@ function generateDetailPanelContent(d, connectedNodes) {
 function toggleHighlight(event, d) {
     event.stopPropagation();
     
+    // Select node groups and links after they have been rendered by the map loader
+    const allNodes = d3.selectAll(".node-group");
+    const allLinks = d3.selectAll(".link");
+    
     const isClickedNodeActive = activeNode && activeNode.id === d.id;
     unhighlight();
 
@@ -411,7 +480,7 @@ function toggleHighlight(event, d) {
 
         // Filter for connected nodes
         const connectedIds = new Set();
-        link.each(l => {
+        allLinks.each(l => {
             if (l.source.id === targetId) {
                 connectedIds.add(l.target.id);
             } else if (l.target.id === targetId) {
@@ -420,9 +489,9 @@ function toggleHighlight(event, d) {
         });
 
         // 2. Classify all nodes/links for styling
-        link.classed("highlighted", l => l.source.id === targetId || l.target.id === targetId);
+        allLinks.classed("highlighted", l => l.source.id === targetId || l.target.id === targetId);
 
-        node.classed("highlighted", n => connectedIds.has(n.id))
+        allNodes.classed("highlighted", n => connectedIds.has(n.id))
             .classed("inactive", function(n) { 
                 return n.id !== targetId && !connectedIds.has(n.id);
             });
@@ -446,45 +515,36 @@ function unhighlight() {
     d3.selectAll(".link")
         .classed("inactive", false)
         .classed("highlighted", false);
-    detailPanel.style("display", "none");
+    d3.select("#node-details").style("display", "none");
 }
 
-// --- Attach Event Handlers ---
-node.on("click", toggleHighlight);
-svg.on("click", unhighlight);
-
-// --- Simulation Tick ---
-simulation.on("tick", () => {
-    link
-        .attr("x1", d => d.source.x)
-        .attr("y1", d => d.source.y)
-        .attr("x2", d => d.target.x)
-        .attr("y2", d => d.target.y);
-
-    node
-        .attr("transform", d => `translate(${d.x},${d.y})`);
-});
-
-// --- Drag Functions (Standard D3) ---
+// --- Drag Functions (Simplified for Map) ---
 function dragstarted(event, d) {
-    if (!event.active) simulation.alphaTarget(0.3).restart();
+    event.stopPropagation();
     d.fx = d.x;
     d.fy = d.y;
-    event.stopPropagation();
     toggleHighlight.call(this, event, d); 
 }
 
 function dragged(event, d) {
-    d.fx = event.x;
-    d.fy = event.y;
+    d.x = d.fx = event.x;
+    d.y = d.fy = event.y;
+    d3.select(this).attr("transform", `translate(${d.x},${d.y})`);
+    
+    // Also update the links connected to this node
+    d3.selectAll(".link").filter(l => l.source.id === d.id)
+        .attr("x1", d.x).attr("y1", d.y);
+    d3.selectAll(".link").filter(l => l.target.id === d.id)
+        .attr("x2", d.x).attr("y2", d.y);
 }
 
 function dragended(event, d) {
-    if (!event.active) simulation.alphaTarget(0);
+    // Keeps the node fixed where it was dropped on the map
+    // d.fx and d.fy remain set
 }
 
 
-// --- NEW: Filter Functionality ---
+// --- Filter Functionality (Unchanged) ---
 
 // Function to check if a link/relationship matches the filter type
 function linkMatchesFilter(link, filterType) {
@@ -507,17 +567,21 @@ function linkMatchesFilter(link, filterType) {
 }
 
 function applyFilter(filterType) {
+    // Select node groups and links after they have been rendered by the map loader
+    const allNodes = d3.selectAll(".node-group");
+    const allLinks = d3.selectAll(".link");
+    
     const isFilterActive = filterType !== 'ALL';
 
     // 1. Determine which links should be visible
-    const visibleLinks = edgeData.filter(d => linkMatchesFilter(d, filterType));
-    const visibleLinkIds = new Set(visibleLinks.map(l => l.source + l.target).concat(visibleLinks.map(l => l.target + l.source)));
+    const visibleLinks = links.filter(d => linkMatchesFilter(d, filterType));
+    const visibleLinkIds = new Set(visibleLinks.map(l => l.source.id + l.target.id).concat(visibleLinks.map(l => l.target.id + l.source.id)));
     
     // 2. Determine which nodes are connected to visible links, or are awards/places/persons themselves
     const visibleNodeIds = new Set();
     visibleLinks.forEach(l => {
-        visibleNodeIds.add(l.source);
-        visibleNodeIds.add(l.target);
+        visibleNodeIds.add(l.source.id);
+        visibleNodeIds.add(l.target.id);
     });
 
     // We must show all Awards nodes that match the filter category
@@ -528,16 +592,13 @@ function applyFilter(filterType) {
     });
 
     // 3. Update visibility of links
-    link.style("display", l => visibleLinkIds.has(l.source.id + l.target.id) ? "block" : "none");
+    allLinks.style("display", l => visibleLinkIds.has(l.source.id + l.target.id) ? "block" : "none");
 
     // 4. Update visibility of nodes (only show nodes connected to visible links)
-    node.style("display", n => visibleNodeIds.has(n.id) ? "block" : "none");
+    allNodes.style("display", n => visibleNodeIds.has(n.id) ? "block" : "none");
 
     // Clear any active highlight/panel when changing the filter
     unhighlight();
-    
-    // Restart the simulation to stabilize the view of visible nodes
-    simulation.alpha(0.3).restart();
 }
 
 // Attach the filtering logic to the new dropdown
@@ -545,5 +606,4 @@ d3.select("#award-filter").on("change", function() {
     applyFilter(this.value);
 });
 
-// Initialize the filter to ALL on load
-applyFilter('ALL');
+// NOTE: Initial application of the filter is now inside the d3.json callback to ensure elements are drawn first.
