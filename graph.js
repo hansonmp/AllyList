@@ -99,18 +99,26 @@ function drawGraph(filteredData) {
     // Clear the previous drawing
     g.selectAll("*").remove();
 
+    // 🏆 CRITICAL FIX: Explicitly map links to ensure D3 resolves node IDs correctly.
+    // This resolves the "node not found: undefined" error.
+    const simulationLinks = filteredData.links.map(l => ({
+        ...l, 
+        source: String(l.Source), 
+        target: String(l.Target)
+    }));
+
     // D3 force simulation initialization
-    // The forceLink function will now correctly find all node IDs from the loaded data
     const simulation = d3.forceSimulation(filteredData.nodes)
-        .force("link", d3.forceLink(filteredData.links).id(d => d.ID).distance(50))
+        .force("link", d3.forceLink(simulationLinks).id(d => d.ID).distance(50))
         .force("charge", d3.forceManyBody().strength(-300))
         .force("center", d3.forceCenter(width / 2, height / 2));
 
     // --- Links ---
+    // Use the fixed simulationLinks array for data binding
     const link = g.append("g")
         .attr("class", "links")
         .selectAll("line")
-        .data(filteredData.links)
+        .data(simulationLinks)
         .enter().append("line")
         .attr("class", "link");
 
@@ -126,6 +134,7 @@ function drawGraph(filteredData) {
             g.selectAll(".node").classed("active", false);
             d3.select(event.currentTarget).classed("active", true);
             
+            // Note: link.source and link.target are now node objects thanks to d3.forceLink
             link.classed("highlighted", l => l.source.ID === d.ID || l.target.ID === d.ID);
 
             // Populate the detail panel
@@ -210,6 +219,7 @@ function generateDetailPanelContent(d) {
         content += `<h3 class="detail-connections-header">Connections:</h3><ul class="detail-connections-list">`;
         
         connections.forEach(link => {
+            // Note: link.Source and link.Target here are still the raw string IDs, which is correct for this lookup.
             let connectedNodeId = (link.Source === d.ID) ? link.Target : link.Source;
             let connectedNode = getNodeById(connectedNodeId);
             
@@ -258,11 +268,12 @@ function generateDetailPanelContent(d) {
 // --- Initialization & Event Binding (Data Fetch) ---
 document.addEventListener('DOMContentLoaded', () => {
     // Use D3 to fetch the external JSON file
-  d3.json("data.json?v=100").then(data => {
-        if (!data) {
+    // Adding v=100 to the data.json URL to bypass the stubborn GitHub CDN cache
+    d3.json("data.json?v=100").then(data => {
+        if (!data || data.nodes.length === 0) {
             console.error("Failed to load data.json or file is empty.");
             // Set error message in detail panel for user visibility
-            d3.select("#detail-panel").html('<h2>Error: Failed to load graph data. Check browser console for network errors.</h2>');
+            d3.select("#detail-panel").html('<h2>Error: Failed to load graph data or data is empty.</h2>');
             return;
         }
         
@@ -299,5 +310,3 @@ document.addEventListener('DOMContentLoaded', () => {
         d3.select("#detail-panel").html('<h2>Network Error: Could not retrieve data.json. Check file path and deployment.</h2>');
     });
 });
-
-
