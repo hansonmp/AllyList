@@ -99,13 +99,19 @@ function drawGraph(filteredData) {
     // Clear the previous drawing
     g.selectAll("*").remove();
 
+    // 🏆 CRITICAL FIX: Explicitly map links to ensure D3 resolves node IDs correctly.
+    // This resolves the "node not found: undefined" error.
+    const simulationLinks = filteredData.links.map(l => ({
+        ...l, 
+        source: String(l.Source), 
+        target: String(l.Target)
+    }));
+
     // D3 force simulation initialization
-    // The forceLink function will now correctly find all node IDs from the loaded data
     const simulation = d3.forceSimulation(filteredData.nodes)
-        .force("link", d3.forceLink(filteredData.links).id(d => d.ID).distance(50))
+        .force("link", d3.forceLink(simulationLinks).id(d => d.ID).distance(50))
         .force("charge", d3.forceManyBody().strength(-300))
         .force("center", d3.forceCenter(width / 2, height / 2));
-
     // --- Links ---
     const link = g.append("g")
         .attr("class", "links")
@@ -299,3 +305,4 @@ document.addEventListener('DOMContentLoaded', () => {
         d3.select("#detail-panel").html('<h2>Network Error: Could not retrieve data.json. Check file path and deployment.</h2>');
     });
 });
+
