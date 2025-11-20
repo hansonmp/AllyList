@@ -1,135 +1,149 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+    margin: 20px;
+    background-color: #f4f4f9;
     color: #333;
-    text-align: center;
 }
 
-.header {
-    background-color: #fff;
-    padding: 20px 0;
-    border-bottom: 3px solid #f0ad4e;
+header {
+    text-align: center;
     margin-bottom: 20px;
 }
 
 h1 {
-    margin: 0;
-    font-size: 2em;
-    color: #333;
+    color: #5d5d81;
 }
 
-.container {
-    max-width: 1250px;
-    margin: 0 auto;
-    padding: 0 10px;
-}
-
-/* --- Graph Container Styling --- */
+/* --- Map & SVG Container --- */
 #chart-container {
-    /* Define a clear size for the graph area */
-    width: 1200px; 
-    height: 800px;
-    margin: 20px auto; 
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative; /* Needed for absolute positioning of details panel */
 }
 
-/* --- D3 Node and Link Styles --- */
-.link {
-    stroke: #999;
-    stroke-opacity: 0.6;
-    stroke-width: 1.5px;
-    transition: stroke-width 0.2s, stroke-opacity 0.2s;
+/* Base style for US States */
+.states path {
+    fill: #e0e0e0;
+    stroke: #ffffff;
 }
 
+.state-borders {
+    fill: none;
+    stroke: #aaa;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+/* --- Node Styling --- */
 .node-circle {
     stroke: #fff;
     stroke-width: 2px;
-    /* Default color based on role/type */
-    fill: #1f77b4; 
-}
-
-/* Specific colors for Node types */
-.person .node-circle {
-    fill: #2ca02c; /* Green for Person/Chef */
-}
-
-.place .node-circle {
-    fill: #ff7f0e; /* Orange for Place/Restaurant */
-}
-
-.award .node-circle {
-    fill: #9467bd; /* Purple for Award */
+    cursor: pointer;
+    transition: r 0.15s, stroke 0.15s, fill 0.15s;
 }
 
 .node-label {
     fill: #000;
-    font-size: 1.1em;
-    pointer-events: none; /* Allows mouse events to pass through to the circle */
+    font-size: 14px;
+    pointer-events: none; /* Allows click through to the circle */
 }
 
-/* --- Highlighting Styles --- */
-/* Inactive elements when a node is highlighted */
-.inactive {
-    opacity: 0.1;
+/* Type-specific Colors */
+.node-group.person .node-circle {
+    fill: #4e79a7; /* Blue for Person */
 }
 
-/* Highlighted links */
-.link.highlighted {
-    stroke: #d62728;
-    stroke-width: 3px;
-    stroke-opacity: 1;
+.node-group.place .node-circle {
+    fill: #f28e2b; /* Orange for Place */
 }
 
-/* Highlighted nodes (connected nodes) */
+.node-group.award .node-circle {
+    fill: #e15759; /* Red for Award */
+}
+
+/* --- Link (Edge) Styling --- */
+.link {
+    stroke: #999;
+    stroke-opacity: 0.6;
+    stroke-width: 1px;
+    transition: stroke-width 0.2s, stroke-opacity 0.2s;
+}
+
+/* --- Interactivity and Highlighting --- */
 .node-group.highlighted .node-circle {
-    stroke: #d62728;
+    stroke: #333;
     stroke-width: 4px;
+    r: 20px;
 }
 
-/* --- Tooltip Styles --- */
-.tooltip {
-    position: absolute;
-    text-align: left;
-    padding: 8px;
-    font: 12px sans-serif;
-    background: lightsteelblue;
-    border: 0px;
-    border-radius: 8px;
+.link.highlighted {
+    stroke-opacity: 1;
+    stroke: #366c8d;
+    stroke-width: 3px;
+    z-index: 10;
+}
+
+/* Fading for non-related elements */
+.node-group.inactive,
+.link[style*="none"] {
+    opacity: 0.2;
     pointer-events: none;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* --- Legend and Instructions Styles --- */
-.legend-instructions-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 30px;
-    padding-bottom: 50px;
+
+/* --- Node Details Panel --- */
+#node-details {
+    position: absolute;
+    top: 150px; /* Adjusted lower to avoid the filter control */
+    right: 20px;
+    width: 280px;
+    min-height: 100px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-left: 5px solid #5d5d81;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 100; /* Ensure it stays above the map */
+    font-size: 14px;
+    display: none; /* Initially hidden */
 }
 
-.instructions-box, .legend-box {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: left;
+#node-details strong {
+    font-size: 1.3em;
+    display: block;
+    margin-bottom: 5px;
+    color: #5d5d81;
 }
 
-.legend-item {
-    padding: 5px 0;
-    font-size: 1em;
+#node-details h4 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 3px;
 }
 
-.instructions-box ul {
-    list-style-type: disc;
-    padding-left: 20px;
+#node-details p {
+    margin: 5px 0;
 }
 
-.instructions-box li {
+#node-details a {
+    color: #366c8d;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#node-details .connection-list {
+    margin-top: 5px;
+    padding-left: 0;
+    list-style: none;
+}
+
+#node-details .connection-list li {
     margin-bottom: 8px;
+    padding-left: 10px;
+    border-left: 3px solid #f0f0f0;
 }
