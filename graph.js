@@ -258,7 +258,7 @@ function generateDetailPanelContent(d) {
 // --- Initialization & Event Binding (Data Fetch) ---
 document.addEventListener('DOMContentLoaded', () => {
     // Use D3 to fetch the external JSON file
-    d3.json("data.json").then(data => {
+  d3.json("data.json?v=100").then(data => {
         if (!data) {
             console.error("Failed to load data.json or file is empty.");
             // Set error message in detail panel for user visibility
