@@ -1,0 +1,110 @@
+Record_ID,Type,ID,Name,City,State,Lat,Lng,Emoji,Cuisine,Flags,Role/Primary,Year,Source
+43,NODE,P-014,Kin,Boise,ID,43.6150,-116.2023,🍽️,Modern American,🇺🇸,Place,NA,NA
+44,NODE,N-013,Kris Komori,Boise (Kin),ID,43.6150,-116.2023,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+45,NODE,P-015,L'Etoile,Madison,WI,43.0731,-89.3837,🍽️,French,🇫🇷,Place,NA,NA
+46,NODE,N-014,Tory Miller,Madison (L'Etoile),WI,43.0731,-89.3837,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+47,NODE,P-016,Ardent,Milwaukee,WI,43.0640,-87.9170,🍽️,Tasting Menu,🇺🇸,Place,NA,NA
+48,NODE,N-015,Justin Carlisle,Milwaukee (Ardent),WI,43.0640,-87.9170,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+49,NODE,P-017,Mixtli,San Antonio,TX,29.5310,-98.4870,🍽️,Mexican (Rotating),🇲🇽,Place,NA,NA
+50,NODE,N-016,Rico Torres,San Antonio (Mixtli),TX,29.5310,-98.4870,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+51,NODE,P-018,The Southern,Augusta,GA,33.4735,-82.0105,🍽️,Southern,🇺🇸,Place,NA,NA
+52,NODE,N-017,Brandon Rushing,Augusta (The Southern),GA,33.4735,-82.0105,👨🏿‍🍳,Chef,🇺🇸,Person,NA,NA
+53,NODE,P-019,Blackbird Kitchen,Bozeman,MT,45.6811,-111.0494,🍽️,Italian,🇮🇹,Place,NA,NA
+54,NODE,N-018,Robert Wallace,Bozeman (Blackbird),MT,45.6811,-111.0494,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+55,NODE,P-020,Preserved Restaurant,St Augustine,FL,29.8940,-81.3110,🍽️,Coastal Southern,🇺🇸,Place,NA,NA
+56,NODE,N-019,Jeffrey Harding,St Augustine (Preserved),FL,29.8940,-81.3110,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+57,NODE,P-021,FIG,Charleston,NC,32.7885,-79.9328,🍽️,Seasonal American,🇺🇸,Place,NA,NA
+58,NODE,N-020,Jason Stanhope,Charleston (FIG),NC,32.7885,-79.9328,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+59,NODE,P-022,Vicia,St Louis,MO,38.6391,-90.2312,🍽️,Vegetable-Forward,🇺🇸,Place,NA,NA
+60,NODE,N-021,Michael Gallina,St Louis (Vicia),MO,38.6391,-90.2312,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+61,NODE,P-023,Au Courant Regional,Omaha,NE,41.2587,-96.0592,🍽️,New American,🇺🇸,Place,NA,NA
+62,NODE,N-022,Chris Hughes,Omaha (Au Courant),NE,41.2587,-96.0592,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+63,NODE,P-024,Perch,Gulf Shores,AL,30.2520,-87.7001,🍽️,Seafood,🇺🇸,Place,NA,NA
+64,NODE,N-023,Wesley True,Gulf Shores (Perch),AL,30.2520,-87.7001,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+65,NODE,P-025,Young Joni,St Paul,MN,44.9780,-93.2530,🍽️,Pizza/Asian Fusion,🇺🇸🇰🇷,Place,NA,NA
+66,NODE,N-024,Ann Kim,St Paul (Young Joni),MN,44.9780,-93.2530,👩🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+67,NODE,P-026,The Plum Cafe,Cleveland,OH,41.5034,-81.6944,🍽️,Seasonal American,🇺🇸,Place,NA,NA
+68,NODE,N-025,Brett Sawyer,Cleveland (The Plum),OH,41.5034,-81.6944,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+69,NODE,P-027,Capital Bar,Little Rock,AR,34.7465,-92.2896,🍽️,Fine Dining,🇺🇸,Place,NA,NA
+70,NODE,N-026,Matt Bell,Little Rock (Capital Bar),AR,34.7465,-92.2896,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+71,NODE,P-028,Crow's Nest,Anchorage,AK,61.2181,-149.9003,🍽️,Pacific Northwest,🇺🇸,Place,NA,NA
+72,NODE,N-027,Danny Peñaloza,Anchorage (Crow's Nest),AK,61.2181,-149.9003,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+73,NODE,N-028,Erik Anderson,Multiple (The Grey),NA,NA,NA,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+74,NODE,A-003,Best Chef: Northwest Nominee,NA,NA,NA,NA,🏆,NA,NA,Award,2022,JBF
+75,NODE,A-004,Best Chef: Midwest Nominee,NA,NA,NA,NA,🏆,NA,NA,Award,2023,JBF
+76,NODE,A-005,Outstanding Chef Nominee,NA,NA,NA,NA,🏆,NA,NA,Award,2019,JBF
+77,NODE,A-006,Top Chef,NA,NA,NA,NA,🏆,NA,NA,Award,2024,Bravo
+78,NODE,A-008,Best New Restaurant Nominee,NA,NA,NA,NA,🏆,NA,NA,Award,2019,JBF
+79,NODE,A-013,Next Level Chef,NA,NA,NA,NA,🏆,NA,NA,Award,2024,Fox
+80,NODE,A-014,MasterChef,NA,NA,NA,NA,🏆,NA,NA,Award,2024,Fox
+81,NODE,A-016,Best Chef: South Nominee,NA,NA,NA,NA,🏆,NA,NA,Award,2023,JBF
+82,NODE,A-017,Outstanding Chef Nominee,NA,NA,NA,NA,🏆,NA,NA,Award,2023,JBF
+83,NODE,A-018,Best New Restaurant Nominee,NA,NA,NA,NA,🏆,NA,NA,Award,2023,JBF
+84,NODE,A-019,Best Chef: Mountain Nominee,NA,NA,NA,NA,🏆,NA,NA,Award,2022,JBF
+85,NODE,A-020,Food & Wine Best New Chef,NA,NA,NA,NA,🏆,NA,NA,Award,2022,F&W Mag
+86,NODE,A-021,The Final Table,NA,NA,NA,NA,🏆,NA,NA,Award,2018,Netflix
+87,NODE,A-026,One MICHELIN Star,NA,NA,NA,NA,🏆,NA,NA,Award,2024,Michelin Guide
+88,NODE,P-029,The Grey,Savannah,GA,NA,NA,🍽️,Southern,🇺🇸,Place,NA,NA
+89,NODE,P-030,Pēppē,NYC,NY,NA,NA,🍽️,Modern Fine Dining,🇺🇸,Place,NA,NA
+90,NODE,N-029,Nini Nguyen,NYC (Pēppē),NY,NA,NA,👩🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+91,NODE,N-031,Joe Sasto,SF/LA (Nomad/La Tavola),CA,NA,NA,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+92,NODE,N-032,Kelsey Clark,Dothan (The Dothan Nurseries),AL,NA,NA,👩🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+93,NODE,N-034,Buddha Lo,NYC (Pēppē),NY,NA,NA,👨🏻‍🍳,Chef,🇦🇺,Person,NA,NA
+94,NODE,N-041,Timothy Hollingsworth,LA (Otium),CA,NA,NA,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+95,NODE,N-044,Michael Leonard,Multiple (Crow's Nest),AK,NA,NA,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+96,NODE,N-045,Gabi Chappel,Brooklyn (Social Media),NY,NA,NA,👩🏻‍🍳,Social Media Chef,🇺🇸,Person,NA,NA
+97,NODE,P-034,Isidore,San Antonio,TX,29.5310,-98.4870,🍽️,Texas Steakhouse,🇺🇸,Place,NA,NA
+98,NODE,N-048,Danny Parada,San Antonio (Isidore),TX,NA,NA,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+99,NODE,P-035,Nicosi,San Antonio,TX,29.5310,-98.4870,🍰,Dessert Bar,🇺🇸,Place,NA,NA
+100,NODE,N-049,Tavel Bristol-Joseph,San Antonio (Nicosi),TX,NA,NA,👨🏿‍🍳,Chef,🇺🇸,Person,NA,NA
+101,NODE,P-040,The Diplomat,Milwaukee,WI,43.0640,-87.9170,🍽️,American,🇺🇸,Place,NA,NA
+102,NODE,N-055,Dane Baldwin,Milwaukee (The Diplomat),WI,NA,NA,👨🏻‍🍳,Chef/Owner,🇺🇸,Person,NA,NA
+103,NODE,P-041,EsterEv,Milwaukee,WI,NA,NA,🍽️,Modern American,🇺🇸,Place,NA,NA
+104,NODE,N-056,Dan Jacobs,Milwaukee (EsterEv),WI,NA,NA,👨🏻‍🍳,Chef/Owner,🇺🇸,Person,NA,NA
+105,NODE,P-042,Myriel,St. Paul,MN,44.9780,-93.2530,🍽️,Scandinavian,🇸🇪,Place,NA,NA
+106,NODE,N-057,Karyn Tomlinson,St. Paul (Myriel),MN,NA,NA,👩🏻‍🍳,Chef/Owner,🇺🇸,Person,NA,NA
+107,NODE,P-043,Block 16,Omaha,NE,41.2587,-96.0592,🍽️,Farm-to-Table,🇺🇸,Place,NA,NA
+108,NODE,N-058,Paul Urban,Omaha (Block 16),NE,NA,NA,👨🏻‍🍳,Chef/Owner,🇺🇸,Person,NA,NA
+109,NODE,P-044,Yoshitomo,Omaha,NE,NA,NA,🍣,Sushi/Omakase,🇯🇵,Place,NA,NA
+110,NODE,N-059,David Utterback,Omaha (Yoshitomo),NE,NA,NA,👨🏻‍🍳,Chef/Owner,🇺🇸,Person,NA,NA
+111,NODE,P-046,Larder Delicatessen,Cleveland,OH,41.5034,-81.6944,🍽️,Deli/American,🇺🇸,Place,NA,NA
+112,NODE,N-061,Allie La Valle-Umansky,Cleveland (Larder),OH,NA,NA,👩🏻‍🍳,Chef/Owner,🇺🇸,Person,NA,NA
+113,NODE,N-062,Chris Lockhart,Bozeman (Blackbird),MT,NA,NA,👨🏻‍🍳,Chef/Owner,🇺🇸,Person,NA,NA
+114,NODE,P-047,Khâluna,Minneapolis,MN,NA,NA,🍽️,Laotian,🇱🇦,Place,NA,NA
+115,NODE,N-063,Ann Ahmed,Minneapolis (Khâluna),MN,NA,NA,👩🏻‍🍳,Chef/Owner,🇺🇸,Person,NA,NA
+116,NODE,P-048,Union Hmong Kitchen,Minneapolis,MN,NA,NA,🍽️,Hmong,🇱🇦,Place,NA,NA
+117,NODE,N-064,Yia Vang,Minneapolis (Union Hmong),MN,NA,NA,👨🏻‍🍳,Chef/Owner,🇺🇸,Person,NA,NA
+118,NODE,P-049,Parachute,Chicago,IL,41.9360,-87.7020,🍽️,Korean-American,🇺🇸🇰🇷,Place,NA,NA
+119,NODE,N-065,Beverly Kim,Chicago (Parachute),IL,NA,NA,👩🏻‍🍳,Chef/Owner,🇺🇸,Person,NA,NA
+120,NODE,P-050,HaiSous,Chicago,IL,41.8540,-87.6680,🍽️,Vietnamese,🇻🇳,Place,NA,NA
+121,NODE,N-066,Thai Dang,Chicago (HaiSous),IL,NA,NA,👨🏻‍🍳,Chef/Owner,🇺🇸,Person,NA,NA
+122,NODE,P-051,Little Goat Diner,Chicago,IL,41.8845,-87.6430,🍽️,Diner/Fusion,🇺🇸,Place,NA,NA
+123,NODE,N-067,Stephanie Izard,Chicago (Girl & The Goat),IL,NA,NA,👩🏻‍🍳,Chef/Owner,🇺🇸,Person,NA,NA
+124,NODE,P-052,The Anchorage,Anchorage,AK,61.2181,-149.9003,🍽️,Fine Dining,🇺🇸,Place,NA,NA
+125,NODE,N-068,Robert DeGeorge,Anchorage (The Anchorage),AK,NA,NA,👨🏻‍🍳,Executive Chef,🇺🇸,Person,NA,NA
+126,NODE,P-055,Hai Hai,Minneapolis,MN,NA,NA,🍽️,Vietnamese,🇻🇳,Place,NA,NA
+127,NODE,N-071,Christina Nguyen,Minneapolis (Hai Hai),MN,NA,NA,👩🏻‍🍳,Chef/Owner,🇺🇸,Person,NA,NA
+128,NODE,P-056,Rootstalk,Breckenridge,CO,NA,NA,🍽️,New American,🇺🇸,Place,NA,NA
+129,NODE,N-072,Matt Vawter,Breckenridge (Rootstalk),CO,NA,NA,👨🏻‍🍳,Chef/Owner,🇺🇸,Person,NA,NA
+130,NODE,P-057,Lula Cafe,Chicago,IL,NA,NA,🍽️,American,🇺🇸,Place,NA,NA
+131,NODE,P-058,Mirra,Chicago,IL,NA,NA,🍽️,Modern American,🇺🇸,Place,NA,NA
+132,NODE,N-074,Sean Pharr,Madison (Mint Mark),WI,NA,NA,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+133,NODE,N-075,Michael Corvino,Kansas City (Corvino),MO,NA,NA,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+134,NODE,N-077,Jason Vincent,Chicago (Giant),IL,NA,NA,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+135,NODE,N-035,Shelly Flash,KC (Flash's Kitchen),MO,NA,NA,👩🏿‍🍳,Chef,🇯🇲,Person,NA,NA
+136,NODE,N-042,Fred Chang,LA (Dessert),CA,NA,NA,👨🏻‍🍳,Pastry Chef,🇹🇼,Person,NA,NA
+137,NODE,N-036,Wuta Onda,Louisville (Noma),KY,NA,NA,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+138,NODE,P-059,Mint Mark,Madison,WI,NA,NA,🍽️,Contemporary American,🇺🇸,Place,NA,NA
+139,NODE,P-060,Giant,Chicago,IL,NA,NA,🍽️,New American,🇺🇸,Place,NA,NA
+140,NODE,N-050,Sam Fore,Augusta (Tala),GA,NA,NA,👩🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+141,NODE,N-052,Michael O'Malley,Des Moines (Baru 66),IA,NA,NA,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+142,NODE,P-064,Obelix,Chicago,IL,NA,NA,🍽️,French,🇫🇷,Place,NA,NA
+143,NODE,N-082,Oliver Poilevey,Chicago (Obelix),IL,NA,NA,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+144,NODE,N-083,Genie Kwon,Chicago (Kasama),IL,NA,NA,👩🏻‍🍳,Pastry Chef,🇺🇸,Person,NA,NA
+145,NODE,P-066,Coiled,Boise,ID,NA,NA,🍽️,New American,🇺🇸,Place,NA,NA
+146,NODE,N-084,Ellie Youngblood,Boise (Coiled),ID,NA,NA,👩🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+147,NODE,P-067,Kasama,Chicago,IL,NA,NA,🍽️,Filipino-American,🇵🇭🇺🇸,Place,NA,NA
+148,NODE,N-087,Timothy Flores,Chicago (Kasama),IL,NA,NA,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+149,NODE,N-037,Dorian Hunter,Atlanta (Personal),GA,NA,NA,👩🏿‍🍳,Chef,🇺🇸,Person,NA,NA
+150,NODE,N-043,Dale Talde,NYC (Multiple),NY,NA,NA,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA
+151,NODE,N-085,Shota Nakajima,Seattle (Taku),WA,NA,NA,👨🏻‍🍳,Chef,🇺🇸,Person,NA,NA

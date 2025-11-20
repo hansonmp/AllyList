@@ -1,0 +1,102 @@
+Record_ID,Type,ID,Label,City,Degree,Start_ID,End_ID,Relationship Type,Current,Sources,Confidence
+74,EDGE,E-019,CURRENT_HEAD_CHEF_AT,Boise,1,P-014,N-013,Employment,True,"Eater Boise, JBF Site",NA
+75,EDGE,E-020,CURRENT_HEAD_CHEF_AT,Madison,1,P-015,N-014,Employment,True,"Madison Mag, L’Etoile Site",NA
+76,EDGE,E-021,CURRENT_HEAD_CHEF_AT,Milwaukee,1,P-016,N-015,Employment,True,"Ardent Site, Milwaukee Journal",NA
+77,EDGE,E-022,CURRENT_HEAD_CHEF_AT,San Antonio,1,P-017,N-016,Employment,True,"Texas Monthly, Mixtli Site",NA
+78,EDGE,E-023,CURRENT_HEAD_CHEF_AT,Augusta,1,P-018,N-017,Employment,True,"Local News, Restaurant Website",NA
+79,EDGE,E-024,CURRENT_HEAD_CHEF_AT,Bozeman,1,P-019,N-018,Employment,True,"Bozeman Mag, Blackbird Site",NA
+80,EDGE,E-025,CURRENT_HEAD_CHEF_AT,St Augustine,1,P-020,N-019,Employment,True,"Coastal Mag, Preserved Site",NA
+81,EDGE,E-026,CURRENT_HEAD_CHEF_AT,Charleston,1,P-021,N-020,Employment,True,"FIG Website, Eater Charleston",NA
+82,EDGE,E-027,CURRENT_HEAD_CHEF_AT,St Louis,1,P-022,N-021,Employment,True,"Vicia Site, St. Louis Post",NA
+83,EDGE,E-028,CURRENT_HEAD_CHEF_AT,Omaha,1,P-023,N-022,Employment,True,"Omaha Mag, Au Courant Site",NA
+84,EDGE,E-029,CURRENT_HEAD_CHEF_AT,Gulf Shores,1,P-024,N-023,Employment,True,"Local PR, Perch Site",NA
+85,EDGE,E-030,CURRENT_HEAD_CHEF_AT,St Paul,1,P-025,N-024,Employment,True,"Young Joni Site, Star Tribune",NA
+86,EDGE,E-031,CURRENT_HEAD_CHEF_AT,Cleveland,1,P-026,N-025,Employment,True,"Cleveland Scene, The Plum Site",NA
+87,EDGE,E-032,CURRENT_HEAD_CHEF_AT,Little Rock,1,P-027,N-026,Employment,True,"Capital Site, Arkansas Times",NA
+88,EDGE,E-033,CURRENT_HEAD_CHEF_AT,Anchorage,1,P-028,N-027,Employment,True,"Local Guide, Crow's Nest Site",NA
+89,EDGE,E-034,TRAINED_UNDER,Milwaukee,2,N-015,N-028,Mentorship,True,"Chef Bio, Eater MKE",NA
+90,EDGE,E-035,CURRENT_HEAD_CHEF_AT,Savannah,3,P-029,N-028,Employment,True,"Food & Wine, Chef Bio",NA
+91,EDGE,E-037,CURRENT_HEAD_CHEF_AT,NYC,3,P-030,N-029,Employment,True,"Time Out, Group Website",NA
+92,EDGE,E-042,AWARDED_FOR_PLACE,Savannah,1,A-018,P-029,Award,True,"JBF Website",NA
+93,EDGE,E-045,JBF_NOMINEE_AT,Augusta,1,N-017,A-016,Award,True,"JBF Website",NA
+94,EDGE,E-046,CURRENT_HEAD_CHEF_AT,Augusta,2,P-018,N-017,Employment,True,"Restaurant Site",NA
+95,EDGE,E-053,TOP_CHEF_COMPETITOR,St Paul,2,N-024,A-006,Award,True,"Bravo TV",NA
+96,EDGE,E-054,NEXT_LEVEL_CHEF_COMPETITOR,Brooklyn,1,N-045,A-013,Award,True,"Fox TV",NA
+97,EDGE,E-056,MICHELIN_STAR_AWARDED_TO,San Antonio,1,A-026,P-034,Award,True,"Michelin Guide",NA
+98,EDGE,E-057,MICHELIN_STAR_AWARDED_TO,San Antonio,1,A-026,P-035,Award,True,"Michelin Guide",NA
+99,EDGE,E-058,MICHELIN_STAR_AWARDED_TO,San Antonio,1,A-026,P-017,Award,True,"Michelin Guide",NA
+100,EDGE,E-059,CURRENT_HEAD_CHEF_AT,San Antonio,2,P-034,N-048,Employment,True,"Restaurant Site",NA
+101,EDGE,E-060,PARTNER_AT,San Antonio,2,P-035,N-049,Employment,True,"Restaurant Site",NA
+102,EDGE,E-072,JBF_WINNER_AT,Milwaukee,1,N-055,A-004,Award,True,"JBF Website",NA
+103,EDGE,E-073,CURRENT_OWNER_AT,Milwaukee,1,P-040,N-055,Ownership,True,"Restaurant Site",NA
+104,EDGE,E-074,JBF_NOMINEE_AT,Milwaukee,1,N-056,A-004,Award,True,"JBF Website",NA
+105,EDGE,E-075,CURRENT_OWNER_AT,Milwaukee,1,P-041,N-056,Ownership,True,"Restaurant Site",NA
+106,EDGE,E-076,JBF_WINNER_AT,St. Paul,1,N-057,A-004,Award,True,"JBF Website",NA
+107,EDGE,E-077,CURRENT_OWNER_AT,St. Paul,1,P-042,N-057,Ownership,True,"Restaurant Site",NA
+108,EDGE,E-078,JBF_NOMINEE_AT,Omaha,1,N-058,A-004,Award,True,"JBF Website",NA
+109,EDGE,E-079,CURRENT_OWNER_AT,Omaha,1,P-043,N-058,Ownership,True,"Restaurant Site",NA
+110,EDGE,E-080,JBF_NOMINEE_AT,Omaha,1,N-059,A-004,Award,True,"JBF Website",NA
+111,EDGE,E-081,CURRENT_OWNER_AT,Omaha,1,P-044,N-059,Ownership,True,"Restaurant Site",NA
+112,EDGE,E-084,JBF_NOMINEE_AT,Cleveland,1,N-061,A-005,Award,True,"JBF Website",NA
+113,EDGE,E-085,CURRENT_OWNER_AT,Cleveland,1,P-046,N-061,Ownership,True,"Restaurant Site",NA
+114,EDGE,E-086,JBF_NOMINEE_AT,Bozeman,1,N-062,A-019,Award,True,"JBF Website",NA
+115,EDGE,E-087,TOP_CHEF_COMPETITOR,Minneapolis,2,N-064,A-006,Award,True,"TV Show Site",NA
+116,EDGE,E-088,JBF_NOMINEE_AT,Minneapolis,1,N-063,A-004,Award,True,"JBF Website",NA
+117,EDGE,E-089,CURRENT_OWNER_AT,Minneapolis,1,P-047,N-063,Ownership,True,"Restaurant Site",NA
+118,EDGE,E-091,IRON_CHEF_COMPETITOR,Minneapolis,3,N-064,A-021,Award,True,"Netflix",NA
+119,EDGE,E-092,CURRENT_OWNER_AT,Minneapolis,1,P-048,N-064,Ownership,True,"Restaurant Site",NA
+120,EDGE,E-094,BIB_GOURMAND_AWARDED_TO,Chicago,1,A-008,P-049,Award,True,"Michelin Guide",NA
+121,EDGE,E-095,CURRENT_OWNER_AT,Chicago,1,P-049,N-065,Ownership,True,"Restaurant Site",NA
+122,EDGE,E-097,BIB_GOURMAND_AWARDED_TO,Chicago,1,A-008,P-050,Award,True,"Michelin Guide",NA
+123,EDGE,E-098,CURRENT_OWNER_AT,Chicago,1,P-050,N-066,Ownership,True,"Restaurant Site",NA
+124,EDGE,E-100,CURRENT_OWNER_AT,Chicago,3,P-051,N-067,Ownership,True,"Restaurant Site",NA
+125,EDGE,E-101,JBF_WINNER_AT,Chicago,4,N-067,A-005,Award,True,"JBF Website",NA
+126,EDGE,E-102,CURRENT_HEAD_CHEF_AT,Anchorage,1,P-028,N-027,Employment,True,"Restaurant Site",NA
+127,EDGE,E-104,CURRENT_HEAD_CHEF_AT,Anchorage,3,P-052,N-068,Employment,True,"Restaurant Site",NA
+128,EDGE,E-110,JBF_WINNER_AT,Minneapolis,1,N-071,A-004,Award,True,"JBF Website 2024",NA
+129,EDGE,E-111,CURRENT_OWNER_AT,Minneapolis,1,P-055,N-071,Ownership,True,"Restaurant Site",NA
+130,EDGE,E-112,JBF_WINNER_AT,Breckenridge,1,N-072,A-019,Award,True,"JBF Website 2024",NA
+131,EDGE,E-113,CURRENT_OWNER_AT,Breckenridge,1,P-056,N-072,Ownership,True,"Restaurant Site",NA
+132,EDGE,E-116,BIB_GOURMAND_AWARDED_TO,Chicago,1,A-008,P-058,Award,True,"Michelin Guide 2025",NA
+133,EDGE,E-119,JBF_AWARD_WINNER,Chicago,1,P-057,A-008,Award,True,"JBF Website 2024",NA
+134,EDGE,E-120,JBF_NOMINEE_AT,Milwaukee,1,N-056,A-004,Award,True,"JBF Site 2024",NA
+135,EDGE,E-121,JBF_NOMINEE_AT,Milwaukee,1,P-040,A-005,Award,True,"JBF Site 2024",NA
+136,EDGE,E-122,JBF_NOMINEE_AT,Madison,1,N-074,A-004,Award,True,"JBF Site 2024",NA
+137,EDGE,E-123,CURRENT_HEAD_CHEF_AT,Madison,2,P-059,N-074,Employment,True,"Restaurant Site",NA
+138,EDGE,E-125,JBF_NOMINEE_AT,Omaha,1,N-058,A-004,Award,True,"JBF Site 2023",NA
+139,EDGE,E-126,JBF_NOMINEE_AT,Omaha,1,N-059,A-004,Award,True,"JBF Site 2023",NA
+140,EDGE,E-128,JBF_NOMINEE_AT,KC,3,N-075,A-004,Award,True,"JBF Site 2023",NA
+141,EDGE,E-132,BIB_GOURMAND_AWARDED_TO,Chicago,1,A-008,P-060,Award,True,"Michelin Guide",NA
+142,EDGE,E-133,CURRENT_OWNER_AT,Chicago,1,P-060,N-077,Ownership,True,"Restaurant Site",NA
+143,EDGE,E-134,JBF_NOMINEE_AT,Chicago,2,N-077,A-004,Award,True,"JBF Site 2022",NA
+144,EDGE,E-137,JBF_NOMINEE_AT,Bozeman,1,N-062,A-019,Award,True,"JBF Site 2023",NA
+145,EDGE,E-146,JBF_NOMINEE_AT,Cleveland,1,N-061,A-005,Award,True,"JBF Site 2023",NA
+146,EDGE,E-150,JBF_NOMINEE_AT,Milwaukee,1,N-055,A-004,Award,True,"JBF Site 2024",NA
+147,EDGE,E-151,JBF_NOMINEE_AT,Madison,1,P-015,A-008,Award,True,"JBF Site 2023",NA
+148,EDGE,E-156,JBF_NOMINEE_AT,Chicago,1,P-064,A-008,Award,True,"JBF Site 2024",NA
+149,EDGE,E-157,CURRENT_OWNER_AT,Chicago,1,P-064,N-082,Ownership,True,"Restaurant Site",NA
+150,EDGE,E-158,JBF_NOMINEE_AT,Chicago,2,N-082,A-005,Award,True,"JBF Site 2024",NA
+151,EDGE,E-161,JBF_NOMINEE_AT,Chicago,2,N-083,A-005,Award,True,"JBF Site 2024",NA
+152,EDGE,E-163,MASTERCHEF_COMPETITOR,Des Moines,2,N-052,A-080,Award,True,"TV Show Site",NA
+153,EDGE,E-164,JBF_NOMINEE_AT,Boise,1,N-084,A-003,Award,True,"JBF Site 2023",NA
+154,EDGE,E-165,CURRENT_OWNER_AT,Boise,1,P-066,N-084,Ownership,True,"Restaurant Site",NA
+155,EDGE,E-167,JBF_NOMINEE_AT,Seattle,3,N-085,A-003,Award,True,"JBF Site 2024",NA
+156,EDGE,E-169,JBF_NOMINEE_AT,Chicago,2,P-049,A-008,Award,True,"JBF Site 2024",NA
+157,EDGE,E-172,BIB_GOURMAND_AWARDED_TO,Chicago,1,A-008,P-067,Award,True,"Michelin Guide",NA
+158,EDGE,E-173,CURRENT_OWNER_AT,Chicago,1,P-067,N-087,Ownership,True,"Restaurant Site",NA
+159,EDGE,E-174,JBF_NOMINEE_AT,Chicago,2,N-087,A-005,Award,True,"JBF Site 2024",NA
+160,EDGE,E-175,JBF_NOMINEE_AT,Augusta,1,N-050,A-016,Award,True,"JBF Site 2024",NA
+161,EDGE,E-177,JBF_NOMINEE_AT,Anchorage,1,P-028,A-003,Award,True,"JBF Site 2024",NA
+162,EDGE,E-178,TOP_CHEF_COMPETITOR,Anchorage,2,N-068,A-006,Award,True,"TV Show Site",NA
+163,EDGE,E-181,TOP_CHEF_COMPETITOR,NYC,3,N-034,A-006,Award,True,"Bravo TV",NA
+164,EDGE,E-182,TOP_CHEF_COMPETITOR,SF/LA,4,N-031,A-006,Award,True,"Bravo TV",NA
+165,EDGE,E-183,TOP_CHEF_COMPETITOR,NYC,5,N-029,A-006,Award,True,"Bravo TV",NA
+166,EDGE,E-184,MASTERCHEF_COMPETITOR,Dothan,1,N-032,A-080,Award,True,"Fox TV",NA
+167,EDGE,E-185,MASTERCHEF_COMPETITOR,KC,2,N-035,A-080,Award,True,"Fox TV",NA
+168,EDGE,E-186,MASTERCHEF_COMPETITOR,LA,3,N-042,A-080,Award,True,"Fox TV",NA
+169,EDGE,E-187,MASTERCHEF_COMPETITOR,Louisville,4,N-036,A-080,Award,True,"Fox TV",NA
+170,EDGE,E-188,NEXT_LEVEL_CHEF_COMPETITOR,Multiple,1,N-044,A-013,Award,True,"Fox TV",NA
+171,EDGE,E-189,FOOD_WINE_BEST_NEW_CHEF,Anchorage,1,N-027,A-020,Award,True,"Magazine Site",NA
+172,EDGE,E-190,FINAL_TABLE_FINALIST,LA,1,N-041,A-021,Award,True,"Netflix",NA
+173,EDGE,E-191,MASTERCHEF_COMPETITOR,GA,1,N-037,A-080,Award,True,"Fox TV",NA
+174,EDGE,E-192,TOP_CHEF_COMPETITOR,Multiple,1,N-043,A-006,Award,True,"Bravo TV",NA

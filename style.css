@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f7f6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#chart-container {
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: white;
+}
+
+/* SVG Elements */
+.link {
+    stroke: #999;
+    stroke-opacity: 0.6;
+    stroke-width: 1.5px;
+    cursor: default;
+}
+
+.node circle {
+    stroke: #fff;
+    stroke-width: 2px;
+    cursor: pointer;
+    transition: r 0.1s;
+}
+
+/* Node Coloring based on Type */
+.person { fill: #c0392b; /* Deep Red */ }
+.place { fill: #27ae60; /* Emerald Green */ }
+.award { fill: #f39c12; /* Orange Gold */ }
+
+/* Highlighting styles */
+.inactive {
+    opacity: 0.1;
+}
+.highlighted {
+    stroke-width: 3px;
+    stroke: #333;
+    opacity: 1;
+}
+.highlighted-link {
+    stroke-opacity: 1.0;
+    stroke-width: 3px;
+    stroke: #3498db; /* Bright Blue */
+}
+
+/* Tooltip and Legend */
+.tooltip {
+    position: absolute;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    border-radius: 5px;
+    pointer-events: none;
+    font-size: 14px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+#info-panel {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    background-color: white;
+    width: 600px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.legend-item {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 20px;
+    font-size: 14px;
+}
+
+.legend-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+    border: 1px solid #fff;
+}
