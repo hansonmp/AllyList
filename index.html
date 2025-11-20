@@ -3,37 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Culinary Network Map (V5: Map Projection)</title>
-    
+    <title>Dynamic Graph Visualization</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://unpkg.com/topojson-client@3"></script>
-    
     <link rel="stylesheet" href="style.css">
-    
 </head>
 <body>
-
-    <header>
-        <h1>Chef & Restaurant Network Explorer 🍽️</h1>
-        <p>Visualizing connections (Employment, Awards, Mentorship) anchored to the US Map.</p>
-    </header>
-
-    <div id="filter-controls" style="margin-bottom: 20px;">
-        <label for="award-filter">Filter by Award/Relationship:</label>
-        <select id="award-filter">
-            <option value="ALL">Show All Connections</option>
-            <option value="JBF">JBF Awards (Winner/Nominee)</option>
-            <option value="MICHELIN">Michelin (Star/Bib Gourmand)</option>
-            <option value="CHEF_COMPETITION">TV Cooking Competitions (Top Chef, MasterChef, etc.)</option>
-            <option value="EMPLOYMENT">Employment/Ownership</option>
-        </select>
+    
+    <div id="controls">
+        <label for="relationship-filter">Filter by Relationship:</label>
+        <select id="relationship-filter">
+            <option value="ALL">Show All Relationships</option>
+            </select>
     </div>
 
-    <div id="chart-container"></div>
+    <div id="detail-panel">
+        <h2 id="detail-title">Select a Node to View Details</h2>
+    </div>
+
+    <svg id="network-map"></svg>
     
-    <div id="node-details"></div>
-
     <script src="script.js"></script>
-
 </body>
 </html>
