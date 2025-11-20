@@ -16,9 +16,10 @@ const g = svg.append("g");
 const tooltip = d3.select("#tooltip");
 
 // --- Data Loading and Initialization ---
+const baseURL = "https://hansonmp.github.io/AllyList/";
 Promise.all([
-    d3.csv("nodes.csv"),
-    d3.csv("edges.csv")
+    d3.csv(baseURL + "nodes.csv"),
+    d3.csv(baseURL + "edges.csv")
 ]).then(([nodeData, edgeData]) => {
     // 1. Process Node Data
     const nodes = nodeData.map(d => ({
@@ -174,4 +175,5 @@ Promise.all([
 }).catch(error => {
     console.error("Error loading data:", error);
     d3.select("#chart-container").html("<p style='color: red;'>Error loading CSV files. Make sure 'nodes.csv' and 'edges.csv' are in the same directory.</p>");
+
 });
