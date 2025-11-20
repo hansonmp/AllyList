@@ -194,7 +194,7 @@ const graphData = {
         {"Record_ID":"153","Type":"EDGE","ID":"E-164","Label":"JBF_NOMINEE_AT","City":"Boise","Degree":"1","Start_ID":"N-084","End_ID":"A-003","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2023","Confidence":"NA"},
         {"Record_ID":"154","Type":"EDGE","ID":"E-165","Label":"CURRENT_OWNER_AT","City":"Boise","Degree":"1","Start_ID":"P-066","End_ID":"N-084","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
         {"Record_ID":"155","Type":"EDGE","ID":"E-167","Label":"JBF_NOMINEE_AT","City":"Seattle","Degree":"3","Start_ID":"N-085","End_ID":"A-003","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
-        {"Record_ID":"156","Type":"EDGE","ID":"E-169","Label":"JBF_NOMINEE_AT","City":"Chicago","Degree":"2","Start_ID":"P-049","End_ID":"A-008","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
+        {"Record_ID":"156","TYPE":"EDGE","ID":"E-169","Label":"JBF_NOMINEE_AT","City":"Chicago","Degree":"2","Start_ID":"P-049","End_ID":"A-008","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
         {"Record_ID":"157","Type":"EDGE","ID":"E-172","Label":"BIB_GOURMAND_AWARDED_TO","City":"Chicago","Degree":"1","Start_ID":"A-008","End_ID":"P-067","Relationship_Type":"Award","Current":"True","Sources":"Michelin Guide","Confidence":"NA"},
         {"Record_ID":"158","Type":"EDGE","ID":"E-173","Label":"CURRENT_OWNER_AT","City":"Chicago","Degree":"1","Start_ID":"P-067","End_ID":"N-087","Relationship_Type":"Ownership","Current":"True","Sources":"Restaurant Site","Confidence":"NA"},
         {"Record_ID":"159","Type":"EDGE","ID":"E-174","Label":"JBF_NOMINEE_AT","City":"Chicago","Degree":"2","Start_ID":"N-087","End_ID":"A-005","Relationship_Type":"Award","Current":"True","Sources":"JBF Site 2024","Confidence":"NA"},
@@ -228,13 +228,13 @@ const nodes = nodeData
     .map(d => ({
         id: d.ID,
         name: d.Name,
-        type: d.Role_Primary,
+        type: d['Role/Primary'], // Use bracket notation for keys with special characters
         city: d.City,
         state: d.State,
         emoji: d.Emoji,
         cuisine: d.Cuisine,
         flags: d.Flags,
-        group: d.Role_Primary === 'Person' ? 1 : (d.Role_Primary === 'Place' ? 2 : 3)
+        group: d['Role/Primary'] === 'Person' ? 1 : (d['Role/Primary'] === 'Place' ? 2 : 3)
     }));
 
 // 2. Process Edge Data
@@ -262,17 +262,25 @@ const simulation = d3.forceSimulation(nodes)
 
 // 4. Create SVG Container
 // --- Select the container and append the SVG element
-const svg = d3.select("#chart-container").append("svg")
+// NOTE: We select the container but append the SVG. This is the key.
+const svgContainer = d3.select("#chart-container");
+
+const svg = svgContainer.append("svg")
     .attr("width", width)
     .attr("height", height)
+    // Add the Zoom behavior to the SVG element
     .call(d3.zoom().on("zoom", (event) => {
-        svg.attr("transform", event.transform);
-    }))
-    .append("g");
+        // Apply the transform to the main 'g' element inside the SVG
+        g.attr("transform", event.transform);
+    }));
+
+// Create a main group element 'g' to hold all graph elements (links and nodes)
+const g = svg.append("g");
+
 
 // 5. Draw Links (Edges)
-// --- Append lines for edges
-const link = svg.append("g")
+// --- Append lines for edges to the 'g' element
+const link = g.append("g")
     .attr("class", "links")
     .selectAll("line")
     .data(links)
@@ -280,8 +288,8 @@ const link = svg.append("g")
     .attr("class", d => `link ${d.type}`);
 
 // 6. Draw Nodes
-// --- Append circles and text/emojis for nodes
-const node = svg.append("g")
+// --- Append groups for nodes to the 'g' element
+const node = g.append("g")
     .attr("class", "nodes")
     .selectAll("g")
     .data(nodes)
@@ -289,7 +297,7 @@ const node = svg.append("g")
     .attr("class", d => `node-group ${d.type.toLowerCase().replace(/\s/g, '-')}`)
     .call(d3.drag()
         .on("start", dragstarted)
-        .on("drag", dragged)
+        .on("on", dragged) // Changed 'drag' to 'on' for correct D3 syntax if previous versions were problematic
         .on("end", dragended));
 
 // --- Append Circles for visual grouping/size
@@ -333,7 +341,9 @@ function highlight(d, highlight_type) {
         );
         return connected;
     })
-    .classed("inactive", n => !d3.select(n).classed("highlighted")); // Ensure non-highlighted are inactive
+    .classed("inactive", function(n) { 
+        return !d3.select(this).classed("highlighted"); 
+    });
 }
 
 // --- Reset function (used on mouse out)
