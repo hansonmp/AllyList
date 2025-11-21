@@ -1,133 +1,166 @@
 body {
-    margin: 0;
-    font-family: sans-serif;
-    overflow: hidden; /* Prevent body scroll, D3 handles map scroll */
+    margin: 0;
+    font-family: sans-serif;
+    overflow: hidden; /* Prevent body scroll, D3 handles map scroll */
 }
 
 #controls {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 1000;
-    padding: 10px;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 #network-map {
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    background-color: #f0f0f0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background-color: #f0f0f0;
 }
 
 /* --- Node Styling --- */
 .node circle {
-    stroke: #333;
-    stroke-width: 1.5px;
-    cursor: pointer;
+    stroke: #333;
+    stroke-width: 1.5px;
+    cursor: pointer;
+    transition: fill 0.2s, stroke 0.2s, stroke-width 0.2s;
+}
+
+/* Node Size Distinction (Place > Person) */
+.node.Place circle {
+    r: 18px; /* Larger radius for Place (Restaurant/Bar) */
+    fill: #4CAF50; /* Green */
+}
+.node.Person circle {
+    r: 12px; /* Smaller radius for Person */
+    fill: #2196F3; /* Blue */
 }
 
 .node text {
-    fill: #000;
-    text-anchor: middle;
-    font-size: 10px;
-    pointer-events: none; /* Allows click to pass through text to the circle */
+    fill: #000;
+    text-anchor: middle;
+    font-size: 10px;
+    pointer-events: none;
+}
+
+/* Initial State: Dim People */
+.node.Person {
+    opacity: 0.5;
+}
+
+/* Node Selection/Highlight */
+.node.active circle {
+    stroke: #FF0000; /* Red border */
+    stroke-width: 4px;
+    opacity: 1;
 }
 
 /* --- Link Styling --- */
 .link {
-    stroke: #999;
-    stroke-opacity: 0.6;
-    stroke-width: 1px;
+    stroke: #999;
+    stroke-opacity: 0.3; /* Initial state: dimmed */
+    stroke-width: 1px;
+    transition: stroke-opacity 0.2s, stroke-width 0.2s;
 }
 
 .link.highlighted {
-    stroke: #FF0000;
-    stroke-width: 2px;
-    stroke-opacity: 1;
+    stroke: #FF0000;
+    stroke-width: 3px !important; /* Override confidence score width for clarity */
+    stroke-opacity: 1 !important;
 }
 
-/* --- Detail Panel Styling --- */
-#detail-panel {
-    position: absolute;
-    top: 50px;
-    right: 10px;
-    width: 250px;
-    padding: 15px;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    z-index: 999;
-    max-height: 80vh;
-    overflow-y: auto;
+/* --- Detail Panel Styling (Stacking) --- */
+#detail-panel-stack {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+    width: 300px;
+    max-height: 98vh;
+    pointer-events: none; /* Allows graph interaction beneath empty space */
 }
 
-#detail-panel h2 {
-    margin-top: 0;
-    font-size: 1.2em;
-    color: #333;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
+/* Styling for individual panels */
+.detail-panel {
+    pointer-events: auto; /* Enable interaction only on the panel itself */
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    padding: 15px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+    max-height: 98vh;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+    transform: translateX(0);
 }
 
-#detail-panel p {
-    font-size: 0.9em;
-    margin: 5px 0;
+/* Style for panels in the stack that are NOT active (pushed back) */
+.detail-panel:not(.active) {
+    transform: translateX(5%); /* Slide back slightly */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    opacity: 0.8;
 }
 
-#detail-panel .detail-connections-header {
-    font-size: 1em;
-    color: #555;
-    margin-top: 15px;
-    border-top: 1px dashed #eee;
-    padding-top: 10px;
+/* Active panel (the one fully visible) */
+.detail-panel.active {
+    transform: translateX(0);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    opacity: 1;
 }
 
-.detail-connections-list {
-    list-style-type: none;
-    padding-left: 0;
-    font-size: 0.85em;
+/* Base styles for panel content */
+.detail-panel h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
 }
 
-.detail-connections-list li {
-    margin-bottom: 3px;
-    color: #0056b3;
+.detail-panel .close-btn {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+    color: #888;
 }
 
-/* --- V7: Hide Award Nodes (Stylistic Fix) --- */
-/* This makes nodes classified as 'Award' transparent and unclickable, effectively removing them from the map view while keeping their data available for filters. */
-.node.Award, .node.Competition {
-    pointer-events: none;
-}
+/* Mobile Styling (Bottom Sheet UX) */
+@media (max-width: 768px) {
+    #detail-panel-stack {
+        top: auto;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        max-height: 80vh; /* Max height for mobile sheet */
+    }
 
-.node.Award circle, .node.Competition circle {
-    fill: none; /* Hide the colored circle */
-    stroke: none; /* Hide the border */
-}
+    .detail-panel {
+        border-radius: 8px 8px 0 0;
+        transform: translateY(100%); /* Initially hide panels off-screen */
+        position: fixed; /* Ensures fixed position from bottom */
+        transition: transform 0.3s ease-out;
+    }
 
-.node.Award text, .node.Competition text {
-    fill: transparent; /* Hide the emoji/label */
-}
-/* --- Confidence Score Legend Styling --- */
+    /* Active panel is pulled into view */
+    .detail-panel.active {
+        transform: translateY(0);
+        box-shadow: 0 -4px 16px rgba(0,0,0,0.3);
+    }
 
-/* Ensures the legend is placed correctly above the graph */
-.confidence-legend {
-    z-index: 100;
-}
-
-/* Styles for the text within the legend */
-.confidence-legend text {
-    font-family: Arial, sans-serif;
-    fill: #333; /* Dark text for readability */
-}
-
-/* Styles for the background box of the legend */
-.confidence-legend rect {
-    /* Subtle drop shadow to make the legend look separated from the background */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    /* Panels in the stack slide up slightly to show context */
+    .detail-panel:not(.active) {
+        transform: translateY(95%); 
+        box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+    }
 }
