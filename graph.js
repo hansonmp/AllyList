@@ -100,7 +100,7 @@ function drawGraph(filteredData) {
     g.selectAll("*").remove();
 
     // 🏆 CRITICAL FIX: Explicitly map links to ensure D3 resolves node IDs correctly.
-    // This resolves the "node not found: undefined" error.
+    // This resolves the "node not found: undefined" error by pre-processing link data.
     const simulationLinks = filteredData.links.map(l => ({
         ...l, 
         source: String(l.Source), 
@@ -161,6 +161,7 @@ function drawGraph(filteredData) {
     node.append("text")
         .attr("dy", 25) 
         .attr("font-size", "10px")
+        .attr("text-anchor", "middle") // Center the text below the node
         .text(d => {
              // Only show the name label for visible nodes (Places/People)
              if (d['Role/Primary'] === 'Place' || d['Role/Primary'] === 'Person') {
@@ -306,6 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 3. Draw the initial graph with all data
         drawGraph(globalGraphData);
     }).catch(error => {
+        // This catch block will fire if the 404 error occurs.
         console.error("Error fetching data.json:", error);
         d3.select("#detail-panel").html('<h2>Network Error: Could not retrieve data.json. Check file path and deployment.</h2>');
     });
