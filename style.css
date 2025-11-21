@@ -113,3 +113,21 @@ body {
 .node.Award text, .node.Competition text {
     fill: transparent; /* Hide the emoji/label */
 }
+/* --- Confidence Score Legend Styling --- */
+
+/* Ensures the legend is placed correctly above the graph */
+.confidence-legend {
+    z-index: 100;
+}
+
+/* Styles for the text within the legend */
+.confidence-legend text {
+    font-family: Arial, sans-serif;
+    fill: #333; /* Dark text for readability */
+}
+
+/* Styles for the background box of the legend */
+.confidence-legend rect {
+    /* Subtle drop shadow to make the legend look separated from the background */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
