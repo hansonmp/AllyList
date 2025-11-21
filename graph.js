@@ -23,9 +23,9 @@ let currentFilters = {
 
 // --- Zoom and Pan Setup ---
 const zoom = d3.zoom()
-    .scaleExtent([0.5, 8]) 
+    .scaleExtent([0.5, 8]) 
     .translateExtent([
-        [-width * 2, -height * 2], 
+        [-width * 2, -height * 2], 
         [width * 3, height * 3]
     ])
     .on("zoom", (event) => {
@@ -63,7 +63,7 @@ function updateMapLayer() {
     let activeNodes = [];
     activeNodeIds.forEach(id => {
         const node = getNodeById(id);
-        if (node && node.Latitude && node.Longitude) {
+        if (node && node.Lat && node.Lng) { // Corrected from Latitude/Longitude to Lat/Lng
             activeNodes.push(node);
         }
     });
@@ -74,8 +74,8 @@ function updateMapLayer() {
     }
 
     activeNodes.forEach(node => {
-        const lat = parseFloat(node.Latitude);
-        const lon = parseFloat(node.Longitude);
+        const lat = parseFloat(node.Lat);
+        const lon = parseFloat(node.Lng);
 
         if (!isNaN(lat) && !isNaN(lon)) {
             L.marker([lat, lon])
@@ -87,9 +87,12 @@ function updateMapLayer() {
 
     if (activeNodes.length === 1) {
         const node = activeNodes[0];
-        map.flyTo([parseFloat(node.Latitude), parseFloat(node.Longitude)], 14, { duration: 0.8 });
+        map.flyTo([parseFloat(node.Lat), parseFloat(node.Lng)], 14, { duration: 0.8 });
     } else {
-        const bounds = activeNodes.map(n => [parseFloat(n.Latitude), parseFloat(n.Longitude)]);
+        const bounds = activeNodes
+            .filter(n => n.Lat && n.Lng) // Filter nodes with valid coordinates
+            .map(n => [parseFloat(n.Lat), parseFloat(n.Lng)]);
+        
         if (bounds.length > 0) {
             map.flyToBounds(bounds, {
                 padding: L.point(100, 100),
@@ -109,11 +112,17 @@ function getNodeById(id) {
 }
 
 function nodeMatchesFilters(node) {
-    if (currentFilters.awards.size === 0) {
+    // The main node filter: only nodes with Role/Primary = Place or Person
+    if (node['Role/Primary'] !== 'Place' && node['Role/Primary'] !== 'Person') {
+        // Awards and Competitions (A-026, etc.) are always visible to hold the graph together
         return true; 
     }
 
-    // Use String() conversion for consistency
+    // Award filter logic:
+    if (currentFilters.awards.size === 0) {
+        return true; // No award filter applied, so place/person nodes are visible
+    }
+
     const nodeIdString = String(node.ID);
     
     // Find all links connected to this node
@@ -121,20 +130,19 @@ function nodeMatchesFilters(node) {
         (String(link.Source) === nodeIdString || String(link.Target) === nodeIdString)
     );
     
-    // If the node has AT LEAST ONE link matching AT LEAST ONE selected award, it matches.
+    // Check if the node is connected to any of the selected award/competition nodes.
     return relatedLinks.some(link => {
-        const relationship = link.Relationship;
-        let matchesAward = false;
-
-        currentFilters.awards.forEach(award => {
-            if (relationship.includes(award)) {
-                matchesAward = true;
-            }
-        });
+        const connectedId = (String(link.Source) === nodeIdString) ? String(link.Target) : String(link.Source);
+        const connectedNode = getNodeById(connectedId);
         
-        return matchesAward;
+        if (connectedNode && (connectedNode['Role/Primary'] === 'Award' || connectedNode['Role/Primary'] === 'Competition')) {
+            // Check if the connected award/competition node matches any selected filter
+            return currentFilters.awards.has(connectedNode.ID);
+        }
+        return false;
     });
 }
+
 
 function parseRelationship(relationship) {
     if (relationship.startsWith('MICHELIN_STAR')) {
@@ -168,6 +176,7 @@ function applyVisualStyles(selectionData = globalGraphData) {
             
             if (!isMatch) return 0; 
             
+            // Special handling for Person nodes when nothing is selected
             if (d['Role/Primary'] === 'Person' && activeNodeIds.size === 0) {
                 return 0.5; 
             }
@@ -256,8 +265,8 @@ function handleNodeClick(nodeId, forceDeselect = false) {
     const node = getNodeById(nodeIdStr);
     
     // 1. Filter Check (If filtered out, only allow deselection)
-    if (!nodeMatchesFilters(node) && !activeNodeIds.has(nodeIdStr)) {
-        return; 
+    if (node && node['Role/Primary'] !== 'Award' && node['Role/Primary'] !== 'Competition' && !nodeMatchesFilters(node) && !activeNodeIds.has(nodeIdStr)) {
+        return; // Prevents clicking a non-award/competition node that is filtered out
     }
 
     // 2. Already Selected, Bring to Front
@@ -344,8 +353,8 @@ function drawGraph(filteredData) {
     
     // Ensure all links reference string IDs
     const simulationLinks = filteredData.links.map(l => ({
-        ...l, 
-        source: String(l.Source), 
+        ...l, 
+        source: String(l.Source), 
         target: String(l.Target)
     }));
 
@@ -362,8 +371,8 @@ function drawGraph(filteredData) {
             .force("link", d3.forceLink(simulationLinks).id(d => String(d.ID)).distance(80))
             .force("charge", d3.forceManyBody().strength(-150)) 
             .force("center", d3.forceCenter(width / 2, height / 2))
-            .force("x", d3.forceX(width / 2).strength(0.1)) 
-            .force("y", d3.forceY(height / 2).strength(0.1)); 
+            .force("x", d3.forceX(width / 2).strength(0.1)) 
+            .force("y", d3.forceY(height / 2).strength(0.1)); 
     }
     
     // --- Links ---
@@ -388,7 +397,7 @@ function drawGraph(filteredData) {
         .selectAll(".node")
         .data(nodesWithStringIds, d => String(d.ID)) // Ensure key binding uses string ID
         .enter().append("g")
-        .attr("class", d => `node ${d['Role/Primary']}`) 
+        .attr("class", d => `node ${d['Role/Primary']}`) 
         .on("click", function(event, d) {
             event.stopPropagation(); 
             handleNodeClick(String(d.ID)); 
@@ -396,7 +405,8 @@ function drawGraph(filteredData) {
 
     // Node Circles
     node.append("circle")
-        .attr("r", d => d['Role/Primary'] === 'Place' ? 18 : 12); 
+        .attr("r", d => d['Role/Primary'] === 'Place' ? 18 : 
+                      (d['Role/Primary'] === 'Award' || d['Role/Primary'] === 'Competition' ? 10 : 12)); 
 
     // Node Labels (Emojis)
     node.append("text")
@@ -406,10 +416,11 @@ function drawGraph(filteredData) {
         
     // Node Labels (Name/City)
     node.append("text")
-        .attr("dy", d => d['Role/Primary'] === 'Place' ? 28 : 22) 
+        .attr("dy", d => d['Role/Primary'] === 'Place' ? 28 : 22) 
         .attr("font-size", "10px")
-        .attr("text-anchor", "middle") 
+        .attr("text-anchor", "middle") 
         .text(d => {
+             // Only display labels for Place/Person nodes when node count is low
              if (filteredData.nodes.length < 25 && (d['Role/Primary'] === 'Place' || d['Role/Primary'] === 'Person')) {
                  return d.Name;
              }
@@ -440,24 +451,32 @@ function generateDetailPanelContent(d) {
         <h2 class="detail-name">${d.Emoji} ${d.Name}</h2>
     `;
     
-    if (d['Role/Primary'] === 'Place') {
-        content += `
-            <p><strong>Cuisine:</strong> ${d.Cuisine || 'N/A'} ${d.Flags || ''}</p>
-            <p><strong>Location:</strong> ${d.City}, ${d.State || 'N/A'}</p>
-            ${d.Price && d.Price !== 'NA' ? `<p><strong>Price Range:</strong> ${d.Price}</p>` : ''}
-            ${d.Rating ? `<p><strong>Rating:</strong> ${d.Rating} (${d.Reviews || 0} total)</p>` : ''}
-            ${d.MapLink && d.MapLink !== 'NA' ? `<p class="detail-link"><a href="${d.MapLink}" target="_blank">View on Google Maps</a></p>` : ''}
-        `;
-    }
-    
-    if (d['Role/Primary'] === 'Person') {
-        content += `
-            <p><strong>Role:</strong> ${d.Cuisine || 'Chef'} ${d.Flags || ''}</p>
-            <p><strong>Location:</strong> ${d.City}, ${d.State || 'N/A'}</p>
-        `;
+    // Only show place/person details for those nodes
+    if (d['Role/Primary'] === 'Place' || d['Role/Primary'] === 'Person') {
+        if (d['Role/Primary'] === 'Place') {
+            content += `
+                <p><strong>Cuisine:</strong> ${d.Cuisine || 'N/A'} ${d.Flags || ''}</p>
+                <p><strong>Location:</strong> ${d.City}, ${d.State || 'N/A'}</p>
+                ${d.Price && d.Price !== 'NA' ? `<p><strong>Price Range:</strong> ${d.Price}</p>` : ''}
+                ${d.Rating ? `<p><strong>Rating:</strong> ${d.Rating} (${d.Reviews || 0} total)</p>` : ''}
+                ${d.MapLink && d.MapLink !== 'NA' ? `<p class="detail-link"><a href="${d.MapLink}" target="_blank">View on Google Maps</a></p>` : ''}
+            `;
+        }
+        
+        if (d['Role/Primary'] === 'Person') {
+            content += `
+                <p><strong>Role:</strong> ${d.Cuisine || 'Chef'} ${d.Flags || ''}</p>
+                <p><strong>Location:</strong> ${d.City}, ${d.State || 'N/A'}</p>
+            `;
+        }
+    } else {
+        // Content for Awards/Competitions
+        content += `<p><strong>Type:</strong> ${d['Role/Primary']}</p>`;
+        content += `<p><strong>Year:</strong> ${d.Year || 'N/A'}</p>`;
     }
 
-    const connections = globalGraphData.links.filter(link => 
+
+    const connections = globalGraphData.links.filter(link => 
         String(link.Source) === String(d.ID) || String(link.Target) === String(d.ID)
     );
 
@@ -474,14 +493,15 @@ function generateDetailPanelContent(d) {
                 
                 const scoreText = link.ConfidenceScore ? `(Score: ${link.ConfidenceScore})` : '';
 
-                if (relationshipDetails.isAward || relationshipDetails.isCompetition) {
-                    listItemContent = `<strong>${relationshipDetails.label}</strong> ${scoreText}`;
-                } else if (String(link.Source) === String(d.ID)) {
+                if (String(link.Source) === String(d.ID)) {
+                    // Current node is the Source
                     listItemContent = `<strong>${relationshipDetails.label}</strong> - ${connectedNode.Emoji} ${connectedNode.Name} ${scoreText}`;
                 } else {
+                    // Current node is the Target
                     let displayLabel;
                     if (relationshipDetails.isChef) { displayLabel = 'Features Chef 👨🏻‍🍳'; }
-                    else { displayLabel = 'Connected to'; } 
+                    else if (relationshipDetails.isAward || relationshipDetails.isCompetition) { displayLabel = 'Received by'; }
+                    else { displayLabel = 'Connected to'; } 
 
                     listItemContent = `<strong>${displayLabel}</strong> - ${connectedNode.Emoji} ${connectedNode.Name} ${scoreText}`;
                 }
@@ -551,16 +571,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize map immediately after DOM is ready
     initializeMap();
 
-    d3.json("data.json?v=100").then(data => {
+    // The ?v=100 is a cache-busting parameter, helpful for debugging
+    d3.json("data.json?v=100").then(data => { 
         if (!data || data.nodes.length === 0) {
             console.error('Data Error: Failed to load graph data or data is empty.');
             d3.select("#initial-detail-title").text('Error: Failed to load graph data or data is empty.');
             return;
         }
         
-        globalGraphData.nodes = data.nodes.filter(n => n['Role/Primary'] !== 'Award' && n['Role/Primary'] !== 'Competition');
+        // *****************************************************************
+        // ********** CRITICAL FIX APPLIED HERE ****************************
+        // *****************************************************************
+        // DO NOT FILTER OUT AWARD OR COMPETITION NODES! 
+        // D3 needs these nodes (like A-026) to exist to calculate the links.
+        globalGraphData.nodes = data.nodes; 
         globalGraphData.links = data.links;
-
+        // *****************************************************************
+        
         // Force all node IDs to be strings at load time for consistency
         globalGraphData.nodes.forEach(n => n.ID = String(n.ID));
         
