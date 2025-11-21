@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Graph Visualization</title>
-    
-    <base href="./"> 
-    
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Graph Visualization</title>
+    
+    <base href="./"> 
+    
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <div id="controls">
-        <label for="relationship-filter">Filter by Relationship:</label>
-        <select id="relationship-filter">
-            <option value="ALL">Show All Relationships</option>
-            </select>
-    </div>
+    
+    <div id="controls">
+        <h2>🏆 Award Filters</h2>
+        
+                <div id="award-filters">
+            <label><input type="checkbox" data-award="MICHELIN"> Michelin</label>
+            <label><input type="checkbox" data-award="JAMES_BEARD"> James Beard</label>
+            <label><input type="checkbox" data-award="TOP_CHEF"> Top Chef</label>
+            <label><input type="checkbox" data-award="MASTERCHEF"> MasterChef</label>
+            <br>
+            <label>Tier: </label>
+            <select id="award-tier-filter">
+                <option value="ALL">All Tiers</option>
+                <option value="WINNER">Winners</option>
+                <option value="FINALIST">Finalists</option>
+                <option value="NOMINEE">Nominee/Recommended</option>
+            </select>
+        </div>
+    </div>
 
-    <div id="detail-panel">
-        <h2 id="detail-title">Select a Node to View Details</h2>
-    </div>
+        <div id="detail-panel-stack">
+        <h2 id="initial-detail-title">Select a Node to View Details</h2>
+    </div>
 
-    <svg id="network-map"></svg>
-    
-    <script src="graph.js"></script>
+    <svg id="network-map"></svg>
+    
+    <script src="graph.js"></script>
 </body>
 </html>
-
-
-
-
