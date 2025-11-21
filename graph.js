@@ -440,7 +440,6 @@ function drawGraph(filteredData) {
     });
     
     applyVisualStyles(filteredData);
-    simulation.stop(); 
 }
 
 
