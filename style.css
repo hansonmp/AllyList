@@ -1,10 +1,19 @@
+/*
+ * Base Styles
+ */
 body {
-    margin: 0;
-    font-family: sans-serif;
-    overflow: hidden; /* Prevent body scroll, D3 handles map scroll */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Prevent scrolling */
+    background-color: #f4f4f4;
 }
 
-/* New Map Overlay Styling */
+/*
+ * Map and SVG Containers
+ * CRITICAL Z-INDEX FIX: SVG must be above the map.
+ */
+
 #map-overlay {
     position: absolute;
     top: 0;
@@ -14,165 +23,186 @@ body {
     z-index: 1; /* Below the SVG */
 }
 
-#controls {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 1000;
-    padding: 10px;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
 #network-map {
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    background-color: transparent; /* IMPORTANT: Make SVG background transparent to see the map */
-    z-index: 2; /* Above the map */
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background-color: transparent; 
+    z-index: 2; /* Must be higher than map overlay to receive clicks */
     position: relative;
 }
 
-/* --- Node Styling --- */
-.node circle {
-    stroke: #333;
-    stroke-width: 1.5px;
-    cursor: pointer;
-    transition: fill 0.2s, stroke 0.2s, stroke-width 0.2s;
-}
+/* * D3 Graph Elements 
+ */
 
-/* Node Size Distinction (Place > Person) */
-.node.Place circle {
-    r: 18px; /* Larger radius for Place (Restaurant/Bar) */
-    fill: #4CAF50; /* Green */
-}
-.node.Person circle {
-    r: 12px; /* Smaller radius for Person */
-    fill: #2196F3; /* Blue */
-}
-
-.node text {
-    fill: #000;
-    text-anchor: middle;
-    font-size: 10px;
-    pointer-events: none;
-}
-
-/* Initial State: Dim People */
-.node.Person {
-    opacity: 0.5;
-}
-
-/* Node Selection/Highlight */
-.node.active circle {
-    stroke: #FF0000; /* Red border */
-    stroke-width: 4px;
-    opacity: 1;
-}
-
-/* --- Link Styling --- */
 .link {
-    stroke: #999;
-    stroke-opacity: 0.3; /* Initial state: dimmed */
-    stroke-width: 1px;
-    transition: stroke-opacity 0.2s, stroke-width 0.2s;
+    stroke: #999;
+    stroke-opacity: 0.6;
+    transition: stroke-opacity 0.2s;
 }
 
 .link.highlighted {
-    stroke: #FF0000;
-    stroke-width: 3px !important; /* Override confidence score width for clarity */
-    stroke-opacity: 1 !important;
+    stroke-opacity: 1;
+    stroke-width: 3px !important;
 }
 
-/* --- Detail Panel Styling (Stacking) --- */
+.node circle {
+    stroke: #fff;
+    stroke-width: 1.5px;
+    transition: all 0.2s ease-in-out;
+}
+
+.node.Person circle {
+    fill: #3498db; /* Blue for people */
+}
+
+.node.Place circle {
+    fill: #2ecc71; /* Green for places/restaurants */
+}
+
+.node text {
+    fill: #333;
+    pointer-events: none; /* Ignore click events on text */
+    font-weight: bold;
+    user-select: none;
+}
+
+/* Active/Selected Node Style */
+.node.active circle {
+    stroke: #f39c12; /* Orange glow */
+    stroke-width: 5px;
+    r: 20px !important; /* Make slightly larger */
+}
+
+
+/*
+ * Controls and Panel Stacking
+ */
+
+#controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 999; /* Always on top */
+}
+
+#controls h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+#award-filters label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+#award-tier-filter {
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+/*
+ * Detail Panel Styling (Sidebar)
+ */
+
 #detail-panel-stack {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 999;
-    width: 300px;
-    max-height: 98vh;
-    pointer-events: none; /* Allows graph interaction beneath empty space */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 300px;
+    height: 100%; 
+    display: flex;
+    flex-direction: column-reverse; /* Panels stack bottom-up */
+    padding: 10px;
+    pointer-events: none; /* Allows clicks to pass through empty space */
+    box-sizing: border-box;
+    z-index: 999; /* Always on top */
 }
 
-/* Styling for individual panels */
+#initial-detail-title {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #666;
+    font-size: 1.2em;
+    z-index: 999; 
+    pointer-events: none;
+}
+
 .detail-panel {
-    pointer-events: auto; /* Enable interaction only on the panel itself */
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    padding: 15px;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
-    max-height: 98vh;
-    overflow-y: auto;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
-    transform: translateX(0);
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 10px; 
+    padding: 15px;
+    border-radius: 8px;
+    pointer-events: auto; /* Re-enables clicks inside the panel */
+    opacity: 0; 
+    transform: translateX(-320px); /* Off-screen */
+    transition: all 0.3s ease-in-out;
+    flex-shrink: 0;
+    overflow-y: auto;
+    max-height: 90%;
+    position: relative;
 }
 
-/* Style for panels in the stack that are NOT active (pushed back) */
-.detail-panel:not(.active) {
-    transform: translateX(5%); /* Slide back slightly */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    opacity: 0.8;
-}
-
-/* Active panel (the one fully visible) */
 .detail-panel.active {
-    transform: translateX(0);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-    opacity: 1;
+    opacity: 1; 
+    transform: translateX(0);
 }
 
-/* Base styles for panel content */
-.detail-panel h2 {
-    margin-top: 0;
-    font-size: 1.2em;
-    color: #333;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
+.detail-name {
+    margin-top: 0;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
 }
 
-.detail-panel .close-btn {
-    float: right;
-    cursor: pointer;
-    font-weight: bold;
-    color: #888;
+.detail-panel p {
+    font-size: 0.9em;
+    margin: 5px 0;
 }
 
-/* Mobile Styling (Bottom Sheet UX) */
-@media (max-width: 768px) {
-    #detail-panel-stack {
-        top: auto;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        width: 100%;
-        max-height: 80vh; /* Max height for mobile sheet */
-    }
+.detail-connections-header {
+    font-size: 1em;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
 
-    .detail-panel {
-        border-radius: 8px 8px 0 0;
-        transform: translateY(100%); /* Initially hide panels off-screen */
-        position: fixed; /* Ensures fixed position from bottom */
-        transition: transform 0.3s ease-out;
-    }
+.detail-connections-list {
+    list-style: none;
+    padding: 0;
+}
 
-    /* Active panel is pulled into view */
-    .detail-panel.active {
-        transform: translateY(0);
-        box-shadow: 0 -4px 16px rgba(0,0,0,0.3);
-    }
+.connection-item {
+    padding: 5px 0;
+    cursor: pointer;
+    font-size: 0.85em;
+    border-bottom: 1px dotted #eee;
+}
 
-    /* Panels in the stack slide up slightly to show context */
-    .detail-panel:not(.active) {
-        transform: translateY(95%); 
-        box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
-    }
+.connection-item:hover {
+    background-color: #f7f7f7;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #999;
+}
+
+/*
+ * Legend Styling
+ */
+.confidence-legend text {
+    fill: #333;
+    font-size: 10px;
 }
