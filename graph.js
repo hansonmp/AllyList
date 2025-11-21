@@ -10,11 +10,10 @@ const g = svg.append("g");
 
 let globalGraphData = { nodes: [], links: [] }; // Storage for the loaded data
 
-// --- Zoom and Pan Setup (Fix for Issue 1 & 5: Aggressively Expanded Pan Limits) ---
+// --- Zoom and Pan Setup ---
 const zoom = d3.zoom()
     .scaleExtent([0.5, 8]) 
     .translateExtent([
-        // Aggressively expanded pan limits to prevent being "stuck"
         [-width * 2, -height * 2], 
         [width * 3, height * 3]
     ])
@@ -38,7 +37,6 @@ function getNodeById(id) {
     return globalGraphData.nodes.find(node => node.ID === id);
 }
 
-// Fix for Issue 2: Expanded logic to correctly parse and label specific relationships
 function parseRelationship(relationship) {
     
     // Check for Competition Types
@@ -52,7 +50,6 @@ function parseRelationship(relationship) {
 
     // Check for Award Types
     else if (relationship.startsWith('MICHELIN_STAR')) {
-        // Fix for Issue 4: Better Labeling
         return { label: 'Award Winning Restaurant 🍽️', isAward: true, isPlace: true, displayLabel: 'Award Winning Restaurant' };
     } else if (relationship.startsWith('JAMES_BEARD_AWARD')) {
         return { label: 'James Beard Nominee/Winner 🏆', isAward: true };
@@ -100,7 +97,7 @@ function filterGraph(relationshipType) {
         };
     }
     
-    // Fix for Issue 1: Reset zoom to initial state on filter change and zoom back out to see content
+    // Reset zoom to initial state on filter change
     svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity);
     
     // Redraw the graph with the filtered data
@@ -125,7 +122,8 @@ function drawGraph(filteredData) {
     // D3 force simulation initialization
     const simulation = d3.forceSimulation(filteredData.nodes)
         .force("link", d3.forceLink(simulationLinks).id(d => d.ID).distance(50))
-        .force("charge", d3.forceManyBody().strength(-400)) 
+        // FIX FOR ISSUE: Changed -400 to -150 for tighter node clustering
+        .force("charge", d3.forceManyBody().strength(-150)) 
         .force("center", d3.forceCenter(width / 2, height / 2));
 
     // --- Links ---
@@ -174,7 +172,6 @@ function drawGraph(filteredData) {
         .attr("font-size", "10px")
         .attr("text-anchor", "middle") 
         .text(d => {
-             // Only show the name label for visible nodes (Places/People) when nodes are few
              if (filteredData.nodes.length < 25 && (d['Role/Primary'] === 'Place' || d['Role/Primary'] === 'Person')) {
                  return d.Name;
              }
@@ -196,13 +193,13 @@ function drawGraph(filteredData) {
 }
 
 
-// --- Detail Panel Generation (Fix for Issue 6) ---
+// --- Detail Panel Generation ---
 function generateDetailPanelContent(d) {
     let content = `
         <h2 class="detail-name">${d.Emoji} ${d.Name}</h2>
     `;
     
-    // --- Place Node Content (Issue 6: Corrected Profile) ---
+    // --- Place Node Content ---
     if (d['Role/Primary'] === 'Place') {
         content += `
             <p><strong>Cuisine:</strong> ${d.Cuisine || 'N/A'} ${d.Flags || ''}</p>
@@ -213,7 +210,7 @@ function generateDetailPanelContent(d) {
         `;
     }
     
-    // --- Person Node Content (Issue 6: Corrected Profile) ---
+    // --- Person Node Content ---
     if (d['Role/Primary'] === 'Person') {
         content += `
             <p><strong>Role:</strong> ${d.Cuisine || 'N/A'} ${d.Flags || ''}</p>
@@ -221,7 +218,7 @@ function generateDetailPanelContent(d) {
         `;
     }
     
-    // --- Award/Competition Content (Simplified and cleaned) ---
+    // --- Award/Competition Content ---
     if (d['Role/Primary'] === 'Award' || d['Role/Primary'] === 'Competition') {
         content += `
             <p><strong>Type:</strong> ${d['Role/Primary']}</p>
@@ -229,7 +226,7 @@ function generateDetailPanelContent(d) {
         `;
     }
 
-    // --- Connections Section (Fixed Issue 6 spacing) ---
+    // --- Connections Section ---
     const connections = globalGraphData.links.filter(link => 
         link.Source === d.ID || link.Target === d.ID
     );
