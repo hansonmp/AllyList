@@ -10,6 +10,8 @@ const g = svg.append("g");
 
 let globalGraphData = { nodes: [], links: [] }; // Storage for the loaded data
 let simulation = null; // Store simulation instance globally
+let map = null; // Leaflet map instance
+let markersLayer = new L.LayerGroup(); // Layer for holding all markers
 
 // --- NEW STATE MANAGEMENT ---
 // Set to track the IDs of nodes that are currently selected/active
@@ -35,19 +37,84 @@ const zoom = d3.zoom()
 
 svg.call(zoom);
 
+// --- MAP FUNCTIONS ---
+
+function initializeMap() {
+    if (map) return; // Prevent re-initialization
+
+    // Initialize the map on the 'map-overlay' div
+    map = L.map('map-overlay', { 
+        zoomControl: false // Hide default Leaflet zoom controls
+    }).setView([40.7128, -74.0060], 5); // Default to a central US view (e.g., New York, zoom 5)
+
+    // Add a basic tile layer (OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18
+    }).addTo(map);
+
+    markersLayer.addTo(map);
+}
+
+function updateMapLayer() {
+    markersLayer.clearLayers(); // Clear old markers
+    
+    let activeNodes = [];
+    activeNodeIds.forEach(id => {
+        const node = getNodeById(id);
+        if (node && node.Latitude && node.Longitude) {
+            activeNodes.push(node);
+        }
+    });
+
+    if (activeNodes.length === 0) {
+        // If no nodes selected, reset map view to general overview
+        map.setView([40.7128, -74.0060], 5, { animate: true });
+        return;
+    }
+
+    // 1. Add markers for all active nodes
+    activeNodes.forEach(node => {
+        const lat = parseFloat(node.Latitude);
+        const lon = parseFloat(node.Longitude);
+
+        if (!isNaN(lat) && !isNaN(lon)) {
+            L.marker([lat, lon])
+                .addTo(markersLayer)
+                .bindPopup(`<strong>${node.Emoji} ${node.Name}</strong><br>${node.City}, ${node.State}`)
+                .openPopup(); // Open the popup automatically for the active node(s)
+        }
+    });
+
+    // 2. Adjust map viewport
+    if (activeNodes.length === 1) {
+        // Center and zoom to the single selected node
+        const node = activeNodes[0];
+        map.flyTo([parseFloat(node.Latitude), parseFloat(node.Longitude)], 14, { duration: 0.8 });
+    } else {
+        // If multiple nodes are selected, fit bounds to include all of them
+        const bounds = activeNodes.map(n => [parseFloat(n.Latitude), parseFloat(n.Longitude)]);
+        if (bounds.length > 0) {
+            map.flyToBounds(bounds, {
+                padding: L.point(100, 100), // Add padding so markers aren't on the edge
+                maxZoom: 12,
+                duration: 0.8
+            });
+        }
+    }
+}
+
 // --- Helper Functions ---
 
 function getNodeById(id) {
     return globalGraphData.nodes.find(node => node.ID === id);
 }
 
-// Function to check if a node meets the current filter criteria (Placeholder Logic)
 function nodeMatchesFilters(node) {
     if (currentFilters.awards.size === 0) {
-        return true; // No filters active, show all
+        return true; // No awards selected, show all nodes
     }
 
-    // Simplified logic: Check if node has a link related to ANY active award type
     const relatedLinks = globalGraphData.links.filter(link => 
         (link.Source === node.ID || link.Target === node.ID)
     );
@@ -62,14 +129,11 @@ function nodeMatchesFilters(node) {
             }
         });
         
-        // This is where you would implement complex Tier logic if Award/Tier columns were in the Node data
-        // For now, we only check for the award type.
         return matchesAward;
     });
 }
 
 function parseRelationship(relationship) {
-    // Award nodes are hidden, but relationships related to awards still need labels
     if (relationship.startsWith('MICHELIN_STAR')) {
         return { label: 'Awarded Michelin Star 🍽️', isAward: true };
     } else if (relationship.startsWith('JAMES_BEARD_AWARD')) {
@@ -79,7 +143,6 @@ function parseRelationship(relationship) {
     } else if (relationship.startsWith('CURRENT_HEAD_CHEF')) {
         return { label: 'Current Chef 👨🏻‍🍳', isChef: true };
     }
-    // Check for Competition Types
     else if (relationship.includes('COMPETED_ON_TOP_CHEF')) {
         return { label: 'Competitor on Top Chef 🔪', isCompetition: true };
     } else if (relationship.includes('COMPETED_ON_MASTERCHEF')) {
@@ -91,60 +154,61 @@ function parseRelationship(relationship) {
     return { label: relationship.replace(/_/g, ' '), isUnknown: true };
 }
 
-// --- FILTERING LOGIC (Now attribute-based) ---
+// --- FILTERING LOGIC ---
 
 function applyVisualStyles(selectionData = globalGraphData) {
     // 1. Update Node Opacity/Size
     g.selectAll(".node")
-        .classed("filtered-out", d => !nodeMatchesFilters(d))
-        .classed("Person", d => d['Role/Primary'] === 'Person')
-        .classed("Place", d => d['Role/Primary'] === 'Place')
         .classed("active", d => activeNodeIds.has(d.ID))
         .style("opacity", d => {
-            // Check if node is filtered out or is a dimmable 'Person' node 
-            if (!nodeMatchesFilters(d)) return 0;
-            if (d['Role/Primary'] === 'Person' && activeNodeIds.size === 0) return 0.5;
-            return 1;
+            const isMatch = nodeMatchesFilters(d);
+            
+            if (!isMatch) return 0; // Filtered out: Hide it completely
+            
+            // Not filtered out: Apply standard logic
+            if (d['Role/Primary'] === 'Person' && activeNodeIds.size === 0) {
+                return 0.5; // Dim people when nothing is selected
+            }
+            return 1; // Full visibility (or active)
         });
 
-    // 2. Update Link Highlighting
+    // 2. Update Link Highlighting and Opacity
     const isNodeActive = id => activeNodeIds.has(id);
     const isLinkHighlighted = l => isNodeActive(l.source.ID) || isNodeActive(l.target.ID);
 
     g.selectAll(".link")
         .classed("highlighted", isLinkHighlighted)
         .style("opacity", l => {
-            // Hide links connected to filtered-out nodes
-            if (!nodeMatchesFilters(l.source.ID) || !nodeMatchesFilters(l.target.ID)) return 0;
+            const sourceVisible = nodeMatchesFilters(l.source);
+            const targetVisible = nodeMatchesFilters(l.target);
+            
+            if (!sourceVisible || !targetVisible) return 0; // Hide link if connected node is hidden
 
-            // Highlight active links, dim all others
             return isLinkHighlighted(l) ? 1 : 0.3; 
         });
 }
 
-// Master filter function called when filter UI changes
 function filterGraph() {
-    // Re-apply visual styles based on currentFilters state
     applyVisualStyles(globalGraphData);
 
-    // If a node is currently selected and gets filtered out, we should deselect it (and close its panel)
     activeNodeIds.forEach(id => {
         if (!nodeMatchesFilters(getNodeById(id))) {
             handleNodeClick(id, true); // Deselect and close panel
         }
     });
+
+    // Update map to reflect any deselected/filtered nodes
+    updateMapLayer();
 }
 
 // --- INTERACTION LOGIC ---
 
-// NEW FUNCTION: Handles clicking a connection in the side panel to select a new node
 function setupConnectionClickHandlers(panelId) {
     d3.select(`#${panelId}`).selectAll(".connection-item")
         .on("click", function(event) {
-            event.stopPropagation(); // Stop the click from bubbling up and closing the panel
+            event.stopPropagation(); 
             const connectedId = d3.select(this).attr("data-connected-id");
             if (connectedId) {
-                // Select the new node, which adds it to the panel stack
                 handleNodeClick(connectedId);
             }
         });
@@ -159,22 +223,21 @@ function updatePanelStack() {
                 .attr("id", d => `panel-${d}`)
                 .classed("active", (d, i) => i === panelStack.length - 1)
                 .html(d => generateDetailPanelContent(getNodeById(d)))
-                .each(function(d) { // Setup handlers on creation
+                .each(function(d) { 
                     setupConnectionClickHandlers(this.id);
                 }),
             update => update
                 .classed("active", (d, i) => i === panelStack.length - 1)
                 .on("click", (event, d) => handlePanelClick(d)) 
-                .each(function(d) { // Re-apply handlers on update
+                .each(function(d) { 
                     setupConnectionClickHandlers(this.id);
                 }),
             exit => exit.remove()
         )
-        // Add or update the close button handler for all panels
         .each(function(id) {
             d3.select(this).select(".close-btn").on("click", (event) => {
                 event.stopPropagation(); 
-                handleNodeClick(id, true); // Use forceDeselect=true
+                handleNodeClick(id, true); 
             });
         });
 
@@ -184,76 +247,76 @@ function updatePanelStack() {
 function handleNodeClick(nodeId, forceDeselect = false) {
     const node = getNodeById(nodeId);
     
+    if (!nodeMatchesFilters(node) && !activeNodeIds.has(nodeId)) {
+        return; 
+    }
+
     if (activeNodeIds.has(nodeId) && !forceDeselect) {
-        // Node already selected, but not necessarily the active panel. Bring it to front.
         const index = panelStack.indexOf(nodeId);
         if (index !== -1 && index !== panelStack.length - 1) {
             panelStack.splice(index, 1);
             panelStack.push(nodeId);
             updatePanelStack();
         }
-        return; // Exit after reordering
+        return; 
     } 
     
     // Toggle selection (Add or Remove)
     if (activeNodeIds.has(nodeId)) {
         activeNodeIds.delete(nodeId);
         panelStack = panelStack.filter(id => id !== nodeId);
-    } else if (nodeMatchesFilters(node)) {
+    } else {
         activeNodeIds.add(nodeId);
         panelStack.push(nodeId);
     }
-
 
     // Update the simulation for pinning/unpinning
     if (simulation) {
         simulation.nodes().forEach(d => {
             if (activeNodeIds.has(d.ID)) {
-                // Pin selected node in place (prevents movement)
                 d.fx = d.x;
                 d.fy = d.y;
             } else if (d.fx !== null && d.fy !== null && !activeNodeIds.has(d.ID)) {
-                // Unpin unselected nodes
                 d.fx = null;
                 d.fy = null;
             }
         });
-        simulation.alpha(0.1).restart(); // Small nudge to update pinned nodes
+        simulation.alpha(0.1).restart(); 
     }
     
     applyVisualStyles();
     updatePanelStack();
+    updateMapLayer(); // NEW: Update map whenever selection changes
 }
 
 function handlePanelClick(nodeId) {
-    // Bring this panel to the front of the stack
     const index = panelStack.indexOf(nodeId);
     if (index !== -1 && index !== panelStack.length - 1) {
         panelStack.splice(index, 1);
         panelStack.push(nodeId);
         updatePanelStack();
+        updateMapLayer(); // NEW: Update map when panel order changes (brings focus to top node)
     }
 }
 
 // Event listener for tapping outside panels/nodes to reset
 d3.select("body").on("click", function(event) {
-    // Check if the click occurred on the SVG (graph background) or BODY (empty space)
-    // Also check if the click target is NOT inside the detail-panel-stack, to allow clicks on underlying panels
-    if (event.target.id === "network-map" || event.target.tagName === 'BODY') {
+    if (event.target.id === "network-map" || event.target.tagName === 'BODY' || event.target.id === 'map-overlay') {
         if (activeNodeIds.size > 0) {
             activeNodeIds.clear();
             panelStack = [];
-            applyVisualStyles();
-            updatePanelStack();
             
-            // Unpin all nodes
             if (simulation) {
                 simulation.nodes().forEach(d => { d.fx = null; d.fy = null; });
                 simulation.alpha(0.1).restart();
             }
+
+            applyVisualStyles();
+            updatePanelStack();
+            updateMapLayer(); // NEW: Reset map view
         }
     }
-}, true); // Use capture phase to check click target before propagation
+}, true); 
 
 // --- Main Visualization Function ---
 function drawGraph(filteredData) {
@@ -265,7 +328,6 @@ function drawGraph(filteredData) {
         target: String(l.Target)
     }));
 
-    // Reuse existing simulation if possible, otherwise create new
     if (simulation) {
         simulation.nodes(filteredData.nodes);
         simulation.force("link").links(simulationLinks);
@@ -273,7 +335,7 @@ function drawGraph(filteredData) {
     } else {
         simulation = d3.forceSimulation(filteredData.nodes)
             .force("link", d3.forceLink(simulationLinks).id(d => d.ID).distance(80))
-            .force("charge", d3.forceManyBody().strength(-150)) // Increased repulsion for better spread
+            .force("charge", d3.forceManyBody().strength(-150)) 
             .force("center", d3.forceCenter(width / 2, height / 2))
             .force("x", d3.forceX(width / 2).strength(0.1)) 
             .force("y", d3.forceY(height / 2).strength(0.1)); 
@@ -283,15 +345,15 @@ function drawGraph(filteredData) {
     const link = g.append("g")
         .attr("class", "links")
         .selectAll(".link")
-        .data(simulationLinks, d => `${d.Source}-${d.Target}`) // Key for data binding
+        .data(simulationLinks, d => `${d.Source}-${d.Target}`) 
         .enter().append("line")
         .attr("class", "link")
         .style("stroke-width", d => (d.ConfidenceScore || 1) * 0.8 + "px")
         .style("stroke", d => {
             const score = d.ConfidenceScore || 1;
-            if (score >= 4) return "#2ecc71"; // High confidence (Green)
-            if (score >= 2) return "#f39c12"; // Medium confidence (Orange)
-            return "#e74c3c"; // Low confidence (Red)
+            if (score >= 4) return "#2ecc71"; 
+            if (score >= 2) return "#f39c12"; 
+            return "#e74c3c"; 
         });
 
     // --- Nodes ---
@@ -302,13 +364,12 @@ function drawGraph(filteredData) {
         .enter().append("g")
         .attr("class", d => `node ${d['Role/Primary']}`) 
         .on("click", (event, d) => {
-            event.stopPropagation(); // Prevent the body click listener from triggering
+            event.stopPropagation(); 
             handleNodeClick(d.ID);
         });
 
     // Node Circles
     node.append("circle")
-        // Radius handled by CSS .node.Place and .node.Person
         .attr("r", d => d['Role/Primary'] === 'Place' ? 18 : 12); 
 
     // Node Labels (Emojis)
@@ -341,21 +402,18 @@ function drawGraph(filteredData) {
             .attr("transform", d => `translate(${d.x},${d.y})`);
     });
     
-    // Apply initial visual state and check for pinned nodes
     applyVisualStyles(filteredData);
-    simulation.stop(); // Freeze the layout after it settles initially
+    simulation.stop(); 
 }
 
 
-// --- Detail Panel Generation (Updated) ---
+// --- Detail Panel Generation (No change to content logic) ---
 function generateDetailPanelContent(d) {
-    // Panel structure including close button and content
     let content = `
         <span class="close-btn">X</span>
         <h2 class="detail-name">${d.Emoji} ${d.Name}</h2>
     `;
     
-    // --- Node Content based on Role ---
     if (d['Role/Primary'] === 'Place') {
         content += `
             <p><strong>Cuisine:</strong> ${d.Cuisine || 'N/A'} ${d.Flags || ''}</p>
@@ -373,7 +431,6 @@ function generateDetailPanelContent(d) {
         `;
     }
 
-    // --- Connections Section ---
     const connections = globalGraphData.links.filter(link => 
         link.Source === d.ID || link.Target === d.ID
     );
@@ -391,15 +448,11 @@ function generateDetailPanelContent(d) {
                 
                 const scoreText = link.ConfidenceScore ? `(Score: ${link.ConfidenceScore})` : '';
 
-                // Award nodes are hidden, so we just check for Award relationships
                 if (relationshipDetails.isAward || relationshipDetails.isCompetition) {
-                    // Node is connected to an Award/Competition
                     listItemContent = `<strong>${relationshipDetails.label}</strong> ${scoreText}`;
                 } else if (link.Source === d.ID) {
-                    // Current node (d) is the Source (Outbound link)
                     listItemContent = `<strong>${relationshipDetails.label}</strong> - ${connectedNode.Emoji} ${connectedNode.Name} ${scoreText}`;
                 } else {
-                    // Current node (d) is the Target (Inbound link) - use reversed language
                     let displayLabel;
                     if (relationshipDetails.isChef) { displayLabel = 'Features Chef 👨🏻‍🍳'; }
                     else { displayLabel = 'Connected to'; } 
@@ -407,7 +460,6 @@ function generateDetailPanelContent(d) {
                     listItemContent = `<strong>${displayLabel}</strong> - ${connectedNode.Emoji} ${connectedNode.Name} ${scoreText}`;
                 }
 
-                // IMPORTANT: Added `data-connected-id` for click handling
                 content += `<li class="connection-item" data-connected-id="${connectedNode.ID}">${listItemContent}</li>`;
             }
         });
@@ -470,13 +522,15 @@ function drawLegend() {
 
 // --- Initialization & Event Binding ---
 document.addEventListener('DOMContentLoaded', () => {
+    // NEW: Initialize the map first
+    initializeMap();
+
     d3.json("data.json?v=100").then(data => {
         if (!data || data.nodes.length === 0) {
             d3.select("#initial-detail-title").text('Error: Failed to load graph data or data is empty.');
             return;
         }
         
-        // Remove Award/Competition nodes before drawing (as per spec)
         globalGraphData.nodes = data.nodes.filter(n => n['Role/Primary'] !== 'Award' && n['Role/Primary'] !== 'Competition');
         globalGraphData.links = data.links;
         
