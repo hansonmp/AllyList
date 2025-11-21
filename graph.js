@@ -9,12 +9,24 @@ const svg = d3.select("#network-map")
 const g = svg.append("g");
 
 let globalGraphData = { nodes: [], links: [] }; // Storage for the loaded data
+let simulation = null; // Store simulation instance globally
+
+// --- NEW STATE MANAGEMENT ---
+// Set to track the IDs of nodes that are currently selected/active
+let activeNodeIds = new Set(); 
+// Array to maintain the stacking order of panels
+let panelStack = []; 
+// Object to hold the current filter state (for future use)
+let currentFilters = {
+    awards: new Set(),
+    tier: 'ALL'
+};
 
 // --- Zoom and Pan Setup ---
 const zoom = d3.zoom()
-    .scaleExtent([0.5, 8]) 
+    .scaleExtent([0.5, 8]) 
     .translateExtent([
-        [-width * 2, -height * 2], 
+        [-width * 2, -height * 2], 
         [width * 3, height * 3]
     ])
     .on("zoom", (event) => {
@@ -25,155 +37,279 @@ svg.call(zoom);
 
 // --- Helper Functions ---
 
-function getAllRelationshipTypes(data) {
-    const relationships = new Set();
-    data.links.forEach(link => {
-        relationships.add(link.Relationship);
-    });
-    return Array.from(relationships).sort();
-}
-
 function getNodeById(id) {
     return globalGraphData.nodes.find(node => node.ID === id);
 }
 
-function parseRelationship(relationship) {
+// Function to check if a node meets the current filter criteria (Placeholder Logic)
+function nodeMatchesFilters(node) {
+    if (currentFilters.awards.size === 0) {
+        return true; // No filters active, show all
+    }
+
+    // Simplified logic: Check if node has a link related to ANY active award type
+    const relatedLinks = globalGraphData.links.filter(link => 
+        (link.Source === node.ID || link.Target === node.ID)
+    );
     
+    return relatedLinks.some(link => {
+        const relationship = link.Relationship;
+        let matchesAward = false;
+
+        currentFilters.awards.forEach(award => {
+            if (relationship.includes(award)) {
+                matchesAward = true;
+            }
+        });
+        
+        // This is where you would implement complex Tier logic if Award/Tier columns were in the Node data
+        // For now, we only check for the award type.
+        return matchesAward;
+    });
+}
+
+function parseRelationship(relationship) {
+    // Award nodes are hidden, but relationships related to awards still need labels
+    if (relationship.startsWith('MICHELIN_STAR')) {
+        return { label: 'Awarded Michelin Star 🍽️', isAward: true };
+    } else if (relationship.startsWith('JAMES_BEARD_AWARD')) {
+        return { label: 'Won James Beard Award 🏆', isAward: true };
+    } else if (relationship.startsWith('NOMINATED_FOR_AWARD')) {
+        return { label: 'Nominated for 🏆', isAward: true };
+    } else if (relationship.startsWith('CURRENT_HEAD_CHEF')) {
+        return { label: 'Current Chef 👨🏻‍🍳', isChef: true };
+    }
     // Check for Competition Types
-    if (relationship.includes('COMPETED_ON_TOP_CHEF')) {
+    else if (relationship.includes('COMPETED_ON_TOP_CHEF')) {
         return { label: 'Competitor on Top Chef 🔪', isCompetition: true };
     } else if (relationship.includes('COMPETED_ON_MASTERCHEF')) {
         return { label: 'Competitor on MasterChef 🔪', isCompetition: true };
     } else if (relationship.includes('COMPETED_ON')) {
         return { label: 'Competitor on TV 📺', isCompetition: true };
     }
-
-    // Check for Award Types
-    else if (relationship.startsWith('MICHELIN_STAR')) {
-        return { label: 'Award Winning Restaurant 🍽️', isAward: true, isPlace: true, displayLabel: 'Award Winning Restaurant' };
-    } else if (relationship.startsWith('JAMES_BEARD_AWARD')) {
-        return { label: 'James Beard Nominee/Winner 🏆', isAward: true };
-    } else if (relationship.startsWith('NOMINATED_FOR_AWARD')) {
-        return { label: 'Nominated for 🏆', isAward: true };
-    } else if (relationship.startsWith('WON_AWARD')) {
-        return { label: 'Winner of 🏆', isAward: true };
-    }
-
-    // Check for Employment
-    else if (relationship.startsWith('CURRENT_HEAD_CHEF')) {
-        return { label: 'Current Chef 👨🏻‍🍳', isChef: true };
-    } else if (relationship.startsWith('HAS_AWARD_2024')) {
-         return { label: 'Has Award 2024 🎖️', isAward: true };
-    }
     
-    // Fallback for unexpected relationships
     return { label: relationship.replace(/_/g, ' '), isUnknown: true };
 }
 
+// --- FILTERING LOGIC (Now attribute-based) ---
 
-function filterGraph(relationshipType) {
-    let filteredData;
-
-    if (relationshipType === "ALL") {
-        filteredData = globalGraphData;
-    } else {
-        const filteredLinks = globalGraphData.links.filter(link => 
-            link.Relationship === relationshipType
-        );
-
-        const connectedNodeIds = new Set();
-        filteredLinks.forEach(link => {
-            connectedNodeIds.add(link.Source);
-            connectedNodeIds.add(link.Target);
+function applyVisualStyles(selectionData = globalGraphData) {
+    // 1. Update Node Opacity/Size
+    g.selectAll(".node")
+        .classed("filtered-out", d => !nodeMatchesFilters(d))
+        .classed("Person", d => d['Role/Primary'] === 'Person')
+        .classed("Place", d => d['Role/Primary'] === 'Place')
+        .classed("active", d => activeNodeIds.has(d.ID))
+        .style("opacity", d => {
+            // Check if node is filtered out or is a dimmable 'Person' node 
+            if (!nodeMatchesFilters(d)) return 0;
+            if (d['Role/Primary'] === 'Person' && activeNodeIds.size === 0) return 0.5;
+            return 1;
         });
 
-        const filteredNodes = globalGraphData.nodes.filter(node => 
-            connectedNodeIds.has(node.ID)
-        );
+    // 2. Update Link Highlighting
+    const isNodeActive = id => activeNodeIds.has(id);
+    const isLinkHighlighted = l => isNodeActive(l.source.ID) || isNodeActive(l.target.ID);
 
-        filteredData = {
-            nodes: filteredNodes,
-            links: filteredLinks
-        };
+    g.selectAll(".link")
+        .classed("highlighted", isLinkHighlighted)
+        .style("opacity", l => {
+            // Hide links connected to filtered-out nodes
+            if (!nodeMatchesFilters(l.source.ID) || !nodeMatchesFilters(l.target.ID)) return 0;
+
+            // Highlight active links, dim all others
+            return isLinkHighlighted(l) ? 1 : 0.3; 
+        });
+}
+
+// Master filter function called when filter UI changes
+function filterGraph() {
+    // Re-apply visual styles based on currentFilters state
+    applyVisualStyles(globalGraphData);
+
+    // If a node is currently selected and gets filtered out, we should deselect it (and close its panel)
+    activeNodeIds.forEach(id => {
+        if (!nodeMatchesFilters(getNodeById(id))) {
+            handleNodeClick(id, true); // Deselect and close panel
+        }
+    });
+}
+
+// --- INTERACTION LOGIC ---
+
+// NEW FUNCTION: Handles clicking a connection in the side panel to select a new node
+function setupConnectionClickHandlers(panelId) {
+    d3.select(`#${panelId}`).selectAll(".connection-item")
+        .on("click", function(event) {
+            event.stopPropagation(); // Stop the click from bubbling up and closing the panel
+            const connectedId = d3.select(this).attr("data-connected-id");
+            if (connectedId) {
+                // Select the new node, which adds it to the panel stack
+                handleNodeClick(connectedId);
+            }
+        });
+}
+
+function updatePanelStack() {
+    d3.select("#detail-panel-stack").selectAll(".detail-panel")
+        .data(panelStack, d => d)
+        .join(
+            enter => enter.append("div")
+                .attr("class", "detail-panel")
+                .attr("id", d => `panel-${d}`)
+                .classed("active", (d, i) => i === panelStack.length - 1)
+                .html(d => generateDetailPanelContent(getNodeById(d)))
+                .each(function(d) { // Setup handlers on creation
+                    setupConnectionClickHandlers(this.id);
+                }),
+            update => update
+                .classed("active", (d, i) => i === panelStack.length - 1)
+                .on("click", (event, d) => handlePanelClick(d)) 
+                .each(function(d) { // Re-apply handlers on update
+                    setupConnectionClickHandlers(this.id);
+                }),
+            exit => exit.remove()
+        )
+        // Add or update the close button handler for all panels
+        .each(function(id) {
+            d3.select(this).select(".close-btn").on("click", (event) => {
+                event.stopPropagation(); 
+                handleNodeClick(id, true); // Use forceDeselect=true
+            });
+        });
+
+    d3.select("#initial-detail-title").style("display", panelStack.length > 0 ? "none" : "block");
+}
+
+function handleNodeClick(nodeId, forceDeselect = false) {
+    const node = getNodeById(nodeId);
+    
+    if (activeNodeIds.has(nodeId) && !forceDeselect) {
+        // Node already selected, but not necessarily the active panel. Bring it to front.
+        const index = panelStack.indexOf(nodeId);
+        if (index !== -1 && index !== panelStack.length - 1) {
+            panelStack.splice(index, 1);
+            panelStack.push(nodeId);
+            updatePanelStack();
+        }
+        return; // Exit after reordering
+    } 
+    
+    // Toggle selection (Add or Remove)
+    if (activeNodeIds.has(nodeId)) {
+        activeNodeIds.delete(nodeId);
+        panelStack = panelStack.filter(id => id !== nodeId);
+    } else if (nodeMatchesFilters(node)) {
+        activeNodeIds.add(nodeId);
+        panelStack.push(nodeId);
+    }
+
+
+    // Update the simulation for pinning/unpinning
+    if (simulation) {
+        simulation.nodes().forEach(d => {
+            if (activeNodeIds.has(d.ID)) {
+                // Pin selected node in place (prevents movement)
+                d.fx = d.x;
+                d.fy = d.y;
+            } else if (d.fx !== null && d.fy !== null && !activeNodeIds.has(d.ID)) {
+                // Unpin unselected nodes
+                d.fx = null;
+                d.fy = null;
+            }
+        });
+        simulation.alpha(0.1).restart(); // Small nudge to update pinned nodes
     }
     
-    // Reset zoom to initial state on filter change
-    svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity);
-    
-    // Redraw the graph with the filtered data
-    drawGraph(filteredData);
-    
-    // Clear the detail panel on filter change
-    d3.select("#detail-panel").html('<h2 id="detail-title">Select a Node to View Details</h2>');
+    applyVisualStyles();
+    updatePanelStack();
 }
+
+function handlePanelClick(nodeId) {
+    // Bring this panel to the front of the stack
+    const index = panelStack.indexOf(nodeId);
+    if (index !== -1 && index !== panelStack.length - 1) {
+        panelStack.splice(index, 1);
+        panelStack.push(nodeId);
+        updatePanelStack();
+    }
+}
+
+// Event listener for tapping outside panels/nodes to reset
+d3.select("body").on("click", function(event) {
+    // Check if the click occurred on the SVG (graph background) or BODY (empty space)
+    // Also check if the click target is NOT inside the detail-panel-stack, to allow clicks on underlying panels
+    if (event.target.id === "network-map" || event.target.tagName === 'BODY') {
+        if (activeNodeIds.size > 0) {
+            activeNodeIds.clear();
+            panelStack = [];
+            applyVisualStyles();
+            updatePanelStack();
+            
+            // Unpin all nodes
+            if (simulation) {
+                simulation.nodes().forEach(d => { d.fx = null; d.fy = null; });
+                simulation.alpha(0.1).restart();
+            }
+        }
+    }
+}, true); // Use capture phase to check click target before propagation
 
 // --- Main Visualization Function ---
 function drawGraph(filteredData) {
-    // Clear the previous drawing
     g.selectAll("*").remove();
 
-    // CRITICAL FIX: Explicitly map links to ensure D3 resolves node IDs correctly.
     const simulationLinks = filteredData.links.map(l => ({
-        ...l, 
-        source: String(l.Source), 
+        ...l, 
+        source: String(l.Source), 
         target: String(l.Target)
     }));
 
-    // D3 force simulation initialization
-    const simulation = d3.forceSimulation(filteredData.nodes)
-        .force("link", d3.forceLink(simulationLinks).id(d => d.ID).distance(50))
-        .force("charge", d3.forceManyBody().strength(-50)) 
-        .force("center", d3.forceCenter(width / 2, height / 2))
-        .force("x", d3.forceX(width / 2).strength(0.1)) 
-        .force("y", d3.forceY(height / 2).strength(0.1)); 
-
+    // Reuse existing simulation if possible, otherwise create new
+    if (simulation) {
+        simulation.nodes(filteredData.nodes);
+        simulation.force("link").links(simulationLinks);
+        simulation.alpha(1).restart();
+    } else {
+        simulation = d3.forceSimulation(filteredData.nodes)
+            .force("link", d3.forceLink(simulationLinks).id(d => d.ID).distance(80))
+            .force("charge", d3.forceManyBody().strength(-150)) // Increased repulsion for better spread
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("x", d3.forceX(width / 2).strength(0.1)) 
+            .force("y", d3.forceY(height / 2).strength(0.1)); 
+    }
+    
     // --- Links ---
     const link = g.append("g")
         .attr("class", "links")
-        .selectAll("line")
-        // Use link Confidence Score to set stroke width/color (assuming a score column exists)
-        .data(simulationLinks)
+        .selectAll(".link")
+        .data(simulationLinks, d => `${d.Source}-${d.Target}`) // Key for data binding
         .enter().append("line")
         .attr("class", "link")
-        .style("stroke-width", d => {
-            // Placeholder: Adjust width based on confidence score (1-5)
-            // Assuming d.ConfidenceScore is 1, 2, 3, 4, or 5
-            return (d.ConfidenceScore || 1) * 0.8 + "px"; 
-        })
+        .style("stroke-width", d => (d.ConfidenceScore || 1) * 0.8 + "px")
         .style("stroke", d => {
-            // Placeholder: Adjust color based on confidence score
             const score = d.ConfidenceScore || 1;
             if (score >= 4) return "#2ecc71"; // High confidence (Green)
             if (score >= 2) return "#f39c12"; // Medium confidence (Orange)
             return "#e74c3c"; // Low confidence (Red)
         });
 
-
     // --- Nodes ---
     const node = g.append("g")
         .attr("class", "nodes")
         .selectAll(".node")
-        .data(filteredData.nodes)
+        .data(filteredData.nodes, d => d.ID)
         .enter().append("g")
-        .attr("class", d => `node ${d['Role/Primary']}`) 
+        .attr("class", d => `node ${d['Role/Primary']}`) 
         .on("click", (event, d) => {
-            g.selectAll(".node").classed("active", false);
-            d3.select(event.currentTarget).classed("active", true);
-            
-            link.classed("highlighted", l => l.source.ID === d.ID || l.target.ID === d.ID);
-
-            d3.select("#detail-panel").html(generateDetailPanelContent(d));
+            event.stopPropagation(); // Prevent the body click listener from triggering
+            handleNodeClick(d.ID);
         });
 
     // Node Circles
     node.append("circle")
-        .attr("r", 15)
-        .attr("fill", d => {
-            if (d['Role/Primary'] === 'Place') return '#4CAF50';
-            if (d['Role/Primary'] === 'Person') return '#2196F3';
-            if (d['Role/Primary'] === 'Award' || d['Role/Primary'] === 'Competition') return 'transparent'; 
-            return '#FF9800';
-        });
+        // Radius handled by CSS .node.Place and .node.Person
+        .attr("r", d => d['Role/Primary'] === 'Place' ? 18 : 12); 
 
     // Node Labels (Emojis)
     node.append("text")
@@ -183,16 +319,15 @@ function drawGraph(filteredData) {
         
     // Node Labels (Name/City)
     node.append("text")
-        .attr("dy", 25) 
+        .attr("dy", d => d['Role/Primary'] === 'Place' ? 28 : 22) 
         .attr("font-size", "10px")
-        .attr("text-anchor", "middle") 
+        .attr("text-anchor", "middle") 
         .text(d => {
              if (filteredData.nodes.length < 25 && (d['Role/Primary'] === 'Place' || d['Role/Primary'] === 'Person')) {
                  return d.Name;
              }
              return "";
         });
-
 
     // Update positions on tick
     simulation.on("tick", () => {
@@ -205,16 +340,22 @@ function drawGraph(filteredData) {
         node
             .attr("transform", d => `translate(${d.x},${d.y})`);
     });
+    
+    // Apply initial visual state and check for pinned nodes
+    applyVisualStyles(filteredData);
+    simulation.stop(); // Freeze the layout after it settles initially
 }
 
 
-// --- Detail Panel Generation ---
+// --- Detail Panel Generation (Updated) ---
 function generateDetailPanelContent(d) {
+    // Panel structure including close button and content
     let content = `
+        <span class="close-btn">X</span>
         <h2 class="detail-name">${d.Emoji} ${d.Name}</h2>
     `;
     
-    // --- Place Node Content ---
+    // --- Node Content based on Role ---
     if (d['Role/Primary'] === 'Place') {
         content += `
             <p><strong>Cuisine:</strong> ${d.Cuisine || 'N/A'} ${d.Flags || ''}</p>
@@ -225,24 +366,15 @@ function generateDetailPanelContent(d) {
         `;
     }
     
-    // --- Person Node Content ---
     if (d['Role/Primary'] === 'Person') {
         content += `
-            <p><strong>Role:</strong> ${d.Cuisine || 'N/A'} ${d.Flags || ''}</p>
+            <p><strong>Role:</strong> ${d.Cuisine || 'Chef'} ${d.Flags || ''}</p>
             <p><strong>Location:</strong> ${d.City}, ${d.State || 'N/A'}</p>
-        `;
-    }
-    
-    // --- Award/Competition Content ---
-    if (d['Role/Primary'] === 'Award' || d['Role/Primary'] === 'Competition') {
-        content += `
-            <p><strong>Type:</strong> ${d['Role/Primary']}</p>
-            ${d.Year ? `<p><strong>Year:</strong> ${d.Year}</p>` : ''}
         `;
     }
 
     // --- Connections Section ---
-    const connections = globalGraphData.links.filter(link => 
+    const connections = globalGraphData.links.filter(link => 
         link.Source === d.ID || link.Target === d.ID
     );
 
@@ -257,44 +389,36 @@ function generateDetailPanelContent(d) {
                 const relationshipDetails = parseRelationship(link.Relationship);
                 let listItemContent;
                 
-                // Add Confidence Score to the connection detail
                 const scoreText = link.ConfidenceScore ? `(Score: ${link.ConfidenceScore})` : '';
 
-                // Logic for display in the Connections list
-                if (connectedNode['Role/Primary'] === 'Award' || connectedNode['Role/Primary'] === 'Competition') {
-                    // Current node (d) -> Award/Competition (connectedNode)
-                    listItemContent = `<strong>${relationshipDetails.label}</strong> - ${connectedNode.Emoji} ${connectedNode.Name} ${scoreText}`;
-
-                } else if (d['Role/Primary'] === 'Award' || d['Role/Primary'] === 'Competition') {
-                     // Current node is an Award/Competition -> linked to a Person/Place
-                    const reverseLabel = relationshipDetails.displayLabel || relationshipDetails.label.replace('Awarded to 🍽️', 'Awarded To');
-                    listItemContent = `<strong>${reverseLabel}</strong> - ${connectedNode.Emoji} ${connectedNode.Name} ${scoreText}`;
-
+                // Award nodes are hidden, so we just check for Award relationships
+                if (relationshipDetails.isAward || relationshipDetails.isCompetition) {
+                    // Node is connected to an Award/Competition
+                    listItemContent = `<strong>${relationshipDetails.label}</strong> ${scoreText}`;
                 } else if (link.Source === d.ID) {
-                    // Current node (d) is the Source 
+                    // Current node (d) is the Source (Outbound link)
                     listItemContent = `<strong>${relationshipDetails.label}</strong> - ${connectedNode.Emoji} ${connectedNode.Name} ${scoreText}`;
                 } else {
-                    // Current node (d) is the Target (Inbound link)
-                    let displayLabel = relationshipDetails.label;
-
+                    // Current node (d) is the Target (Inbound link) - use reversed language
+                    let displayLabel;
                     if (relationshipDetails.isChef) { displayLabel = 'Features Chef 👨🏻‍🍳'; }
-                    else if (relationshipDetails.isAward) { displayLabel = 'Won Award 🏆'; }
-                    else if (relationshipDetails.isCompetition) { displayLabel = 'Participated in 📺'; }
-                    else { displayLabel = 'Connected to'; } 
+                    else { displayLabel = 'Connected to'; } 
 
                     listItemContent = `<strong>${displayLabel}</strong> - ${connectedNode.Emoji} ${connectedNode.Name} ${scoreText}`;
                 }
 
-                content += `<li>${listItemContent}</li>`;
+                // IMPORTANT: Added `data-connected-id` for click handling
+                content += `<li class="connection-item" data-connected-id="${connectedNode.ID}">${listItemContent}</li>`;
             }
         });
         content += `</ul>`;
     }
 
-    return content;
+    return `<div id="panel-content-${d.ID}">${content}</div>`;
 }
 
-// --- Confidence Score Legend Function ---
+
+// --- Confidence Score Legend Function (No change) ---
 function drawLegend() {
     const legendData = [
         { color: "#2ecc71", label: "High Confidence (4-5)" },
@@ -302,10 +426,9 @@ function drawLegend() {
         { color: "#e74c3c", label: "Low Confidence (1)" }
     ];
 
-    // Create a group for the legend (fixed position)
     const legend = svg.append("g")
         .attr("class", "confidence-legend")
-        .attr("transform", `translate(10, ${height - 110})`); // Position near bottom left
+        .attr("transform", `translate(10, ${height - 110})`); 
 
     legend.append("rect")
         .attr("width", 200)
@@ -345,48 +468,39 @@ function drawLegend() {
 }
 
 
-// --- Initialization & Event Binding (Data Fetch) ---
+// --- Initialization & Event Binding ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Using v=100 to mitigate CDN cache issues
     d3.json("data.json?v=100").then(data => {
         if (!data || data.nodes.length === 0) {
-            console.error("Failed to load data.json or file is empty.");
-            d3.select("#detail-panel").html('<h2>Error: Failed to load graph data or data is empty.</h2>');
+            d3.select("#initial-detail-title").text('Error: Failed to load graph data or data is empty.');
             return;
         }
         
-        globalGraphData = data;
+        // Remove Award/Competition nodes before drawing (as per spec)
+        globalGraphData.nodes = data.nodes.filter(n => n['Role/Primary'] !== 'Award' && n['Role/Primary'] !== 'Competition');
+        globalGraphData.links = data.links;
         
-        // 1. Populate the filter dropdown
-        const relationships = getAllRelationshipTypes(globalGraphData);
-        const filterSelect = d3.select("#relationship-filter");
-        
-        // Add "Show All Relationships" option
-        filterSelect.append("option")
-            .attr("value", "ALL")
-            .text("Show All Relationships"); 
-
-        relationships.forEach(rel => {
-            const friendlyLabel = parseRelationship(rel).label;
-            filterSelect.append("option")
-                .attr("value", rel)
-                .text(friendlyLabel);
+        // 1. Setup Filters Event Handlers
+        d3.selectAll('#award-filters input[type="checkbox"]').on('change', function() {
+            const award = this.getAttribute('data-award');
+            if (this.checked) {
+                currentFilters.awards.add(award);
+            } else {
+                currentFilters.awards.delete(award);
+            }
+            filterGraph();
         });
 
-        // 2. Add the event listener to trigger the filter logic
-        filterSelect.on("change", function() {
-            const selectedRelationship = this.value;
-            filterGraph(selectedRelationship);
+        d3.select('#award-tier-filter').on('change', function() {
+            currentFilters.tier = this.value;
+            filterGraph();
         });
 
-        // 3. Draw the initial graph with all data
+        // 2. Draw the initial graph and legend
         drawGraph(globalGraphData);
-        
-        // 4. Draw the Confidence Score Legend
         drawLegend();
-        
+
     }).catch(error => {
-        console.error("Error fetching data.json:", error);
-        d3.select("#detail-panel").html('<h2>Network Error: Could not retrieve data.json. Check file path and deployment.</h2>');
+        d3.select("#initial-detail-title").text('Network Error: Could not retrieve data.json. Check file path and deployment.');
     });
 });
