@@ -122,17 +122,32 @@ function drawGraph(filteredData) {
     // D3 force simulation initialization
     const simulation = d3.forceSimulation(filteredData.nodes)
         .force("link", d3.forceLink(simulationLinks).id(d => d.ID).distance(50))
-        // FIX FOR ISSUE: Changed -400 to -150 for tighter node clustering
-        .force("charge", d3.forceManyBody().strength(-150)) 
-        .force("center", d3.forceCenter(width / 2, height / 2));
+        .force("charge", d3.forceManyBody().strength(-50)) 
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        .force("x", d3.forceX(width / 2).strength(0.1)) 
+        .force("y", d3.forceY(height / 2).strength(0.1)); 
 
     // --- Links ---
     const link = g.append("g")
         .attr("class", "links")
         .selectAll("line")
+        // Use link Confidence Score to set stroke width/color (assuming a score column exists)
         .data(simulationLinks)
         .enter().append("line")
-        .attr("class", "link");
+        .attr("class", "link")
+        .style("stroke-width", d => {
+            // Placeholder: Adjust width based on confidence score (1-5)
+            // Assuming d.ConfidenceScore is 1, 2, 3, 4, or 5
+            return (d.ConfidenceScore || 1) * 0.8 + "px"; 
+        })
+        .style("stroke", d => {
+            // Placeholder: Adjust color based on confidence score
+            const score = d.ConfidenceScore || 1;
+            if (score >= 4) return "#2ecc71"; // High confidence (Green)
+            if (score >= 2) return "#f39c12"; // Medium confidence (Orange)
+            return "#e74c3c"; // Low confidence (Red)
+        });
+
 
     // --- Nodes ---
     const node = g.append("g")
@@ -241,20 +256,23 @@ function generateDetailPanelContent(d) {
             if (connectedNode) {
                 const relationshipDetails = parseRelationship(link.Relationship);
                 let listItemContent;
+                
+                // Add Confidence Score to the connection detail
+                const scoreText = link.ConfidenceScore ? `(Score: ${link.ConfidenceScore})` : '';
 
                 // Logic for display in the Connections list
                 if (connectedNode['Role/Primary'] === 'Award' || connectedNode['Role/Primary'] === 'Competition') {
                     // Current node (d) -> Award/Competition (connectedNode)
-                    listItemContent = `<strong>${relationshipDetails.label}</strong> - ${connectedNode.Emoji} ${connectedNode.Name} (${connectedNode.Year || 'N/A'})`;
+                    listItemContent = `<strong>${relationshipDetails.label}</strong> - ${connectedNode.Emoji} ${connectedNode.Name} ${scoreText}`;
 
                 } else if (d['Role/Primary'] === 'Award' || d['Role/Primary'] === 'Competition') {
                      // Current node is an Award/Competition -> linked to a Person/Place
                     const reverseLabel = relationshipDetails.displayLabel || relationshipDetails.label.replace('Awarded to 🍽️', 'Awarded To');
-                    listItemContent = `<strong>${reverseLabel}</strong> - ${connectedNode.Emoji} ${connectedNode.Name}`;
+                    listItemContent = `<strong>${reverseLabel}</strong> - ${connectedNode.Emoji} ${connectedNode.Name} ${scoreText}`;
 
                 } else if (link.Source === d.ID) {
                     // Current node (d) is the Source 
-                    listItemContent = `<strong>${relationshipDetails.label}</strong> - ${connectedNode.Emoji} ${connectedNode.Name}`;
+                    listItemContent = `<strong>${relationshipDetails.label}</strong> - ${connectedNode.Emoji} ${connectedNode.Name} ${scoreText}`;
                 } else {
                     // Current node (d) is the Target (Inbound link)
                     let displayLabel = relationshipDetails.label;
@@ -264,7 +282,7 @@ function generateDetailPanelContent(d) {
                     else if (relationshipDetails.isCompetition) { displayLabel = 'Participated in 📺'; }
                     else { displayLabel = 'Connected to'; } 
 
-                    listItemContent = `<strong>${displayLabel}</strong> - ${connectedNode.Emoji} ${connectedNode.Name}`;
+                    listItemContent = `<strong>${displayLabel}</strong> - ${connectedNode.Emoji} ${connectedNode.Name} ${scoreText}`;
                 }
 
                 content += `<li>${listItemContent}</li>`;
@@ -275,6 +293,57 @@ function generateDetailPanelContent(d) {
 
     return content;
 }
+
+// --- Confidence Score Legend Function ---
+function drawLegend() {
+    const legendData = [
+        { color: "#2ecc71", label: "High Confidence (4-5)" },
+        { color: "#f39c12", label: "Medium Confidence (2-3)" },
+        { color: "#e74c3c", label: "Low Confidence (1)" }
+    ];
+
+    // Create a group for the legend (fixed position)
+    const legend = svg.append("g")
+        .attr("class", "confidence-legend")
+        .attr("transform", `translate(10, ${height - 110})`); // Position near bottom left
+
+    legend.append("rect")
+        .attr("width", 200)
+        .attr("height", 100)
+        .attr("fill", "white")
+        .attr("stroke", "#ccc")
+        .attr("rx", 5);
+
+    legend.append("text")
+        .attr("x", 10)
+        .attr("y", 20)
+        .text("Link Confidence Score")
+        .style("font-weight", "bold")
+        .style("font-size", "12px");
+
+    legend.selectAll(".legend-item")
+        .data(legendData)
+        .enter()
+        .append("g")
+        .attr("class", "legend-item")
+        .attr("transform", (d, i) => `translate(10, ${35 + i * 20})`)
+        .each(function(d) {
+            d3.select(this).append("line")
+                .attr("x1", 0)
+                .attr("x2", 30)
+                .attr("y1", 0)
+                .attr("y2", 0)
+                .style("stroke", d.color)
+                .style("stroke-width", "3px");
+
+            d3.select(this).append("text")
+                .attr("x", 40)
+                .attr("y", 3)
+                .text(d.label)
+                .style("font-size", "11px");
+        });
+}
+
 
 // --- Initialization & Event Binding (Data Fetch) ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -312,6 +381,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3. Draw the initial graph with all data
         drawGraph(globalGraphData);
+        
+        // 4. Draw the Confidence Score Legend
+        drawLegend();
+        
     }).catch(error => {
         console.error("Error fetching data.json:", error);
         d3.select("#detail-panel").html('<h2>Network Error: Could not retrieve data.json. Check file path and deployment.</h2>');
