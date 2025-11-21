@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Graph Visualization</title>
-    
-    <base href="./"> 
-    
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Graph Visualization</title>
+    
+    <base href="./"> 
+    
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20n6a9c4717f38d904337617882d909d901b0f5b1c55d14e05b5f8f83049b49e"
+        crossorigin=""></script>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <div id="controls">
+    
+    <div id="map-overlay"></div>
+
+    <div id="controls">
         <h2>🏆 Award Filters</h2>
         
-                <div id="award-filters">
+        <div id="award-filters">
             <label><input type="checkbox" data-award="MICHELIN"> Michelin</label>
             <label><input type="checkbox" data-award="JAMES_BEARD"> James Beard</label>
             <label><input type="checkbox" data-award="TOP_CHEF"> Top Chef</label>
