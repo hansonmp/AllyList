@@ -99,7 +99,7 @@
         {"Record_ID":"26","Type":"EDGE","Source":"N-026","Target":"P-027","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
         {"Record_ID":"27","Type":"EDGE","Source":"N-027","Target":"P-028","Relationship":"CURRENT_HEAD_CHEF_AT","Flags":"NA","Year":"NA"},
         {"Record_ID":"28","Type":"EDGE","Source":"P-029","Target":"A-026","Relationship":"HAS_AWARD_2024","Flags":"NA","Year":"NA"},
-        {"Record_ID":"29","Type":"EDGE","Source":"P-031","Target":"A-006","Relationship":"WON_AWARD_2024","Flags":"NA","Year":"NA"},
+        {"Record_ID":"29","Type":"EDGE","Source":"P-031","Target":"A-006","Relationship":"COMPETED_ON_2024","Flags":"NA","Year":"NA"},
         {"Record_ID":"30","Type":"EDGE","Source":"P-032","Target":"A-013","Relationship":"COMPETED_ON_2024","Flags":"NA","Year":"NA"},
         {"Record_ID":"31","Type":"EDGE","Source":"P-033","Target":"A-014","Relationship":"COMPETED_ON_2024","Flags":"NA","Year":"NA"},
         {"Record_ID":"32","Type":"EDGE","Source":"P-034","Target":"A-006","Relationship":"WON_AWARD_2024","Flags":"NA","Year":"NA"},
