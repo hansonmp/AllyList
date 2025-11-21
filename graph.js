@@ -37,25 +37,26 @@ svg.call(zoom);
 // --- MAP FUNCTIONS ---
 
 function initializeMap() {
-    // Adding a small timeout to ensure the DOM is fully loaded before Leaflet initializes
-    setTimeout(() => {
-        if (map) return; 
+    // Safety check
+    if (map) return; 
 
-        map = L.map('map-overlay', { 
-            zoomControl: false 
-        }).setView([40.7128, -74.0060], 5); 
+    // Initialize the map on the 'map-overlay' div
+    map = L.map('map-overlay', { 
+        zoomControl: false 
+    }).setView([40.7128, -74.0060], 5); 
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            maxZoom: 18
-        }).addTo(map);
+    // Add a basic tile layer (OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18
+    }).addTo(map);
 
-        markersLayer.addTo(map);
-    }, 100);
+    markersLayer.addTo(map);
+    console.log("Map initialized successfully.");
 }
 
 function updateMapLayer() {
-    if (!map) return; // Safety check
+    if (!map) return; 
 
     markersLayer.clearLayers(); 
     
@@ -102,16 +103,17 @@ function updateMapLayer() {
 // --- Helper Functions ---
 
 function getNodeById(id) {
+    // Ensure the ID being looked up is treated as a string, matching the stored node IDs
     const strId = String(id);
     return globalGraphData.nodes.find(node => String(node.ID) === strId);
 }
 
-// SIMPLIFIED FILTERING LOGIC
 function nodeMatchesFilters(node) {
     if (currentFilters.awards.size === 0) {
-        return true; // No filters selected, show all
+        return true; 
     }
 
+    // Use String() conversion for consistency
     const nodeIdString = String(node.ID);
     
     // Find all links connected to this node
@@ -130,7 +132,6 @@ function nodeMatchesFilters(node) {
             }
         });
         
-        // Tier filtering is ignored for simplicity here, but can be added back if filters start working
         return matchesAward;
     });
 }
@@ -180,7 +181,6 @@ function applyVisualStyles(selectionData = globalGraphData) {
     g.selectAll(".link")
         .classed("highlighted", isLinkHighlighted)
         .style("opacity", l => {
-            // Check visibility based on the simulation's source/target objects
             const sourceVisible = nodeMatchesFilters(l.source);
             const targetVisible = nodeMatchesFilters(l.target);
             
@@ -252,7 +252,7 @@ function updatePanelStack() {
 }
 
 function handleNodeClick(nodeId, forceDeselect = false) {
-    const nodeIdStr = String(nodeId); 
+    const nodeIdStr = String(nodeId); // Use string ID for consistency
     const node = getNodeById(nodeIdStr);
     
     // 1. Filter Check (If filtered out, only allow deselection)
@@ -336,7 +336,12 @@ d3.select("body").on("click", function(event) {
 // --- Main Visualization Function ---
 function drawGraph(filteredData) {
     g.selectAll("*").remove();
+    console.log("Drawing graph with data:", filteredData.nodes.length, "nodes");
 
+    if (filteredData.nodes.length === 0) {
+        return; 
+    }
+    
     // Ensure all links reference string IDs
     const simulationLinks = filteredData.links.map(l => ({
         ...l, 
@@ -385,7 +390,6 @@ function drawGraph(filteredData) {
         .enter().append("g")
         .attr("class", d => `node ${d['Role/Primary']}`) 
         .on("click", function(event, d) {
-            // Explicitly ensure click is handled on the D3 element and passed to handler
             event.stopPropagation(); 
             handleNodeClick(String(d.ID)); 
         });
@@ -429,7 +433,7 @@ function drawGraph(filteredData) {
 }
 
 
-// --- Detail Panel Generation (No change to content logic) ---
+// --- Detail Panel Generation ---
 function generateDetailPanelContent(d) {
     let content = `
         <span class="close-btn">X</span>
@@ -492,7 +496,7 @@ function generateDetailPanelContent(d) {
 }
 
 
-// --- Confidence Score Legend Function (No change) ---
+// --- Confidence Score Legend Function ---
 function drawLegend() {
     const legendData = [
         { color: "#2ecc71", label: "High Confidence (4-5)" },
@@ -544,10 +548,12 @@ function drawLegend() {
 
 // --- Initialization & Event Binding ---
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize map immediately after DOM is ready
     initializeMap();
 
     d3.json("data.json?v=100").then(data => {
         if (!data || data.nodes.length === 0) {
+            console.error('Data Error: Failed to load graph data or data is empty.');
             d3.select("#initial-detail-title").text('Error: Failed to load graph data or data is empty.');
             return;
         }
@@ -555,7 +561,7 @@ document.addEventListener('DOMContentLoaded', () => {
         globalGraphData.nodes = data.nodes.filter(n => n['Role/Primary'] !== 'Award' && n['Role/Primary'] !== 'Competition');
         globalGraphData.links = data.links;
 
-        // Force all node IDs to be strings at load time
+        // Force all node IDs to be strings at load time for consistency
         globalGraphData.nodes.forEach(n => n.ID = String(n.ID));
         
         // 1. Setup Filters Event Handlers
@@ -579,6 +585,7 @@ document.addEventListener('DOMContentLoaded', () => {
         drawLegend();
 
     }).catch(error => {
+        console.error('Network Error: Could not retrieve data.json.', error);
         d3.select("#initial-detail-title").text('Network Error: Could not retrieve data.json. Check file path and deployment.');
     });
 });
