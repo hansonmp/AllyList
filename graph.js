@@ -10,13 +10,13 @@ const g = svg.append("g");
 
 let globalGraphData = { nodes: [], links: [] }; // Storage for the loaded data
 
-// --- Zoom and Pan Setup ---
+// --- Zoom and Pan Setup (Fix for Issue 1 & 5: Aggressively Expanded Pan Limits) ---
 const zoom = d3.zoom()
-    .scaleExtent([0.5, 8]) // Zoom limits: 0.5x minimum, 8x maximum
+    .scaleExtent([0.5, 8]) 
     .translateExtent([
-        // Expanded translation limits for full canvas panning
-        [-width, -height], 
-        [width * 2, height * 2]
+        // Aggressively expanded pan limits to prevent being "stuck"
+        [-width * 2, -height * 2], 
+        [width * 3, height * 3]
     ])
     .on("zoom", (event) => {
         g.attr("transform", event.transform);
@@ -38,22 +38,35 @@ function getNodeById(id) {
     return globalGraphData.nodes.find(node => node.ID === id);
 }
 
+// Fix for Issue 2: Expanded logic to correctly parse and label specific relationships
 function parseRelationship(relationship) {
-    // This function provides the clean, friendly label for the link
-    // We need to expand this for full resolution later (Stage 2)
     
-    if (relationship.startsWith('CURRENT_HEAD_CHEF')) {
-        return { label: 'Current Chef 👨🏻‍🍳', isChef: true };
-    } else if (relationship.includes('MICHELIN_STAR')) {
-        // Will need to adjust this to handle specific star levels
-        return { label: 'Awarded to 🍽️', isAward: true, isPlace: true };
+    // Check for Competition Types
+    if (relationship.includes('COMPETED_ON_TOP_CHEF')) {
+        return { label: 'Competitor on Top Chef 🔪', isCompetition: true };
+    } else if (relationship.includes('COMPETED_ON_MASTERCHEF')) {
+        return { label: 'Competitor on MasterChef 🔪', isCompetition: true };
+    } else if (relationship.includes('COMPETED_ON')) {
+        return { label: 'Competitor on TV 📺', isCompetition: true };
+    }
+
+    // Check for Award Types
+    else if (relationship.startsWith('MICHELIN_STAR')) {
+        // Fix for Issue 4: Better Labeling
+        return { label: 'Award Winning Restaurant 🍽️', isAward: true, isPlace: true, displayLabel: 'Award Winning Restaurant' };
+    } else if (relationship.startsWith('JAMES_BEARD_AWARD')) {
+        return { label: 'James Beard Nominee/Winner 🏆', isAward: true };
     } else if (relationship.startsWith('NOMINATED_FOR_AWARD')) {
         return { label: 'Nominated for 🏆', isAward: true };
     } else if (relationship.startsWith('WON_AWARD')) {
         return { label: 'Winner of 🏆', isAward: true };
-    } else if (relationship.startsWith('COMPETED_ON')) {
-        // Must be expanded to handle different show names later (Stage 2)
-        return { label: 'Competitor on 📺', isCompetition: true };
+    }
+
+    // Check for Employment
+    else if (relationship.startsWith('CURRENT_HEAD_CHEF')) {
+        return { label: 'Current Chef 👨🏻‍🍳', isChef: true };
+    } else if (relationship.startsWith('HAS_AWARD_2024')) {
+         return { label: 'Has Award 2024 🎖️', isAward: true };
     }
     
     // Fallback for unexpected relationships
@@ -87,7 +100,7 @@ function filterGraph(relationshipType) {
         };
     }
     
-    // Fix for Issue 4: Reset zoom to initial state on filter change
+    // Fix for Issue 1: Reset zoom to initial state on filter change and zoom back out to see content
     svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity);
     
     // Redraw the graph with the filtered data
@@ -112,12 +125,10 @@ function drawGraph(filteredData) {
     // D3 force simulation initialization
     const simulation = d3.forceSimulation(filteredData.nodes)
         .force("link", d3.forceLink(simulationLinks).id(d => d.ID).distance(50))
-        // Adjusted charge strength for tighter clustering and better visibility (Issue 3)
         .force("charge", d3.forceManyBody().strength(-400)) 
         .force("center", d3.forceCenter(width / 2, height / 2));
 
     // --- Links ---
-    // Use the fixed simulationLinks array for data binding
     const link = g.append("g")
         .attr("class", "links")
         .selectAll("line")
@@ -157,14 +168,14 @@ function drawGraph(filteredData) {
         .attr("text-anchor", "middle")
         .text(d => d.Emoji);
         
-    // Node Labels (Name/City) - FIX: Remove redundant Name label for cleaner view
+    // Node Labels (Name/City)
     node.append("text")
         .attr("dy", 25) 
         .attr("font-size", "10px")
         .attr("text-anchor", "middle") 
         .text(d => {
-             // Show name only for Place/Person nodes, only if not filtered down to a small number
-             if (filteredData.nodes.length < 50 && (d['Role/Primary'] === 'Place' || d['Role/Primary'] === 'Person')) {
+             // Only show the name label for visible nodes (Places/People) when nodes are few
+             if (filteredData.nodes.length < 25 && (d['Role/Primary'] === 'Place' || d['Role/Primary'] === 'Person')) {
                  return d.Name;
              }
              return "";
@@ -185,24 +196,24 @@ function drawGraph(filteredData) {
 }
 
 
-// --- Detail Panel Generation (Stage 3 Fixes for Issue 6) ---
+// --- Detail Panel Generation (Fix for Issue 6) ---
 function generateDetailPanelContent(d) {
     let content = `
         <h2 class="detail-name">${d.Emoji} ${d.Name}</h2>
     `;
     
-    // --- Place Node Content (Issue 6: Simplified Profile) ---
+    // --- Place Node Content (Issue 6: Corrected Profile) ---
     if (d['Role/Primary'] === 'Place') {
         content += `
             <p><strong>Cuisine:</strong> ${d.Cuisine || 'N/A'} ${d.Flags || ''}</p>
             <p><strong>Location:</strong> ${d.City}, ${d.State || 'N/A'}</p>
             ${d.Price && d.Price !== 'NA' ? `<p><strong>Price Range:</strong> ${d.Price}</p>` : ''}
-            ${d.Rating ? `<p><strong>Rating:</strong> ${d.Rating} (${d.Reviews || 0} reviews)</p>` : ''}
+            ${d.Rating ? `<p><strong>Rating:</strong> ${d.Rating} (${d.Reviews || 0} total)</p>` : ''}
             ${d.MapLink && d.MapLink !== 'NA' ? `<p class="detail-link"><a href="${d.MapLink}" target="_blank">View on Google Maps</a></p>` : ''}
         `;
     }
     
-    // --- Person Node Content (Issue 6: Simplified Profile) ---
+    // --- Person Node Content (Issue 6: Corrected Profile) ---
     if (d['Role/Primary'] === 'Person') {
         content += `
             <p><strong>Role:</strong> ${d.Cuisine || 'N/A'} ${d.Flags || ''}</p>
@@ -218,13 +229,12 @@ function generateDetailPanelContent(d) {
         `;
     }
 
-    // --- Connections Section (Issue 6: Remove extra line break) ---
+    // --- Connections Section (Fixed Issue 6 spacing) ---
     const connections = globalGraphData.links.filter(link => 
         link.Source === d.ID || link.Target === d.ID
     );
 
     if (connections.length > 0) {
-        // Removed extra line break here
         content += `<h3 class="detail-connections-header">Connections:</h3><ul class="detail-connections-list">`;
         
         connections.forEach(link => {
@@ -235,29 +245,27 @@ function generateDetailPanelContent(d) {
                 const relationshipDetails = parseRelationship(link.Relationship);
                 let listItemContent;
 
-                // FIX for Issue 8 (Partial): Displaying the connected Award/Competition Name
+                // Logic for display in the Connections list
                 if (connectedNode['Role/Primary'] === 'Award' || connectedNode['Role/Primary'] === 'Competition') {
-                    // Current node (d) -> Award (connectedNode)
+                    // Current node (d) -> Award/Competition (connectedNode)
                     listItemContent = `<strong>${relationshipDetails.label}</strong> - ${connectedNode.Emoji} ${connectedNode.Name} (${connectedNode.Year || 'N/A'})`;
 
                 } else if (d['Role/Primary'] === 'Award' || d['Role/Primary'] === 'Competition') {
                      // Current node is an Award/Competition -> linked to a Person/Place
-                    // This block is used when viewing an award profile (image_6741fb.png)
-                    const reverseLabel = relationshipDetails.label.replace('Awarded to 🍽️', 'Received Award');
+                    const reverseLabel = relationshipDetails.displayLabel || relationshipDetails.label.replace('Awarded to 🍽️', 'Awarded To');
                     listItemContent = `<strong>${reverseLabel}</strong> - ${connectedNode.Emoji} ${connectedNode.Name}`;
 
                 } else if (link.Source === d.ID) {
-                    // Current node (d) is the Source (e.g., Chef -> Restaurant/Award)
+                    // Current node (d) is the Source 
                     listItemContent = `<strong>${relationshipDetails.label}</strong> - ${connectedNode.Emoji} ${connectedNode.Name}`;
                 } else {
-                    // Current node (d) is the Target (e.g., Restaurant <- Chef/Award)
-                    // Reverse the label logic for inbound links
+                    // Current node (d) is the Target (Inbound link)
                     let displayLabel = relationshipDetails.label;
 
                     if (relationshipDetails.isChef) { displayLabel = 'Features Chef 👨🏻‍🍳'; }
                     else if (relationshipDetails.isAward) { displayLabel = 'Won Award 🏆'; }
                     else if (relationshipDetails.isCompetition) { displayLabel = 'Participated in 📺'; }
-                    else { displayLabel = 'Connected to'; } // Fallback
+                    else { displayLabel = 'Connected to'; } 
 
                     listItemContent = `<strong>${displayLabel}</strong> - ${connectedNode.Emoji} ${connectedNode.Name}`;
                 }
@@ -273,7 +281,7 @@ function generateDetailPanelContent(d) {
 
 // --- Initialization & Event Binding (Data Fetch) ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Adding v=100 to the data.json URL to bypass the stubborn GitHub CDN cache
+    // Using v=100 to mitigate CDN cache issues
     d3.json("data.json?v=100").then(data => {
         if (!data || data.nodes.length === 0) {
             console.error("Failed to load data.json or file is empty.");
@@ -287,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const relationships = getAllRelationshipTypes(globalGraphData);
         const filterSelect = d3.select("#relationship-filter");
         
-        // Add "ALL" option first (Image 72a323: Renamed to match the image)
+        // Add "Show All Relationships" option
         filterSelect.append("option")
             .attr("value", "ALL")
             .text("Show All Relationships"); 
