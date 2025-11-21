@@ -8,10 +8,10 @@ const svg = d3.select("#network-map")
 // Create a group for the main content that will be zoomed and panned
 const g = svg.append("g");
 
-let globalGraphData = { nodes: [], links: [] }; // Storage for the loaded data
-let simulation = null; // Store simulation instance globally
-let map = null; // Leaflet map instance
-let markersLayer = new L.LayerGroup(); // Layer for holding all markers
+let globalGraphData = { nodes: [], links: [] }; 
+let simulation = null; 
+let map = null; 
+let markersLayer = new L.LayerGroup(); 
 
 // --- NEW STATE MANAGEMENT ---
 let activeNodeIds = new Set(); 
@@ -37,23 +37,26 @@ svg.call(zoom);
 // --- MAP FUNCTIONS ---
 
 function initializeMap() {
-    if (map) return; 
+    // Adding a small timeout to ensure the DOM is fully loaded before Leaflet initializes
+    setTimeout(() => {
+        if (map) return; 
 
-    // Initialize the map on the 'map-overlay' div
-    map = L.map('map-overlay', { 
-        zoomControl: false 
-    }).setView([40.7128, -74.0060], 5); 
+        map = L.map('map-overlay', { 
+            zoomControl: false 
+        }).setView([40.7128, -74.0060], 5); 
 
-    // Add a basic tile layer (OpenStreetMap)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 18
-    }).addTo(map);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 18
+        }).addTo(map);
 
-    markersLayer.addTo(map);
+        markersLayer.addTo(map);
+    }, 100);
 }
 
 function updateMapLayer() {
+    if (!map) return; // Safety check
+
     markersLayer.clearLayers(); 
     
     let activeNodes = [];
@@ -99,23 +102,24 @@ function updateMapLayer() {
 // --- Helper Functions ---
 
 function getNodeById(id) {
-    // Ensure the ID being looked up is treated as a string, matching the stored node IDs
     const strId = String(id);
     return globalGraphData.nodes.find(node => String(node.ID) === strId);
 }
 
+// SIMPLIFIED FILTERING LOGIC
 function nodeMatchesFilters(node) {
     if (currentFilters.awards.size === 0) {
-        return true; 
+        return true; // No filters selected, show all
     }
 
-    // Use String() conversion for consistency
     const nodeIdString = String(node.ID);
     
+    // Find all links connected to this node
     const relatedLinks = globalGraphData.links.filter(link => 
         (String(link.Source) === nodeIdString || String(link.Target) === nodeIdString)
     );
     
+    // If the node has AT LEAST ONE link matching AT LEAST ONE selected award, it matches.
     return relatedLinks.some(link => {
         const relationship = link.Relationship;
         let matchesAward = false;
@@ -126,6 +130,7 @@ function nodeMatchesFilters(node) {
             }
         });
         
+        // Tier filtering is ignored for simplicity here, but can be added back if filters start working
         return matchesAward;
     });
 }
@@ -175,6 +180,7 @@ function applyVisualStyles(selectionData = globalGraphData) {
     g.selectAll(".link")
         .classed("highlighted", isLinkHighlighted)
         .style("opacity", l => {
+            // Check visibility based on the simulation's source/target objects
             const sourceVisible = nodeMatchesFilters(l.source);
             const targetVisible = nodeMatchesFilters(l.target);
             
@@ -187,10 +193,16 @@ function applyVisualStyles(selectionData = globalGraphData) {
 function filterGraph() {
     applyVisualStyles(globalGraphData);
 
+    // Deselect any node that is now filtered out
+    const nodesToDeselect = [];
     activeNodeIds.forEach(id => {
         if (!nodeMatchesFilters(getNodeById(id))) {
-            handleNodeClick(id, true); // Deselect and close panel
+            nodesToDeselect.push(id);
         }
+    });
+
+    nodesToDeselect.forEach(id => {
+        handleNodeClick(id, true); // Use forceDeselect=true
     });
 
     updateMapLayer();
@@ -201,7 +213,6 @@ function filterGraph() {
 function setupConnectionClickHandlers(panelId) {
     d3.select(`#${panelId}`).selectAll(".connection-item")
         .on("click", function(event) {
-            // console.log("Connection item clicked!"); // DEBUG
             event.stopPropagation(); 
             const connectedId = d3.select(this).attr("data-connected-id");
             if (connectedId) {
@@ -212,7 +223,7 @@ function setupConnectionClickHandlers(panelId) {
 
 function updatePanelStack() {
     d3.select("#detail-panel-stack").selectAll(".detail-panel")
-        .data(panelStack, d => d)
+        .data(panelStack, d => d) // Keying by the String ID
         .join(
             enter => enter.append("div")
                 .attr("class", "detail-panel")
@@ -241,26 +252,27 @@ function updatePanelStack() {
 }
 
 function handleNodeClick(nodeId, forceDeselect = false) {
-    const nodeIdStr = String(nodeId); // Use string ID for consistency
+    const nodeIdStr = String(nodeId); 
     const node = getNodeById(nodeIdStr);
     
-    // console.log(`Handle Click: Node ${nodeIdStr}, Active: ${activeNodeIds.has(nodeIdStr)}, Force Deselect: ${forceDeselect}`); // DEBUG
-
+    // 1. Filter Check (If filtered out, only allow deselection)
     if (!nodeMatchesFilters(node) && !activeNodeIds.has(nodeIdStr)) {
         return; 
     }
 
+    // 2. Already Selected, Bring to Front
     if (activeNodeIds.has(nodeIdStr) && !forceDeselect) {
         const index = panelStack.indexOf(nodeIdStr);
         if (index !== -1 && index !== panelStack.length - 1) {
             panelStack.splice(index, 1);
             panelStack.push(nodeIdStr);
             updatePanelStack();
+            updateMapLayer();
         }
         return; 
     } 
     
-    // Toggle selection (Add or Remove)
+    // 3. Toggle Selection (Add or Remove)
     if (activeNodeIds.has(nodeIdStr)) {
         activeNodeIds.delete(nodeIdStr);
         panelStack = panelStack.filter(id => id !== nodeIdStr);
@@ -269,12 +281,14 @@ function handleNodeClick(nodeId, forceDeselect = false) {
         panelStack.push(nodeIdStr);
     }
 
+    // 4. Update Simulation Pinning
     if (simulation) {
         simulation.nodes().forEach(d => {
-            if (activeNodeIds.has(String(d.ID))) { // Check against string ID
+            const dIdStr = String(d.ID);
+            if (activeNodeIds.has(dIdStr)) { 
                 d.fx = d.x;
                 d.fy = d.y;
-            } else if (d.fx !== null && d.fy !== null && !activeNodeIds.has(String(d.ID))) {
+            } else if (d.fx !== null && d.fy !== null && !activeNodeIds.has(dIdStr)) {
                 d.fx = null;
                 d.fy = null;
             }
@@ -282,6 +296,7 @@ function handleNodeClick(nodeId, forceDeselect = false) {
         simulation.alpha(0.1).restart(); 
     }
     
+    // 5. Update Visuals and Map
     applyVisualStyles();
     updatePanelStack();
     updateMapLayer();
@@ -329,14 +344,15 @@ function drawGraph(filteredData) {
         target: String(l.Target)
     }));
 
+    // Ensure nodes have string IDs for force layout to work correctly
+    const nodesWithStringIds = filteredData.nodes.map(d => ({ ...d, ID: String(d.ID) }));
+
+
     if (simulation) {
-        simulation.nodes(filteredData.nodes);
+        simulation.nodes(nodesWithStringIds);
         simulation.force("link").links(simulationLinks);
         simulation.alpha(1).restart();
     } else {
-        // Ensure nodes have string IDs for force layout to work correctly
-        const nodesWithStringIds = filteredData.nodes.map(d => ({ ...d, ID: String(d.ID) }));
-
         simulation = d3.forceSimulation(nodesWithStringIds)
             .force("link", d3.forceLink(simulationLinks).id(d => String(d.ID)).distance(80))
             .force("charge", d3.forceManyBody().strength(-150)) 
@@ -349,7 +365,8 @@ function drawGraph(filteredData) {
     const link = g.append("g")
         .attr("class", "links")
         .selectAll(".link")
-        .data(simulationLinks, d => `${d.source.ID}-${d.target.ID}`) // Use source/target ID from simulation
+        // Use d.source.ID and d.target.ID from the simulation data for consistent keying
+        .data(simulationLinks, d => `${String(d.source.ID)}-${String(d.target.ID)}`) 
         .enter().append("line")
         .attr("class", "link")
         .style("stroke-width", d => (d.ConfidenceScore || 1) * 0.8 + "px")
@@ -364,12 +381,13 @@ function drawGraph(filteredData) {
     const node = g.append("g")
         .attr("class", "nodes")
         .selectAll(".node")
-        .data(filteredData.nodes, d => String(d.ID)) // Ensure key binding uses string ID
+        .data(nodesWithStringIds, d => String(d.ID)) // Ensure key binding uses string ID
         .enter().append("g")
         .attr("class", d => `node ${d['Role/Primary']}`) 
-        .on("click", (event, d) => {
+        .on("click", function(event, d) {
+            // Explicitly ensure click is handled on the D3 element and passed to handler
             event.stopPropagation(); 
-            handleNodeClick(String(d.ID)); // Pass string ID to handler
+            handleNodeClick(String(d.ID)); 
         });
 
     // Node Circles
@@ -537,7 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
         globalGraphData.nodes = data.nodes.filter(n => n['Role/Primary'] !== 'Award' && n['Role/Primary'] !== 'Competition');
         globalGraphData.links = data.links;
 
-        // Force all node IDs to be strings at load time for consistency with D3 keys
+        // Force all node IDs to be strings at load time
         globalGraphData.nodes.forEach(n => n.ID = String(n.ID));
         
         // 1. Setup Filters Event Handlers
