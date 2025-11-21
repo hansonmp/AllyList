@@ -4,6 +4,16 @@ body {
     overflow: hidden; /* Prevent body scroll, D3 handles map scroll */
 }
 
+/* New Map Overlay Styling */
+#map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1; /* Below the SVG */
+}
+
 #controls {
     position: absolute;
     top: 10px;
@@ -20,7 +30,9 @@ body {
     width: 100vw;
     height: 100vh;
     display: block;
-    background-color: #f0f0f0;
+    background-color: transparent; /* IMPORTANT: Make SVG background transparent to see the map */
+    z-index: 2; /* Above the map */
+    position: relative;
 }
 
 /* --- Node Styling --- */
